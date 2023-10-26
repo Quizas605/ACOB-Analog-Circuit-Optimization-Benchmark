@@ -1,20 +1,19 @@
 # Analog-Circuit-Sizing-Optimization-Benchmarks
 All circuits come from [ITC 2017 AMS Benchmark Circuits V2.2]([url](https://sagroups.ieee.org/2427/analogue-benchmark-circuits/)), IEEE Standards Association.
 There are three circuits so far, including an OPA-MP circuit, a PLL circuit, and an OSC circuit. Their schematics are listed in 'schematics.pdf'. There are 14, 36, and 77 independent variables corresponding to the OSC, OPA-MP, and PLL circuits. Most of them are the width and length of the MOSFET. The return of the evaluation function is the FOM value defined in the netlists, which is also called the Objective Function in optimization problems. 
-1. Directory Structure：
- **  **OPAMP1/                           
-     process_model/                    different design corners
-
-     subcircuit_files/                 subcircuits of OPA-MP circuit 
-     OPAMP1.circuit                    main circuit 
-     OPAMP1.ic0
-     OPAMP1.mt0
-     OPAMP1.potential_defect_list
-     OPAMP1.py                        evaluation Python script
-     param                            parameters defined in the circuit
-     simlog(OPAMP.lis)                output of the simulation
-   OSC1/
-   PLL/****
+1. Directory Structure：  
+OPAMP1/                           
+     &emsp; process_model/ &emsp; &emsp; &emsp; &emsp;%different design corners  
+     &emsp; subcircuit_files/ &emsp; &emsp; &emsp; &emsp;%subcircuits of OPA-MP circuit   
+     &emsp; OPAMP1.circuit &emsp; &emsp; &emsp; &emsp;%main circuit   
+     &emsp; OPAMP1.ic0  
+     &emsp; OPAMP1.mt0  
+     &emsp; OPAMP1.potential_defect_list  
+     &emsp; OPAMP1.py &emsp; &emsp; &emsp; &emsp;%evaluation Python script  
+     &emsp; param &emsp; &emsp; &emsp; &emsp;%parameters defined in the circuit  
+      &emsp;simlog(OPAMP.lis) &emsp; &emsp; &emsp; &emsp;%output of the simulation  
+OSC1/  
+PLL/
 
 OSC1/ and PLL/ directory have the same structure as OPAMP1/
 2. Installation and Run
