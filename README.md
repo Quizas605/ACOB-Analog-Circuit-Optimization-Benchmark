@@ -15,15 +15,15 @@ OPAMP1/
 OSC1/  
 PLL/
 
-OSC1/ and PLL/ directory have the same structure as OPAMP1/
-2. Installation and Run
-Download and unzip all directories to your main project directory, before importing in your code, please set the variables below correctly:
+OSC1/ and PLL/ directory have the same structure as OPAMP1/  
+2. Installation and Run  
+Download and unzip all directories to your main project directory, before importing in your code, please set the variables below correctly:  
   ****
-  path_param = 'PATH/TO/param'  
-  path_simlog = 'PATH/TO/simlog'# or 'PATH/TO/xxx.lis'
-  sim_command = 'system simulation command '
-  ****
-The variables above are defined in Python scripts. path_param is the path to param file, path_simlog is the path to the simulation output file, and sim_command is the system command used to simulate the netlist with simulators.
+  path_param = 'PATH/TO/param'    
+  path_simlog = 'PATH/TO/simlog'# or 'PATH/TO/xxx.lis'  
+  sim_command = 'system simulation command '  
+  ****  
+The variables above are defined in Python scripts. path_param is the path to param file, path_simlog is the path to the simulation output file, and sim_command is the system command used to simulate the netlist with simulators.  
 
 To import in your algorithm code, add "from circuit/circuit.py import circuitXX" ahead of your main function code. 
        
