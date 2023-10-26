@@ -4,7 +4,7 @@ There are three circuits so far, including an OPA-MP circuit, a PLL circuit, and
 1. Directory Structure：
  **  **OPAMP1/                           
      process_model/                    different design corners
-   
+
      subcircuit_files/                 subcircuits of OPA-MP circuit 
      OPAMP1.circuit                    main circuit 
      OPAMP1.ic0
