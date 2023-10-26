@@ -1,8 +1,8 @@
 # Analog-Circuit-Sizing-Optimization-Benchmarks
-All circuits come from ITC 2017 AMS Benchmark Circuits V2.2, IEEE Standards Association(https://sagroups.ieee.org/2427/analogue-benchmark-circuits/).
+All circuits come from [ITC 2017 AMS Benchmark Circuits V2.2]([url](https://sagroups.ieee.org/2427/analogue-benchmark-circuits/)), IEEE Standards Association.
 There are three circuits so far, including an OPA-MP circuit, a PLL circuit, and an OSC circuit. Their schematics are listed in 'schematics.pdf'. There are 14, 36, and 77 independent variables corresponding to the OSC, OPA-MP, and PLL circuits. Most of them are the width and length of the MOSFET. The return of the evaluation function is the FOM value defined in the netlists, which is also called the Objective Function in optimization problems. 
 1. Directory Structure：
-   **OPAMP1/                           
+ **  **OPAMP1/                           
      process_model/                    %different design corners 
      subcircuit_files/                 %subcircuits of OPA-MP circuit 
      OPAMP1.circuit                    %main circuit 
@@ -13,7 +13,7 @@ There are three circuits so far, including an OPA-MP circuit, a PLL circuit, and
      param                            %parameters defined in the circuit
      simlog(OPAMP.lis)                %output of the simulation
    OSC1/
-   PLL/**
+   PLL/****
 
 OSC1/ and PLL/ directory have the same structure as OPAMP1/
 2. Installation and Run
