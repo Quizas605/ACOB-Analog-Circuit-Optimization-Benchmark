@@ -1,0 +1,540 @@
+ ****** HSPICE -- D-2010.03 32-BIT (Feb 23 2010) linux ******                   
+  Copyright (C) 2010 Synopsys, Inc. All Rights Reserved.                        
+  Unpublished-rights reserved under US copyright laws.
+  This program is protected by law and is subject to the 
+  terms and conditions of the license agreement from Synopsys.
+  Use of this program is your acceptance to be bound by the 
+  license agreement. HSPICE is the trademark of Synopsys, Inc.
+  Input File: OPAMP1.circuit                                                    
+ lic:  
+ lic: FLEXlm: v8.5b 
+ lic: USER:   lvruiyu              HOSTNAME: console5 
+ lic: HOSTID:                      PID:      279253 
+ lic: Using FLEXlm license file: 
+ lic: /export/home/lvruiyu/License-int.dat 
+ lic: Checkout 1 hspice 
+ lic: License/Maintenance for hspice will expire on 31-dec-2040/2019.12 
+ lic: NODE LOCKED license on hostid  
+ lic:   
+
+ **warning**  unknown option compat  
+
+1****** HSPICE -- D-2010.03 32-BIT (Feb 23 2010) linux ******                   
+ ******  
+ * disclaimer:
+
+  ******  circuit name directory
+ circuit number to circuit name directory
+   number circuitname                     definition         multiplier
+        0 main circuit
+        1 x1.                             opamp1             1.00 
+        2 x1.xd1.                         primitive_nwd      1.00 
+        3 x1.xi0.                         primitive_nd       1.00 
+        4 x1.xi3.                         primitive_pd       1.00 
+        5 x1.xr0.                         primitive_rdiffp   1.00 
+        6 x1.xr1.                         primitive_rdiffp   1.00 
+        7 x1.xcc01.                       primitive_cpoly    1.00 
+
+ **warning** It is recommended that you set start explicitly:
+             .TRAN tstep tstop START=val
+
+
+1****** HSPICE -- D-2010.03 32-BIT (Feb 23 2010) linux ******                   
+ ******  
+ * disclaimer:
+
+  ******  diode model parameters tnom=  25.000 temp=  25.000 *****
+ ********************************************************
+ *** common model parameters model name:   0:dninsub ****
+ ********************************************************
+
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** dc breakdown parameters ***
+       vb=   0.    volts        ibv=   1.00m amps   
+
+   2*** parasitic resistance parameters ***
+       rs=   0.    ohms   
+
+   3*** capacitance parameters ***
+       fc= 500.00m              fcs= 500.00m                m= 340.00m        
+     mjsw= 230.00m               pb= 690.00m volts        php= 690.00m volts  
+       tt=   0.    secs         cjo= 840.00u f/area       cjp= 250.00p f/pj   
+
+   4*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                 tcv=   0.    v/deg k
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+      xti=   2.00            xtitun=   3.00               keg=   1.00         
+       eg=   1.10  ev          gap1= 702.00u  ev/deg     gap2=   1.11k  deg   
+     ttt1=   0.    /deg        ttt2=   0.    /deg2        tm1=   0.    /deg   
+      tm2=   0.    /deg2        tpb=   0.    v/deg k     tphp=   0.    v/deg k
+     tref=  25.00   deg c 
+
+   5*** noise parameters ***
+       kf=   0.                  af=   1.00         
+
+   ***  level   1  model parameters  ***
+
+    level=   1.00                is= 500.00n amps         jsw= 600.00f amps   
+        n=   1.00               nbv=   1.00                ik=   0.    amp    
+     area=   1.00                pj=   0.                 ikr=   0.    amp    
+    expli=   0.    amps      explir=   0.    amps        jtun=   0.    amps   
+   jtunsw=   0.    amps        ntun=  30.00         
+  
+ ********************************************************
+ *** common model parameters model name:   0:dpinsub ****
+ ********************************************************
+
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** dc breakdown parameters ***
+       vb=   0.    volts        ibv=   1.00m amps   
+
+   2*** parasitic resistance parameters ***
+       rs=   0.    ohms   
+
+   3*** capacitance parameters ***
+       fc= 500.00m              fcs= 500.00m                m= 540.00m        
+     mjsw= 460.00m               pb=   1.00  volts        php=   1.00  volts  
+       tt=   0.    secs         cjo=   1.40m f/area       cjp= 350.00p f/pj   
+
+   4*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                 tcv=   0.    v/deg k
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+      xti=   1.90            xtitun=   3.00               keg=   1.00         
+       eg=   1.10  ev          gap1= 702.00u  ev/deg     gap2=   1.11k  deg   
+     ttt1=   0.    /deg        ttt2=   0.    /deg2        tm1=   0.    /deg   
+      tm2=   0.    /deg2        tpb=   0.    v/deg k     tphp=   0.    v/deg k
+     tref=  25.00   deg c 
+
+   5*** noise parameters ***
+       kf=   0.                  af=   1.00         
+
+   ***  level   1  model parameters  ***
+
+    level=   1.00                is= 280.00n amps         jsw= 400.00f amps   
+        n=   1.00               nbv=   1.00                ik=   0.    amp    
+     area=   1.00                pj=   0.                 ikr=   0.    amp    
+    expli=   0.    amps      explir=   0.    amps        jtun=   0.    amps   
+   jtunsw=   0.    amps        ntun=  30.00         
+  
+ ********************************************************
+ *** common model parameters model name:   0:dnwinsub****
+ ********************************************************
+
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** dc breakdown parameters ***
+       vb=   0.    volts        ibv=   1.00m amps   
+
+   2*** parasitic resistance parameters ***
+       rs=   0.    ohms   
+
+   3*** capacitance parameters ***
+       fc= 500.00m              fcs= 500.00m                m= 390.00m        
+     mjsw= 270.00m               pb= 530.00m volts        php= 530.00m volts  
+       tt=   0.    secs         cjo=  80.00u f/area       cjp= 510.00p f/pj   
+
+   4*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                 tcv=   0.    v/deg k
+      trs=   0.    /deg         cta=   0.    /deg         ctp=   0.    /deg   
+      xti=   1.50            xtitun=   3.00               keg=   1.00         
+       eg=   1.10  ev          gap1= 702.00u  ev/deg     gap2=   1.11k  deg   
+     ttt1=   0.    /deg        ttt2=   0.    /deg2        tm1=   0.    /deg   
+      tm2=   0.    /deg2        tpb=   0.    v/deg k     tphp=   0.    v/deg k
+     tref=  25.00   deg c 
+
+   5*** noise parameters ***
+       kf=   0.                  af=   1.00         
+
+   ***  level   1  model parameters  ***
+
+    level=   1.00                is=   2.80u amps         jsw=   7.60p amps   
+        n=   1.00               nbv=   1.00                ik=   0.    amp    
+     area=   1.00                pj=   0.                 ikr=   0.    amp    
+    expli=   0.    amps      explir=   0.    amps        jtun=   0.    amps   
+   jtunsw=   0.    amps        ntun=  30.00         
+  
+1****** HSPICE -- D-2010.03 32-BIT (Feb 23 2010) linux ******                   
+ ******  
+ * disclaimer:
+
+  ******  jfet   model parameters tnom=  25.000 temp=  25.000 *****
+
+ ***************************************************************************
+ ***  common model parameters  model name:   5:rdiffp   model type:pjf   ***
+ ***************************************************************************
+
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** basic ids parameters ***
+      vto=  -1.00k volts     lambda=   0.    /v          beta= 878.66namp/v**2
+        l=   0.    meters      ldel=   0.    meters         w=   0.    meters 
+     wdel=   0.    meters      hdif=   0.    meters      ldif=   0.    meters 
+    align=   0.    meters        ni=  14.50g 1/cm**3     area=   1.00         
+       nd=   0.    /v            ng=   0.    /v     
+
+   2*** gate diode dc parameters ***
+       is= 6.5e-17 amps           n=   1.00         
+
+   3*** capacitance parameters ***
+      cgd= 288.38f farad        cgs= 288.38f farad       gcap=   0.   f/m**2  
+     crat= 666.00m               fc= 500.00m                m= 500.00m        
+       pb=   1.00  volts         tt=   0.    secs       capds=   0.   f       
+
+   4*** parasitic resistance parameters ***
+       rd=   1.00  ohms          rg=   1.00  ohms          rs=   1.00  ohms   
+      rsh=   0.   ohm/sq       rshl=   0.   ohm/sq  
+
+   5*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                 tcv=   0.    v/deg k
+      trd=   0.    /deg         trg=   0.    /deg         trs=   0.    /deg   
+      ctd=   0.    /deg         cts=   0.    /deg         tpb=   0.    /deg   
+       eg=   1.11  ev          gap1= 702.00u ev/deg      gap2=   1.11k deg    
+      xti=   1.90              tref=  25.00   deg c 
+
+   6*** noise parameters ***
+       kf=   0.                  af=   1.00            gdsnoi=   1.00         
+     nlev=   0.           
+
+   ***  level   1  model parameters  ***
+
+    level=   1.00         
+  
+
+ ***************************************************************************
+ ***  common model parameters  model name:   6:rdiffp   model type:pjf   ***
+ ***************************************************************************
+
+     names  values   units     names  values   units     names  values   units
+     -----  ------   -----     -----  ------   -----     -----  ------   -----
+
+   1*** basic ids parameters ***
+      vto=  -1.00k volts     lambda=   0.    /v          beta=   1.12mamp/v**2
+        l=   0.    meters      ldel=   0.    meters         w=   0.    meters 
+     wdel=   0.    meters      hdif=   0.    meters      ldif=   0.    meters 
+    align=   0.    meters        ni=  14.50g 1/cm**3     area=   1.00         
+       nd=   0.    /v            ng=   0.    /v     
+
+   2*** gate diode dc parameters ***
+       is= 8.2e-17 amps           n=   1.00         
+
+   3*** capacitance parameters ***
+      cgd= 248.43f farad        cgs= 248.43f farad       gcap=   0.   f/m**2  
+     crat= 666.00m               fc= 500.00m                m= 500.00m        
+       pb=   1.00  volts         tt=   0.    secs       capds=   0.   f       
+
+   4*** parasitic resistance parameters ***
+       rd=   1.00  ohms          rg=   1.00  ohms          rs=   1.00  ohms   
+      rsh=   0.   ohm/sq       rshl=   0.   ohm/sq  
+
+   5*** temperature effect parameters ***
+     tlev=   0.               tlevc=   0.                 tcv=   0.    v/deg k
+      trd=   0.    /deg         trg=   0.    /deg         trs=   0.    /deg   
+      ctd=   0.    /deg         cts=   0.    /deg         tpb=   0.    /deg   
+       eg=   1.11  ev          gap1= 702.00u ev/deg      gap2=   1.11k deg    
+      xti=   1.90              tref=  25.00   deg c 
+
+   6*** noise parameters ***
+       kf=   0.                  af=   1.00            gdsnoi=   1.00         
+     nlev=   0.           
+
+   ***  level   1  model parameters  ***
+
+    level=   1.00         
+  
+1****** HSPICE -- D-2010.03 32-BIT (Feb 23 2010) linux ******                   
+ ******  
+ * disclaimer:
+
+  ******  mos   model parameters tnom=  25.000 temp=  25.000 *****
+ ***************************************************************************
+ ***        model parameters  model name:   0:nmos1    model type:nmos   ***
+ ***************************************************************************
+
+   *** general parameters ***
+    deriv=   0.           
+
+   ***  level 49  model parameters  ***
+
+      hspver=    2006.03               level=         49         
+     version=       3.24            paramchk=          0         
+      apwarn=          1                lite=          0         
+      vgslim=          0             binUnit=          1         
+      capMod=          2               xpart=          1         
+      mobMod=          1              nqsMod=          0         
+      stiMod=          0                 elm=          5         
+    sfvtflag=          0                 tox=    7.5e-09 meter   
+          xj=      3e-07 meter       binflag=          0         
+        lmin=          0 meter          lmax=          0 meter   
+        wmin=          0 meter          wmax=          0 meter   
+        lref=          0 meter          wref=          0 meter   
+        lint=     -5e-08 meter          wint=    9.5e-08 meter   
+       lmult=          1               wmult=          1         
+          ll=          0                 lln=          1         
+          lw=          0                 lwn=          1         
+         lwl=          0                  wl=          0         
+         wln=          1                  ww=   -1.2e-14         
+         wwn=          1                 wwl=   -9.5e-21         
+         dwg=          0 m/V             dwb=          0 m/V^1/2 
+          xl=          0                  xw=          0         
+          a0=        2.6                 ags=       0.24 V^-1    
+          b0=    4.4e-09 meter            b1=          0 meter   
+        keta=       0.02 V^-1           voff=     -0.089 V       
+       ngate=          0 cm^-3           vbx=          0 V       
+         vbm=         -3 V                xt=   1.55e-07 meter   
+        vth0=        0.5 V               nch=    2.6e+17 cm^-3   
+        nsub=      6e+16 cm^-3           nlx=    1.8e-07 meter   
+      gamma1=          0 V^-1/2       gamma2=          0 V^-1/2  
+          k1=        0.5 V^1/2            k2=      0.034         
+          k3=       -1.1                 k3b=      -0.44 V^-1    
+          w0=    2.7e-07 meter          dvt0=         50         
+        dvt1=          1                dvt2=    -0.0084 V^-1    
+       dvt0w=       0.11 meter^-1      dvt1w=      66000 meter^-1
+       dvt2w=     -0.014 V^-1           dsub=        0.5         
+        eta0=      0.015                etab=      -0.12 V^-1    
+          u0=        480 cm^2/V/sec         ua=    4.7e-12 m/V     
+          ub=    2.2e-18 (m/V)^2          uc=      1e-20 V^-1    
+        vsat=     140000 m/sec            a1=          0 v^-1    
+          a2=          1               delta=      0.015 V       
+        rdsw=        350 ohm-um         prwg=          0 V^-1    
+        prwb=      -0.25 V^-1/2           wr=          1         
+        pclm=        0.7             pdiblc1=       0.35         
+     pdiblc2=     0.0021             pdiblcb=       0.32 V^-1    
+      pscbe1=      1e+30 V/m          pscbe2=      1e-06 V/m     
+       drout=        0.5                pvag=          0         
+     nfactor=       0.42                cdsc=          0 f/m^2   
+       cdscb=     0.0015 f/V/m^2       cdscd=      0.001 f/V/m^2 
+         cit=    0.00045 f/m^2        alpha0=    2.6e-06 m/V     
+       beta0=         21 V               dlc=      3e-08 meter   
+         dwc=    9.5e-08 meter           clc=      1e-15 meter   
+         cle=        0.6                cgso=    1.2e-10 f/m     
+        cgdo=    1.2e-10 f/m            cgbo=    1.1e-10 f/m     
+        cgsl=    1.3e-10 f/m            cgdl=    1.4e-10 f/m     
+      ckappa=        0.6                  cf=          0 f/m     
+        acde=          1 m/V            moin=         15 V^1/2   
+        toxm=    7.5e-09 m            dtoxcv=          0 m       
+         vfb (not used)                alpha1=          5 1/V     
+        ijth=          0 A              noff=          1         
+      voffcv=          0                 tcj=          0 1/K     
+       tcjsw=          0 1/K          tcjswg=          0 1/K     
+         tpb=          0 V/K           tpbsw=          0 V/K     
+      tpbswg=          0 V/K             llc=          0         
+         lwc=          0                lwlc=          0         
+         wlc=          0                 wwc=   -1.2e-14         
+        wwlc=   -9.5e-21                tnom=     300.15 K       
+         kt1=      -0.34 V              kt1l=          0         
+         kt2=      0.022                 ute=       -1.8         
+         ua1=          0 m/V             ub1=          0 (m/V)^2 
+         uc1=          0 m/V^2            at=      33000 m/s     
+         prt=          0         
+         using Hspice noise model           nlev=          1         
+          af=        1.5                  kf=    2.2e-26         
+      gdsnoi=-1.23457e-29         
+         using Hspice diodes            using ACM 
+         acm=         2                 hdif=     8e-07 meter    
+        ldif=         0 meter             js=   5.1e-07 amp/m^2  
+         jsw=     6e-13 amp/m            xti=         2          
+           n=         1                   cj=   0.00084 f/m^2    
+          mj=      0.34                   pb=      0.69 V        
+        cjsw=   2.5e-10 f/m             mjsw=      0.23          
+         php=      0.69 V               pbsw (not used)           
+      cjgate=   2.5e-10 f/m            cjswg (not used)           
+       mjswg (not used)                 pbswg (not used)           
+ ***************************************************************************
+ ***        model parameters  model name:   0:pmos1    model type:pmos   ***
+ ***************************************************************************
+
+   *** general parameters ***
+    deriv=   0.           
+
+   ***  level 49  model parameters  ***
+
+      hspver=    2006.03               level=         49         
+     version=       3.24            paramchk=          0         
+      apwarn=          1                lite=          0         
+      vgslim=          0             binUnit=          1         
+      capMod=          2               xpart=          1         
+      mobMod=          1              nqsMod=          0         
+      stiMod=          0                 elm=          5         
+    sfvtflag=          0                 tox=    7.7e-09 meter   
+          xj=      3e-07 meter       binflag=          0         
+        lmin=          0 meter          lmax=          0 meter   
+        wmin=          0 meter          wmax=          0 meter   
+        lref=          0 meter          wref=          0 meter   
+        lint=   -7.1e-08 meter          wint=    3.5e-08 meter   
+       lmult=          1               wmult=          1         
+          ll=          0                 lln=          1         
+          lw=          0                 lwn=          1         
+         lwl=          0                  wl=          0         
+         wln=          1                  ww=    1.8e-16         
+         wwn=        1.1                 wwl=     -2e-21         
+         dwg=          0 m/V             dwb=          0 m/V^1/2 
+          xl=          0                  xw=          0         
+          a0=       0.59                 ags=       0.24 V^-1    
+          b0=    8.9e-08 meter            b1=          0 meter   
+        keta=     -0.014 V^-1           voff=      -0.11 V       
+       ngate=          0 cm^-3           vbx=          0 V       
+         vbm=         -3 V                xt=   1.55e-07 meter   
+        vth0=       -0.7 V               nch=    9.2e+16 cm^-3   
+        nsub=      6e+16 cm^-3           nlx=    1.7e-07 meter   
+      gamma1=          0 V^-1/2       gamma2=          0 V^-1/2  
+          k1=       0.59 V^1/2            k2=     -0.061         
+          k3=         11                 k3b=      -0.76 V^-1    
+          w0=      1e-10 meter          dvt0=        1.7         
+        dvt1=       0.38                dvt2=      0.017 V^-1    
+       dvt0w=       0.19 meter^-1      dvt1w=      73000 meter^-1
+       dvt2w=    -0.0064 V^-1           dsub=        0.5         
+        eta0=       0.25                etab=    -0.0039 V^-1    
+          u0=        150 cm^2/V/sec         ua=    5.3e-10 m/V     
+          ub=    1.1e-18 (m/V)^2          uc=      1e-20 V^-1    
+        vsat=     120000 m/sec            a1=          0 v^-1    
+          a2=          1               delta=       0.01 V       
+        rdsw=       1100 ohm-um         prwg=       0.14 V^-1    
+        prwb=     -0.098 V^-1/2           wr=          1         
+        pclm=        3.2             pdiblc1=     0.0001         
+     pdiblc2=      1e-20             pdiblcb=          1 V^-1    
+      pscbe1=      1e+30 V/m          pscbe2=      1e-06 V/m     
+       drout=        0.5                pvag=          0         
+     nfactor=        1.3                cdsc=     0.0025 f/m^2   
+       cdscb=     0.0003 f/V/m^2       cdscd=    0.00043 f/V/m^2 
+         cit=          0 f/m^2        alpha0=      1e-09 m/V     
+       beta0=         33 V               dlc=    2.4e-08 meter   
+         dwc=    3.5e-08 meter           clc=      1e-15 meter   
+         cle=        0.6                cgso=    8.6e-11 f/m     
+        cgdo=    8.6e-11 f/m            cgbo=    1.1e-10 f/m     
+        cgsl=      1e-10 f/m            cgdl=    1.1e-10 f/m     
+      ckappa=        0.6                  cf=          0 f/m     
+        acde=          1 m/V            moin=         15 V^1/2   
+        toxm=    7.7e-09 m            dtoxcv=          0 m       
+         vfb (not used)                alpha1=        1.5 1/V     
+        ijth=          0 A              noff=          1         
+      voffcv=          0                 tcj=          0 1/K     
+       tcjsw=          0 1/K          tcjswg=          0 1/K     
+         tpb=          0 V/K           tpbsw=          0 V/K     
+      tpbswg=          0 V/K             llc=          0         
+         lwc=          0                lwlc=          0         
+         wlc=          0                 wwc=    1.8e-16         
+        wwlc=     -2e-21                tnom=     300.15 K       
+         kt1=      -0.55 V              kt1l=          0         
+         kt2=      0.022                 ute=       -1.3         
+         ua1=          0 m/V             ub1=          0 (m/V)^2 
+         uc1=          0 m/V^2            at=      33000 m/s     
+         prt=          0         
+         using Hspice noise model           nlev=          1         
+          af=        1.4                  kf=    1.2e-26         
+      gdsnoi=-1.23457e-29         
+         using Hspice diodes            using ACM 
+         acm=         2                 hdif=     8e-07 meter    
+        ldif=         0 meter             js=   2.8e-07 amp/m^2  
+         jsw=   3.7e-13 amp/m            xti=       1.9          
+           n=         1                   cj=    0.0014 f/m^2    
+          mj=      0.54                   pb=         1 V        
+        cjsw=   3.5e-10 f/m             mjsw=      0.46          
+         php=       1.1 V               pbsw (not used)           
+      cjgate=   3.5e-10 f/m            cjswg (not used)           
+       mjswg (not used)                 pbswg (not used)           
+  **info** (OPAMP1.circuit:45) DC voltage reset to initial transient source value              in source        0:vin                 new dc=  0.1650D+01
+ 
+
+ 
+      
+ **info** set option symb=1 internally to help for convergence.
+ *****************************************************************
+ ******  option summary
+ ******
+ runlvl  = 3         bypass  = 2         
+
+ **info** dc convergence failure, 
+ resetting dcon option to 1 and retrying
+
+ **info** dc convergence successful
+ you can increase the efficiency of the
+ operating point calculation by setting dcon= 1
+ in the .option statement
+1****** HSPICE -- D-2010.03 32-BIT (Feb 23 2010) linux ******                   
+ ******  
+ * disclaimer:
+
+  ******  operating point information tnom=  25.000 temp=  27.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:inp     =   1.6500  0:out     =   1.6500  0:pd      =   0.     
+ +0:vdda    =   3.3000  0:xpd     =   3.3000  1:net12   = 680.1936m
+ +1:net13   = 680.1936m 1:net158  =   2.5335  1:net21   = 879.6983m
+ +1:net27   =   1.9679  1:net31   =   2.4486  1:net51   =   3.8042n
+ +1:net56   = 669.3051m 1:net69   =   3.3000 
+
+ ******  
+ * disclaimer:
+
+  ******  transient analysis tnom=  25.000 temp=  27.000 *****
+   voffset=  5.6209E-06
+   vpp@1mhz=  1.0692E+00  from=  2.0000E-07     to=  1.8000E-06
+   delay=  5.6009E-07  targ=  1.0601E-06   trig=  5.0000E-07
+   iddq= -1.5797E-07
+   fom=  7.7427E+00
+
+          ***** job concluded
+1****** HSPICE -- D-2010.03 32-BIT (Feb 23 2010) linux ******                   
+ ******  
+ * disclaimer:
+
+  ******  job statistics summary tnom=  25.000 temp=  27.000 *****
+ 
+ 
+ ******  Machine Information  ******
+ CPU:
+ model name	: Intel(R) Xeon(R) Platinum 8260 CPU @ 2.40GHz
+ cpu MHz	: 3598.242
+ 
+ OS:
+ Linux version 3.10.0-1160.el7.x86_64 (mockbuild@kbuilder.bsys.centos.org) (gcc 
+ version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) ) #1 SMP Mon Oct 19 16:18:59 UT
+ C 2020
+
+
+  ******  HSPICE Threads Information  ******
+
+  Command Line Threads Count                  :     1
+  Available CPU Count                         :   192
+  Actual Model Evaluation(Load) Threads Count :     1
+  Actual Solver Threads Count                 :     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =      49 # elements   =      25
+  # resistors   =       0 # capacitors =       2 # inductors   =       0
+  # mutual_inds =       0 # vccs       =       0 # vcvs        =       0
+  # cccs        =       0 # ccvs       =       0 # volt_srcs   =       4
+  # curr_srcs   =       0 # diodes     =       3 # bjts        =       0
+  # jfets       =       2 # mosfets    =      14 # U elements  =       0
+  # T elements  =       0 # W elements =       0 # B elements  =       0
+  # S elements  =       0 # P elements =       0 # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.01           1         264
+  transient          0.00          24         158          68 rev=         2
+  readin             0.01
+  errchk             0.00
+  setup              0.00
+  output             0.00
+
+
+           total memory used          333  kbytes
+           total cpu time            0.02 seconds
+           total elapsed time        0.03 seconds
+           job started at     16:06:19 10/14/2023
+           job ended   at     16:06:19 10/14/2023
+
+
+>info:         ***** hspice job concluded
+ lic: Release hspice token(s) 

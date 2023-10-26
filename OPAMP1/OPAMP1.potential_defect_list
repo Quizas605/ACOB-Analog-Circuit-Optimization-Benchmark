@@ -1,0 +1,50 @@
+* Disclaimer:
+* THIS FILE IS PROVIDED “AS IS” AND WITH:
+* (A)  NO WARRANTY OF ANY KIND, express, implied or statutory, including any implied warranties of merchantability or 
+* fitness for a particular purpose, which Mentor Graphics disclaims to the maximum extent permitted by applicable law; and
+* (B)  NO INDEMNIFICATION FOR INFRINGEMENT OF INTELLECTUAL PROPERTY RIGHTS.
+* LIMITATION OF LIABILITY:  IN NO EVENT SHALL MENTOR GRAPHICS OR ITS LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, 
+* INCIDENTAL, OR CONSEQUENTIAL DAMAGES (INCLUDING LOST PROFITS OR SAVINGS) WHATSOEVER, WHETHER BASED ON CONTRACT, TORT OR 
+* ANY OTHER LEGAL THEORY, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+* © 2017 Mentor Graphics Corporation. All rights reserved.
+
+* Capacitors name n1 n2 value
+X1.XCC01.C1 X1.NET12 OUT 3.609874E-12                                                                                  [preLRL= 100.000] D1
+X1.XCC01.C1 X1.NET12 OUT 3.609874E-12                                                                                  [preHRL= 100.000] D2
+* Diodes name n1 n2 value
+X1.XD1.D1 0 VDDA DNWINSUB                                                                                              [preLRL= 100.000] D3
+X1.XD1.D1 0 VDDA DNWINSUB                                                                                              [preHRL= 100.000] D4
+X1.XI0.D1 0 X1.NET69 DNINSUB                                                                                           [preLRL= 1.000] D5
+X1.XI0.D1 0 X1.NET69 DNINSUB                                                                                           [preHRL= 1.000] D6
+X1.XI3.D1 X1.NET51 VDDA DPINSUB                                                                                        [preLRL= 0.790] D7
+X1.XI3.D1 X1.NET51 VDDA DPINSUB                                                                                        [preHRL= 0.790] D8
+* MOS Transistors D G S B model L W
+X1.MNM12 X1.NET13 X1.NET56 0 0 NMOS1 4.05000U 10.00000U                                                                [preLRL= 40.500] D9
+X1.MNM12 X1.NET13 X1.NET56 0 0 NMOS1 4.05000U 10.00000U                                                                [preHRL= 40.500] D10
+X1.MNM11 X1.NET56 X1.NET56 0 0 NMOS1 4.05000U 10.00000U                                                                [preLRL= 40.500] D11
+X1.MNM11 X1.NET56 X1.NET56 0 0 NMOS1 4.05000U 10.00000U                                                                [preHRL= 40.500] D12
+X1.MNB02 X1.NET27 X1.NET27 X1.NET21 0 NMOS1 4.05000U 10.00000U                                                         [preLRL= 40.500] D13
+X1.MNB02 X1.NET27 X1.NET27 X1.NET21 0 NMOS1 4.05000U 10.00000U                                                         [preHRL= 40.500] D14
+X1.MNPD1 X1.NET21 XPD 0 0 NMOS1 350.00000N 6.40000U                                                                    [preLRL= 2.240] D15
+X1.MNPD1 X1.NET21 XPD 0 0 NMOS1 350.00000N 6.40000U                                                                    [preHRL= 2.240] D16
+X1.MN001 OUT X1.NET13 0 0 NMOS1 6.05000U 50.00000U                                                                     [preLRL= 100.000] D17
+X1.MN001 OUT X1.NET13 0 0 NMOS1 6.05000U 50.00000U                                                                     [preHRL= 100.000] D18
+X1.MNPD2 X1.NET13 PD 0 0 NMOS1 350.00000N 6.40000U                                                                     [preLRL= 2.240] D19
+X1.MNPD2 X1.NET13 PD 0 0 NMOS1 350.00000N 6.40000U                                                                     [preHRL= 2.240] D20
+X1.MNC01 X1.NET13 X1.NET69 X1.NET12 0 NMOS1 7.05000U 4.00000U                                                          [preLRL= 28.200] D21
+X1.MNC01 X1.NET13 X1.NET69 X1.NET12 0 NMOS1 7.05000U 4.00000U                                                          [preHRL= 28.200] D22
+X1.MPB02 X1.NET27 X1.NET51 X1.NET158 VDDA PMOS1 22.05000U 5.00000U                                                     [preLRL= 100.000] D23
+X1.MPB02 X1.NET27 X1.NET51 X1.NET158 VDDA PMOS1 22.05000U 5.00000U                                                     [preHRL= 100.000] D24
+X1.MPPD1 X1.NET158 XPD VDDA VDDA PMOS1 350.00000N 6.40000U                                                             [preLRL= 2.240] D25
+X1.MPPD1 X1.NET158 XPD VDDA VDDA PMOS1 350.00000N 6.40000U                                                             [preHRL= 2.240] D26
+X1.MPS11 X1.NET31 X1.NET158 VDDA VDDA PMOS1 6.05000U 20.00000U                                                         [preLRL= 100.000] D27
+X1.MPS11 X1.NET31 X1.NET158 VDDA VDDA PMOS1 6.05000U 20.00000U                                                         [preHRL= 100.000] D28
+X1.MPD11 X1.NET56 OUT X1.NET31 X1.NET31 PMOS1 4.05000U 30.00000U                                                       [preLRL= 100.000] D29
+X1.MPD11 X1.NET56 OUT X1.NET31 X1.NET31 PMOS1 4.05000U 30.00000U                                                       [preHRL= 100.000] D30
+X1.MP001 OUT X1.NET158 VDDA VDDA PMOS1 6.05000U 80.00000U                                                              [preLRL= 100.000] D31
+X1.MP001 OUT X1.NET158 VDDA VDDA PMOS1 6.05000U 80.00000U                                                              [preHRL= 100.000] D32
+X1.MPD12 X1.NET13 INP X1.NET31 X1.NET31 PMOS1 4.05000U 30.00000U                                                       [preLRL= 100.000] D33
+X1.MPD12 X1.NET13 INP X1.NET31 X1.NET31 PMOS1 4.05000U 30.00000U                                                       [preHRL= 100.000] D34
+X1.MPB01 X1.NET158 X1.NET158 VDDA VDDA PMOS1 6.05000U 10.00000U                                                        [preLRL= 60.500] D35
+X1.MPB01 X1.NET158 X1.NET158 VDDA VDDA PMOS1 6.05000U 10.00000U                                                        [preHRL= 60.500] D36
+

@@ -1,0 +1,36 @@
+* Disclaimer:
+* No rights or licenses are granted by ams to Recipient, expressly or by implication, with respect to any proprietary information 
+* or patent, copyright mask, work, trademark, trade secret or other intellectual property right owned or controlled by ams, except
+* as expressly provided by ams. Recipient may not remove any copyright notices from the Simulation File. ams may make changes to 
+* the Simulation Files or to items referenced therein at any time without notice and is not obligated to support or update these Files.
+* This simulation File is provided by ams "AS IS" and any express or implied warranties, including, but not limited to the implied 
+* warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall ams or its suppliers be liable 
+* for any direct, indirect, incidental, special, exemplary or consequential damages (including, but not limited to procurement of 
+* substitute goods or services, loss of use, data or profits, or business interruption however caused and on any theory of liability, 
+* whether in contract, strict liability or tort (including negligence or otherwise) arising in any way out of the use of - or any 
+* inability to use - this Simulation File, even if advised of the possibility of such damage.  
+* © ams AG
+
+.subckt OPAMP1 inn inp out pd xpd vdda vssa 
+xd1 vssa vdda primitive_nwd AREA=6.13907e-9 PJ=476.6e-6 M=1
+xi0 vssa net69 primitive_nd AREA=1e-12 PJ=4e-6 M=1
+xi3 net51 vdda primitive_pd AREA=790e-15 PJ=3.3e-6 M=1
+xr0 vssa vdda net51 primitive_rdiffp L=2.1e-6 W=700e-9 M=1
+xr1 vdda vdda net69 primitive_rdiffp L=2.1e-6 W=700e-9 M=1
+xcc01 net12 out primitive_cpoly AREA=4.7e-9 PERI=453.7e-6 M=1
+mnm12 net13 net56 vssa vssa nmos1 L=4.05e-6 W=10e-6 AD=11e-12 AS=11e-12 PD=12.2e-6 PS=12.2e-6 NRD=60e-3 NRS=60e-3 M=1
+mnm11 net56 net56 vssa vssa nmos1 L=4.05e-6 W=10e-6 AD=11e-12 AS=11e-12 PD=12.2e-6 PS=12.2e-6 NRD=60e-3 NRS=60e-3 M=1
+mnb02 net27 net27 net21 vssa nmos1 L=4.05e-6 W=10e-6 AD=11e-12 AS=11e-12 PD=12.2e-6 PS=12.2e-6 NRD=60e-3 NRS=60e-3 M=1
+mnpd1 net21 xpd vssa vssa nmos1 L=350e-9 W=6.4e-6 AD=7.04e-12 AS=7.04e-12 PD=8.6e-6 PS=8.6e-6 NRD=93.75e-3 NRS=93.75e-3 M=1
+mn001 out net13 vssa vssa nmos1 L=6.05e-6 W=50e-6 AD=55e-12 AS=55e-12 PD=52.2e-6 PS=52.2e-6 NRD=12e-3 NRS=12e-3 M=1
+mnpd2 net13 pd vssa vssa nmos1 L=350e-9 W=6.4e-6 AD=7.04e-12 AS=7.04e-12 PD=8.6e-6 PS=8.6e-6 NRD=93.75e-3 NRS=93.75e-3 M=1
+mnc01 net13 net69 net12 vssa nmos1 L=7.05e-6 W=4e-6 AD=4.4e-12 AS=4.4e-12 PD=6.2e-6 PS=6.2e-6 NRD=150e-3 NRS=150e-3 M=1
+mpb02 net27 net51 net158 vdda pmos1 L=22.05e-6 W=5e-6 AD=5.5e-12 AS=5.5e-12 PD=7.2e-6 PS=7.2e-6 NRD=120e-3 NRS=120e-3 M=1
+mppd1 net158 xpd vdda vdda pmos1 L=350e-9 W=6.4e-6 AD=7.04e-12 AS=7.04e-12 PD=8.6e-6 PS=8.6e-6 NRD=93.75e-3 NRS=93.75e-3 M=1
+mps11 net31 net158 vdda vdda pmos1 L=6.05e-6 W=20e-6 AD=22e-12 AS=22e-12 PD=22.2e-6 PS=22.2e-6 NRD=30e-3 NRS=30e-3 M=1
+mpd11 net56 inn net31 net31 pmos1 L=4.05e-6 W=30e-6 AD=33e-12 AS=33e-12 PD=32.2e-6 PS=32.2e-6 NRD=20e-3 NRS=20e-3 M=1
+mp001 out net158 vdda vdda pmos1 L=6.05e-6 W=80e-6 AD=88e-12 AS=88e-12 PD=82.2e-6 PS=82.2e-6 NRD=7.5e-3 NRS=7.5e-3 M=1
+mpd12 net13 inp net31 net31 pmos1 L=4.05e-6 W=30e-6 AD=33e-12 AS=33e-12 PD=32.2e-6 PS=32.2e-6 NRD=20e-3 NRS=20e-3 M=1
+mpb01 net158 net158 vdda vdda pmos1 L=6.05e-6 W=10e-6 AD=11e-12 AS=11e-12 PD=12.2e-6 PS=12.2e-6 NRD=60e-3 NRS=60e-3 M=1
+.ends
+

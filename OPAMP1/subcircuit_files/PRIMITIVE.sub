@@ -1,0 +1,39 @@
+* Disclaimer:
+* No rights or licenses are granted by ams to Recipient, expressly or by implication, with respect to any proprietary information 
+* or patent, copyright mask, work, trademark, trade secret or other intellectual property right owned or controlled by ams, except
+* as expressly provided by ams. Recipient may not remove any copyright notices from the Simulation File. ams may make changes to 
+* the Simulation Files or to items referenced therein at any time without notice and is not obligated to support or update these Files.
+* This simulation File is provided by ams "AS IS" and any express or implied warranties, including, but not limited to the implied 
+* warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall ams or its suppliers be liable 
+* for any direct, indirect, incidental, special, exemplary or consequential damages (including, but not limited to procurement of 
+* substitute goods or services, loss of use, data or profits, or business interruption however caused and on any theory of liability, 
+* whether in contract, strict liability or tort (including negligence or otherwise) arising in any way out of the use of - or any 
+* inability to use - this Simulation File, even if advised of the possibility of such damage.  
+* © ams AG
+
+* Diode, N+ to P substrate
+.subckt primitive_nd a c area=1e-12 pj=4e-6
+D1 A C DNINSUB AREA=AREA PJ=PJ
+.ENDS
+
+* Diode, N well to P substrate
+.subckt primitive_nwd a c area=1e-12 pj=4e-6
+D1 A C DNWINSUB AREA=AREA PJ=PJ
+.ENDS 
+
+* Diode, P+ to N well
+.subckt primitive_pd a c area=1e-12 pj=4e-6
+D1 A C DPINSUB AREA=AREA PJ=PJ
+.ENDS
+
+* Resistor, P+ diffusion
+.subckt primitive_rdiffp d b s w=1e-6 l=1e-6 dtemp=0
+J1 D B S RDIFFP DTEMP=DTEMP
+.MODEL RDIFFP PJF LEVEL=1
++ BETA='3.571e-06*(W-(-1.0e-07))/(L-(0.0))/(1+(1.5e-03)*(TEMPER+DTEMP-2.700e+01))'   
++ BEX='-300.15*(1.5e-03)'
++ VTO='-1.0e+03+(0.000e+00/(W-(-1.0e-07)))'  LAMBDA=0.0
++ IS='1.4e-07*W*L+1.8e-13*(W+L)'    PB=1.0   XTI=1.9e+00
++ CGS='6.8e-04*W*L+3.2e-10*(W+L)'   RS=1.0
++ CGD='6.8e-04*W*L+3.2e-10*(W+L)'   RD=1.0   RG=1.0
+.ENDS

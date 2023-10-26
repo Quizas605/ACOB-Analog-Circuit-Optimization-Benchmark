@@ -1,0 +1,29 @@
+* Disclaimer:
+* No rights or licenses are granted by ams to Recipient, expressly or by implication, with respect to any proprietary information 
+* or patent, copyright mask, work, trademark, trade secret or other intellectual property right owned or controlled by ams, except
+* as expressly provided by ams. Recipient may not remove any copyright notices from the Simulation File. ams may make changes to 
+* the Simulation Files or to items referenced therein at any time without notice and is not obligated to support or update these Files.
+* This simulation File is provided by ams "AS IS" and any express or implied warranties, including, but not limited to the implied 
+* warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall ams or its suppliers be liable 
+* for any direct, indirect, incidental, special, exemplary or consequential damages (including, but not limited to procurement of 
+* substitute goods or services, loss of use, data or profits, or business interruption however caused and on any theory of liability, 
+* whether in contract, strict liability or tort (including negligence or otherwise) arising in any way out of the use of - or any 
+* inability to use - this Simulation File, even if advised of the possibility of such damage.  
+* © ams AG
+
+.subckt BANDGAP1 vdda vref vssa
+xr1 net1 vbe primitive_rpoly2 L=815e-6 W=2e-6 M=1
+xr2 vref net31 primitive_rpoly2 L=1.37e-3 W=2e-6 M=1
+q3 vssa vssa net31 vssa pnp1 m=1
+q2 vssa vssa net43 vssa pnp1 m=1
+q1<0> vssa vssa vbe vssa pnp1 m=5
+m4<0> net58 net58 net43 vssa nmos1 L=10.05e-6 W=100e-6 AD=100e-12 AS=200e-12 PD=104e-6 PS=104e-6 NRD=12.5e-3 NRS=12.5e-3 M=4
+m5 net65 net58 net1 vssa nmos1 L=10.05e-6 W=100e-6 AD=115e-12 AS=230e-12 PD=104.6e-6 PS=104.6e-6 NRD=26e-3 NRS=26e-3 M=2
+m18 net29 net29 vssa vssa nmos1 L=400.05e-6 W=1e-6 AD=1.1e-12 AS=1.1e-12 PD=3.2e-6 PS=3.2e-6 NRD=600e-3 NRS=600e-3 M=1
+m2<0> net58 net65 vdda vdda pmos1 L=20.05e-6 W=50e-6 AD=50e-12 AS=100e-12 PD=54e-6 PS=54e-6 NRD=25e-3 NRS=25e-3 M=4
+m6<0> vref net65 vdda vdda pmos1 L=20.05e-6 W=50e-6 AD=50e-12 AS=100e-12 PD=54e-6 PS=54e-6 NRD=25e-3 NRS=25e-3 M=10
+m16 net58 net29 vdda vdda pmos1 L=100.05e-6 W=2e-6 AD=4.6e-12 AS=4.6e-12 PD=6.6e-6 PS=6.6e-6 NRD=650e-3 NRS=650e-3 M=1
+m3 net65 net65 vdda vdda pmos1 L=20.05e-6 W=50e-6 AD=57.5e-12 AS=115e-12 PD=54.6e-6 PS=54.6e-6 NRD=52e-3 NRS=52e-3 M=2
+m17 net29 net65 vdda vdda pmos1 L=850e-9 W=10e-6 AD=23e-12 AS=23e-12 PD=14.6e-6 PS=14.6e-6 NRD=130e-3 NRS=130e-3 M=1
+.ends
+

@@ -1,0 +1,390 @@
+* Disclaimer:
+* No rights or licenses are granted by ams to Recipient, expressly or by implication, with respect to any proprietary information 
+* or patent, copyright mask, work, trademark, trade secret or other intellectual property right owned or controlled by ams, except
+* as expressly provided by ams. Recipient may not remove any copyright notices from the Simulation File. ams may make changes to 
+* the Simulation Files or to items referenced therein at any time without notice and is not obligated to support or update these Files.
+* This simulation File is provided by ams "AS IS" and any express or implied warranties, including, but not limited to the implied 
+* warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall ams or its suppliers be liable 
+* for any direct, indirect, incidental, special, exemplary or consequential damages (including, but not limited to procurement of 
+* substitute goods or services, loss of use, data or profits, or business interruption however caused and on any theory of liability, 
+* whether in contract, strict liability or tort (including negligence or otherwise) arising in any way out of the use of - or any 
+* inability to use - this Simulation File, even if advised of the possibility of such damage.  
+* © ams AG
+
+.subckt ADC8B1 data<7> data<6> data<5> data<4> data<3> data<2> data<1> data<0> vdda vin vrn vrp vssa clock eoc start inh_gnd inh_vdd
+xi2 vdac vrn vrp dac<0> dac<1> dac<2> dac<3> dac<4> dac<5> dac<6> dac<7> vdda vssa DAC8B1
+*.subckt DAC8B1 dacout rn rp b0 b1 b2 b3 b4 b5 b6 b7 vdda gnda
+xi1 eoc dac<0> dac<1> dac<2> dac<3> dac<4> dac<5> dac<6> dac<7> data<0> data<1> data<2> data<3> data<4> data<5> data<6> data<7> sample clock comp start inh_gnd inh_vdd ADC8B1_SAR8
+xi0 vssa comp vdac vdda vin sample ADC8B1_comparator
+.ends
+
+.subckt adc8b1_ainvr vdda vssa in out
+mn1 out in vssa vssa nmos1 L=gt_pdl W=gt_pdw AD='sx*gt_pdw' AS='sx*gt_pdw' PD='2*sx+gt_pdw' PS='2*sx+gt_pdw' NRD='lc/gt_pdw' NRS='lc/gt_pdw' M=1
+mp1 out in vdda vdda pmos1 L=gt_pul W=gt_puw AD='sx*gt_puw' AS='sx*gt_puw' PD='2*sx+gt_puw' PS='2*sx+gt_puw' NRD='lc/gt_puw' NRS='lc/gt_puw' M=1
+.ends
+
+.subckt adc8b1_anor2 a b out vdda vssa
+mn1 out b vssa vssa nmos1 L=gt_pdl W=gt_pdw AD='sx*gt_pdw' AS='sx*gt_pdw' PD='2*sx+gt_pdw' PS='2*sx+gt_pdw' NRD='lc/gt_pdw' NRS='lc/gt_pdw' M=1
+mn2 out a vssa vssa nmos1 L=gt_pdl W=gt_pdw AD='sx*gt_pdw' AS='sx*gt_pdw' PD='2*sx+gt_pdw' PS='2*sx+gt_pdw' NRD='lc/gt_pdw' NRS='lc/gt_pdw' M=1
+mp1 out a net17 vdda pmos1 L=gt_pul W=gt_puw AD='sx*gt_puw' AS='sx*gt_puw' PD='2*sx+gt_puw' PS='2*sx+gt_puw' NRD='lc/gt_puw' NRS='lc/gt_puw' M=1
+mp2 net17 b vdda vdda pmos1 L=gt_pul W=gt_puw AD='sx*gt_puw' AS='sx*gt_puw' PD='2*sx+gt_puw' PS='2*sx+gt_puw' NRD='lc/gt_puw' NRS='lc/gt_puw' M=1
+.ends
+
+.subckt ADC8B1_AOI210 a b c q inh_gnd inh_vdd
+xi3 a b c q inh_gnd inh_vdd adc8b1_aoi21_core gt_mn2l=350e-9 gt_mn2w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6 gt_mn3l=350e-9
++ gt_mn3w=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6 gt_mp2l=350e-9 gt_mp2w=1.6e-6 gt_mp3l=350e-9 gt_mp3w=1.6e-6
+.ends
+
+.subckt adc8b1_aoi21_core a b c out inh_gnd inh_vdd
+mn2 net14 b inh_gnd inh_gnd nmos1 L=gt_mn2l W=gt_mn2w AD='sx*gt_mn2w' AS='sx*gt_mn2w' PD='2*sx+gt_mn2w' PS='2*sx+gt_mn2w' NRD='lc/gt_mn2w' NRS='lc/gt_mn2w' M=1
+mn1 out a net14 inh_gnd nmos1 L=gt_mn1l W=gt_mn1w AD='sx*gt_mn1w' AS='sx*gt_mn1w' PD='2*sx+gt_mn1w' PS='2*sx+gt_mn1w' NRD='lc/gt_mn1w' NRS='lc/gt_mn1w' M=1
+mn3 out c inh_gnd inh_gnd nmos1 L=gt_mn3l W=gt_mn3w AD='sx*gt_mn3w' AS='sx*gt_mn3w' PD='2*sx+gt_mn3w' PS='2*sx+gt_mn3w' NRD='lc/gt_mn3w' NRS='lc/gt_mn3w' M=1
+mp1 net18 a inh_vdd inh_vdd pmos1 L=gt_mp1l W=gt_mp1w AD='sx*gt_mp1w' AS='sx*gt_mp1w' PD='2*sx+gt_mp1w' PS='2*sx+gt_mp1w' NRD='lc/gt_mp1w' NRS='lc/gt_mp1w' M=1
+mp2 net18 b inh_vdd inh_vdd pmos1 L=gt_mp2l W=gt_mp2w AD='sx*gt_mp2w' AS='sx*gt_mp2w' PD='2*sx+gt_mp2w' PS='2*sx+gt_mp2w' NRD='lc/gt_mp2w' NRS='lc/gt_mp2w' M=1
+mp3 out c net18 inh_vdd pmos1 L=gt_mp3l W=gt_mp3w AD='sx*gt_mp3w' AS='sx*gt_mp3w' PD='2*sx+gt_mp3w' PS='2*sx+gt_mp3w' NRD='lc/gt_mp3w' NRS='lc/gt_mp3w' M=1
+.ends
+
+.subckt ADC8B1_AOI220 a b c d q inh_gnd inh_vdd
+xi2 a b c d q inh_gnd inh_vdd adc8b1_aoi22_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=1e-6 gt_mn3l=350e-9 gt_mn3w=1e-6
++ gt_mn4l=350e-9 gt_mn4w=1e-6 gt_mp1l=350e-9 gt_mp1w=1.6e-6 gt_mp2l=350e-9 gt_mp2w=1.6e-6 gt_mp4l=350e-9 gt_mp4w=1.6e-6 gt_mp3l=350e-9 gt_mp3w=1.6e-6
+.ends
+
+.subckt adc8b1_aoi22_core a b c d out inh_gnd inh_vdd
+mn1 out a net15 inh_gnd nmos1 L=gt_mn1l W=gt_mn1w AD='sx*gt_mn1w' AS='sx*gt_mn1w' PD='2*sx+gt_mn1w' PS='2*sx+gt_mn1w' NRD='lc/gt_mn1w' NRS='lc/gt_mn1w' M=1
+mn2 net15 b inh_gnd inh_gnd nmos1 L=gt_mn2l W=gt_mn2w AD='sx*gt_mn2w' AS='sx*gt_mn2w' PD='2*sx+gt_mn2w' PS='2*sx+gt_mn2w' NRD='lc/gt_mn2w' NRS='lc/gt_mn2w' M=1
+mn3 out c net7 inh_gnd nmos1 L=gt_mn3l W=gt_mn3w AD='sx*gt_mn3w' AS='sx*gt_mn3w' PD='2*sx+gt_mn3w' PS='2*sx+gt_mn3w' NRD='lc/gt_mn3w' NRS='lc/gt_mn3w' M=1
+mn4 net7 d inh_gnd inh_gnd nmos1 L=gt_mn4l W=gt_mn4w AD='sx*gt_mn4w' AS='sx*gt_mn4w' PD='2*sx+gt_mn4w' PS='2*sx+gt_mn4w' NRD='lc/gt_mn4w' NRS='lc/gt_mn4w' M=1
+mp1 net23 a inh_vdd inh_vdd pmos1 L=gt_mp1l W=gt_mp1w AD='sx*gt_mp1w' AS='sx*gt_mp1w' PD='2*sx+gt_mp1w' PS='2*sx+gt_mp1w' NRD='lc/gt_mp1w' NRS='lc/gt_mp1w' M=1
+mp2 net23 b inh_vdd inh_vdd pmos1 L=gt_mp2l W=gt_mp2w AD='sx*gt_mp2w' AS='sx*gt_mp2w' PD='2*sx+gt_mp2w' PS='2*sx+gt_mp2w' NRD='lc/gt_mp2w' NRS='lc/gt_mp2w' M=1
+mp4 out d net23 inh_vdd pmos1 L=gt_mp4l W=gt_mp4w AD='sx*gt_mp4w' AS='sx*gt_mp4w' PD='2*sx+gt_mp4w' PS='2*sx+gt_mp4w' NRD='lc/gt_mp4w' NRS='lc/gt_mp4w' M=1
+mp3 out c net23 inh_vdd pmos1 L=gt_mp3l W=gt_mp3w AD='sx*gt_mp3w' AS='sx*gt_mp3w' PD='2*sx+gt_mp3w' PS='2*sx+gt_mp3w' NRD='lc/gt_mp3w' NRS='lc/gt_mp3w' M=1
+.ends
+
+.subckt ADC8B1_AOI310 a b c d q inh_gnd inh_vdd
+xi2 a b c d q inh_gnd inh_vdd adc8b1_aoi31_core gt_mn3l=350e-9 gt_mn3w=1.5e-6 sx=850e-9 lc=500e-9 gt_mn4l=350e-9 gt_mn4w=500e-9 gt_mn1l=350e-9
++ gt_mn1w=1.5e-6 gt_mn2l=350e-9 gt_mn2w=1.5e-6 gt_mp7l=350e-9 gt_mp7w=1.6e-6 gt_mp4l=350e-9 gt_mp4w=1.6e-6 gt_mp1l=350e-9 gt_mp1w=1.6e-6 gt_mp2l=350e-9 gt_mp2w=1.6e-6
+.ends
+
+.subckt adc8b1_aoi31_core a b c d out inh_gnd inh_vdd
+mn3 out c net23 inh_gnd nmos1 L=gt_mn3l W=gt_mn3w AD='sx*gt_mn3w' AS='sx*gt_mn3w' PD='2*sx+gt_mn3w' PS='2*sx+gt_mn3w' NRD='lc/gt_mn3w' NRS='lc/gt_mn3w' M=1
+mn4 out d inh_gnd inh_gnd nmos1 L=gt_mn4l W=gt_mn4w AD='sx*gt_mn4w' AS='sx*gt_mn4w' PD='2*sx+gt_mn4w' PS='2*sx+gt_mn4w' NRD='lc/gt_mn4w' NRS='lc/gt_mn4w' M=1
+mn1 net27 a inh_gnd inh_gnd nmos1 L=gt_mn1l W=gt_mn1w AD='sx*gt_mn1w' AS='sx*gt_mn1w' PD='2*sx+gt_mn1w' PS='2*sx+gt_mn1w' NRD='lc/gt_mn1w' NRS='lc/gt_mn1w' M=1
+mn2 net23 b net27 inh_gnd nmos1 L=gt_mn2l W=gt_mn2w AD='sx*gt_mn2w' AS='sx*gt_mn2w' PD='2*sx+gt_mn2w' PS='2*sx+gt_mn2w' NRD='lc/gt_mn2w' NRS='lc/gt_mn2w' M=1
+mp7 net7 c inh_vdd inh_vdd pmos1 L=gt_mp7l W=gt_mp7w AD='sx*gt_mp7w' AS='sx*gt_mp7w' PD='2*sx+gt_mp7w' PS='2*sx+gt_mp7w' NRD='lc/gt_mp7w' NRS='lc/gt_mp7w' M=1
+mp4 net7 b inh_vdd inh_vdd pmos1 L=gt_mp4l W=gt_mp4w AD='sx*gt_mp4w' AS='sx*gt_mp4w' PD='2*sx+gt_mp4w' PS='2*sx+gt_mp4w' NRD='lc/gt_mp4w' NRS='lc/gt_mp4w' M=1
+mp1 net7 a inh_vdd inh_vdd pmos1 L=gt_mp1l W=gt_mp1w AD='sx*gt_mp1w' AS='sx*gt_mp1w' PD='2*sx+gt_mp1w' PS='2*sx+gt_mp1w' NRD='lc/gt_mp1w' NRS='lc/gt_mp1w' M=1
+mp2 out d net7 inh_vdd pmos1 L=gt_mp2l W=gt_mp2w AD='sx*gt_mp2w' AS='sx*gt_mp2w' PD='2*sx+gt_mp2w' PS='2*sx+gt_mp2w' NRD='lc/gt_mp2w' NRS='lc/gt_mp2w' M=1
+.ends
+
+.subckt adc8b1_a_schmitt a gnda vdda y
+mi14 net18 y gnda vdda pmos1 L=lg W=wpy AD='sx*wpy' AS='sx*wpy' PD='2*sx+wpy' PS='2*sx+wpy' NRD='lc/wpy' NRS='lc/wpy' M=1
+mi13 y a net18 vdda pmos1 L=lg W=wpa AD='sx*wpa' AS='sx*wpa' PD='2*sx+wpa' PS='2*sx+wpa' NRD='lc/wpa' NRS='lc/wpa' M=1
+mp1 net18 a vdda vdda pmos1 L=lg W=wpa AD='sx*wpa' AS='sx*wpa' PD='2*sx+wpa' PS='2*sx+wpa' NRD='lc/wpa' NRS='lc/wpa' M=1
+mi15 net7 a gnda gnda nmos1 L=lg W=wna AD='sx*wna' AS='sx*wna' PD='2*sx+wna' PS='2*sx+wna' NRD='lc/wna' NRS='lc/wna' M=1
+mi16 net7 y vdda gnda nmos1 L=lg W=wny AD='sx*wny' AS='sx*wny' PD='2*sx+wny' PS='2*sx+wny' NRD='lc/wny' NRS='lc/wny' M=1
+mn1 y a net7 gnda nmos1 L=lg W=wna AD='sx*wna' AS='sx*wna' PD='2*sx+wna' PS='2*sx+wna' NRD='lc/wna' NRS='lc/wna' M=1
+.ends
+
+.subckt ADC8B1_CFG2 vdda vssa cin cl1 cl2 xcl1 xcl2
+xi107 vdda vssa net35 xcl1 adc8b1_ainvr gt_pdl=350e-9 gt_pdw=4.6e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=12.8e-6
+xi98 vdda vssa net11 net36 adc8b1_ainvr gt_pdl=16.05e-6 gt_pdw=3e-6 sx=2e-6 lc=1.25e-6 gt_pul=5.85e-6 gt_puw=3e-6
+xi111 vdda vssa net20 net35 adc8b1_ainvr gt_pdl=350e-9 gt_pdw=3e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi110 vdda vssa net30 net65 adc8b1_ainvr gt_pdl=350e-9 gt_pdw=3e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi102 vdda vssa net22 net30 adc8b1_ainvr gt_pdl=350e-9 gt_pdw=3e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi101 vdda vssa net26 net28 adc8b1_ainvr gt_pdl=16.05e-6 gt_pdw=3e-6 sx=2e-6 lc=1.25e-6 gt_pul=5.85e-6 gt_puw=3e-6
+xi99 vdda vssa net14 net26 adc8b1_ainvr gt_pdl=16.05e-6 gt_pdw=3e-6 sx=2e-6 lc=1.25e-6 gt_pul=5.85e-6 gt_puw=3e-6
+xi95 vdda vssa cin net52 adc8b1_ainvr gt_pdl=350e-9 gt_pdw=3e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi100 vdda vssa net36 net22 adc8b1_ainvr gt_pdl=16.05e-6 gt_pdw=3e-6 sx=2e-6 lc=1.25e-6 gt_pul=5.85e-6 gt_puw=3e-6
+xi103 vdda vssa net28 net20 adc8b1_ainvr gt_pdl=350e-9 gt_pdw=3e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi106 vdda vssa net65 xcl2 adc8b1_ainvr gt_pdl=350e-9 gt_pdw=4.6e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=12.8e-6
+xi109 vdda vssa net20 cl1 adc8b1_ainvr gt_pdl=350e-9 gt_pdw=4.6e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=12.8e-6
+xi108 vdda vssa net30 cl2 adc8b1_ainvr gt_pdl=350e-9 gt_pdw=4.6e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=12.8e-6
+xi118 cl2 net52 net14 vdda vssa adc8b1_anor2 gt_pdl=350e-9 gt_pdw=3e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi119 cin cl1 net11 vdda vssa adc8b1_anor2 gt_pdl=350e-9 gt_pdw=3e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+.ends
+
+.subckt adc8b1_clinv_core a c cn q inh_gnd inh_vdd
+mn1 net18 a inh_gnd inh_gnd nmos1 L=gt_mn1l W=gt_mn1w AD='sx*gt_mn1w' AS='sx*gt_mn1w' PD='2*sx+gt_mn1w' PS='2*sx+gt_mn1w' NRD='lc/gt_mn1w' NRS='lc/gt_mn1w' M=1
+mn0 q c net18 inh_gnd nmos1 L=gt_mn0l W=gt_mn0w AD='sx*gt_mn0w' AS='sx*gt_mn0w' PD='2*sx+gt_mn0w' PS='2*sx+gt_mn0w' NRD='lc/gt_mn0w' NRS='lc/gt_mn0w' M=1
+mp1 net10 a inh_vdd inh_vdd pmos1 L=gt_mp1l W=gt_mp1w AD='sx*gt_mp1w' AS='sx*gt_mp1w' PD='2*sx+gt_mp1w' PS='2*sx+gt_mp1w' NRD='lc/gt_mp1w' NRS='lc/gt_mp1w' M=1
+mp0 q cn net10 inh_vdd pmos1 L=gt_mp0l W=gt_mp0w AD='sx*gt_mp0w' AS='sx*gt_mp0w' PD='2*sx+gt_mp0w' PS='2*sx+gt_mp0w' NRD='lc/gt_mp0w' NRS='lc/gt_mp0w' M=1
+.ends
+
+.subckt ADC8B1_CLKIN0 a q inh_gnd inh_vdd
+xi3 a q inh_gnd inh_vdd adc8b1_invb_core gt_mp2l=350e-9 gt_mp2w=800e-9 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=400e-9
+.ends
+
+.subckt adc8b1_comparator gnda out vdac vdda vin sample
+xd0 gnda vdda primitive_nwd AREA=4.12128e-9 PJ=279.2e-6 M=1
+xi9 net23 gnda vdda out adc8b1_a_schmitt lg=350e-9 wpy=3e-6 sx=1.1e-6 lc=600e-9 wpa=3e-6 wna=1e-6 wny=1e-6
+xi0 vdda gnda sample net6 net12 net37 net1 adc8b1_CFG2
+xi20 vdda gnda net36 net23 adc8b1_ainvr gt_pdl=1.05e-6 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=1.05e-6 gt_puw=3e-6
+xi19 vdda gnda net32 net36 adc8b1_ainvr gt_pdl=1.05e-6 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=1.05e-6 gt_puw=3e-6
+xi18 vdda gnda net40 net32 adc8b1_ainvr gt_pdl=1.05e-6 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=1.05e-6 gt_puw=3e-6
+xi1 net6 net37 vin net21 vdda gnda adc8b1_TG1B
+xi4 net6 net37 net40 net32 vdda gnda adc8b1_TG1B
+xi2 net12 net1 vdac net21 vdda gnda adc8b1_TG2B
+xc3 net21 net40 primitive_cpoly AREA=3.2e-9 PERI=250.8e-6 M=1
+.ends
+
+.subckt ADC8B1_DFE1 c d e q qn inh_gnd inh_vdd
+xi66 net48 net63 inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi67 net57 q inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi68 net55 qn inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi69 e net062 inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=500e-9 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=800e-9
+xi70 net63 net47 inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi71 net57 net55 inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi72 x net57 inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi61 cn ci net55 x inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi62 cn ci net054 net48 inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi63 ci cn net47 net48 inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi64 ci cn net63 x inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi65 net062 e net054 net57 inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi60 c cn inh_gnd inh_vdd adc8b1_invb_core gt_mp2l=350e-9 gt_mp2w=1e-6 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=500e-9
+xi59 cn ci inh_gnd inh_vdd adc8b1_invb_core gt_mp2l=350e-9 gt_mp2w=800e-9 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=400e-9
+xi58 d e net062 net054 inh_gnd inh_vdd adc8b1_clinv_core gt_mn1l=350e-9 gt_mn1w=2e-6 sx=850e-9 lc=500e-9 gt_mn0l=350e-9 gt_mn0w=2e-6 gt_mp1l=350e-9 gt_mp1w=3.2e-6 gt_mp0l=350e-9 gt_mp0w=3.2e-6
+.ends
+
+.subckt ADC8B1_DFEC1 c d e q qn rn inh_gnd inh_vdd
+xi60 net57 net55 inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi64 e net80 inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=500e-9 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=800e-9
+xi61 net48 net63 inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi62 net57 q inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi63 net55 qn inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi58 rn net63 net47 inh_gnd inh_vdd adc8b1_nand2_core gt_mn1l=350e-9 gt_mn1w=2e-6 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=2e-6 gt_mp1l=350e-9 gt_mp1w=1.6e-6 gt_mp2l=350e-9 gt_mp2w=1.6e-6
+xi59 rn net40 net57 inh_gnd inh_vdd adc8b1_nand2_core gt_mn1l=350e-9 gt_mn1w=2e-6 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=2e-6 gt_mp1l=350e-9 gt_mp1w=1.6e-6 gt_mp2l=350e-9 gt_mp2w=1.6e-6
+xi53 cn ci net55 net40 inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi54 cn ci net89 net48 inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi55 ci cn net47 net48 inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi56 ci cn net63 net40 inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi57 net80 e net57 net89 inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi52 cn ci inh_gnd inh_vdd adc8b1_invb_core gt_mp2l=350e-9 gt_mp2w=800e-9 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=400e-9
+xi51 c cn inh_gnd inh_vdd adc8b1_invb_core gt_mp2l=350e-9 gt_mp2w=1e-6 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=500e-9
+xi50 d e net80 net89 inh_gnd inh_vdd adc8b1_clinv_core gt_mn1l=350e-9 gt_mn1w=2e-6 sx=850e-9 lc=500e-9 gt_mn0l=350e-9 gt_mn0w=2e-6 gt_mp1l=350e-9 gt_mp1w=3.2e-6 gt_mp0l=350e-9 gt_mp0w=3.2e-6
+.ends
+
+.subckt ADC8B1_DFEP1 c d e q qn sn inh_gnd inh_vdd
+xi62 net63 net47 inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi66 e net80 inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=500e-9 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=800e-9
+xi63 net40 net57 inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi64 net57 q inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi65 net55 qn inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6
+xi60 sn net48 net63 inh_gnd inh_vdd adc8b1_nand2_core gt_mn1l=350e-9 gt_mn1w=2e-6 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=2e-6 gt_mp1l=350e-9 gt_mp1w=1.6e-6 gt_mp2l=350e-9 gt_mp2w=1.6e-6
+xi61 sn net57 net55 inh_gnd inh_vdd adc8b1_nand2_core gt_mn1l=350e-9 gt_mn1w=2e-6 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=2e-6 gt_mp1l=350e-9 gt_mp1w=1.6e-6 gt_mp2l=350e-9 gt_mp2w=1.6e-6
+xi55 cn ci net55 net40 inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi56 cn ci net89 net48 inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi57 ci cn net47 net48 inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi58 ci cn net63 net40 inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi59 net80 e net57 net89 inh_gnd inh_vdd adc8b1_tgate_core gt_mp1l=350e-9 gt_mp1w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6
+xi54 c cn inh_gnd inh_vdd adc8b1_invb_core gt_mp2l=350e-9 gt_mp2w=1e-6 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=500e-9
+xi53 cn ci inh_gnd inh_vdd adc8b1_invb_core gt_mp2l=350e-9 gt_mp2w=800e-9 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=400e-9
+xi52 d e net80 net89 inh_gnd inh_vdd adc8b1_clinv_core gt_mn1l=350e-9 gt_mn1w=2e-6 sx=850e-9 lc=500e-9 gt_mn0l=350e-9 gt_mn0w=2e-6 gt_mp1l=350e-9 gt_mp1w=3.2e-6 gt_mp0l=350e-9 gt_mp0w=3.2e-6
+.ends
+
+.subckt ADC8B1_IMUX20 a b q s inh_gnd inh_vdd
+xi5 b s net11 q inh_gnd inh_vdd adc8b1_clinv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mn0l=350e-9 gt_mn0w=1e-6 gt_mp1l=350e-9 gt_mp1w=1.6e-6 gt_mp0l=350e-9 gt_mp0w=1.6e-6
+xi6 a net11 s q inh_gnd inh_vdd adc8b1_clinv_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mn0l=350e-9 gt_mn0w=1e-6 gt_mp1l=350e-9 gt_mp1w=1.6e-6 gt_mp0l=350e-9 gt_mp0w=1.6e-6
+xi4 s net11 inh_gnd inh_vdd adc8b1_inv_core gt_mn1l=350e-9 gt_mn1w=500e-9 sx=850e-9 lc=500e-9 gt_mp1l=350e-9 gt_mp1w=800e-9
+.ends
+
+.subckt adc8b1_invb_core a q inh_gnd inh_vdd
+mp2 q a inh_vdd inh_vdd pmos1 L=gt_mp2l W=gt_mp2w AD='sx*gt_mp2w' AS='sx*gt_mp2w' PD='2*sx+gt_mp2w' PS='2*sx+gt_mp2w' NRD='lc/gt_mp2w' NRS='lc/gt_mp2w' M=1
+mn2 q a inh_gnd inh_gnd nmos1 L=gt_mn2l W=gt_mn2w AD='sx*gt_mn2w' AS='sx*gt_mn2w' PD='2*sx+gt_mn2w' PS='2*sx+gt_mn2w' NRD='lc/gt_mn2w' NRS='lc/gt_mn2w' M=1
+.ends
+
+.subckt adc8b1_inv_core in out inh_gnd inh_vdd
+mn1 out in inh_gnd inh_gnd nmos1 L=gt_mn1l W=gt_mn1w AD='sx*gt_mn1w' AS='sx*gt_mn1w' PD='2*sx+gt_mn1w' PS='2*sx+gt_mn1w' NRD='lc/gt_mn1w' NRS='lc/gt_mn1w' M=1
+mp1 out in inh_vdd inh_vdd pmos1 L=gt_mp1l W=gt_mp1w AD='sx*gt_mp1w' AS='sx*gt_mp1w' PD='2*sx+gt_mp1w' PS='2*sx+gt_mp1w' NRD='lc/gt_mp1w' NRS='lc/gt_mp1w' M=1
+.ends
+
+.subckt ADC8B1_NAND20 a b q inh_gnd inh_vdd
+xi1 a b q inh_gnd inh_vdd adc8b1_nand2_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=1e-6 gt_mp1l=350e-9 gt_mp1w=800e-9 gt_mp2l=350e-9 gt_mp2w=800e-9
+.ends
+
+.subckt adc8b1_nand2_core a b out inh_gnd inh_vdd
+mn1 out a net13 inh_gnd nmos1 L=gt_mn1l W=gt_mn1w AD='sx*gt_mn1w' AS='sx*gt_mn1w' PD='2*sx+gt_mn1w' PS='2*sx+gt_mn1w' NRD='lc/gt_mn1w' NRS='lc/gt_mn1w' M=1
+mn2 net13 b inh_gnd inh_gnd nmos1 L=gt_mn2l W=gt_mn2w AD='sx*gt_mn2w' AS='sx*gt_mn2w' PD='2*sx+gt_mn2w' PS='2*sx+gt_mn2w' NRD='lc/gt_mn2w' NRS='lc/gt_mn2w' M=1
+mp1 out a inh_vdd inh_vdd pmos1 L=gt_mp1l W=gt_mp1w AD='sx*gt_mp1w' AS='sx*gt_mp1w' PD='2*sx+gt_mp1w' PS='2*sx+gt_mp1w' NRD='lc/gt_mp1w' NRS='lc/gt_mp1w' M=1
+mp2 out b inh_vdd inh_vdd pmos1 L=gt_mp2l W=gt_mp2w AD='sx*gt_mp2w' AS='sx*gt_mp2w' PD='2*sx+gt_mp2w' PS='2*sx+gt_mp2w' NRD='lc/gt_mp2w' NRS='lc/gt_mp2w' M=1
+.ends
+
+.subckt ADC8B1_NAND30 a b c q inh_gnd inh_vdd
+xi1 a b c q inh_gnd inh_vdd adc8b1_nand3_core gt_mn1l=350e-9 gt_mn1w=1.5e-6 sx=850e-9 lc=500e-9 gt_mn3l=350e-9 gt_mn3w=1.5e-6 gt_mn2l=350e-9 gt_mn2w=1.5e-6
++ gt_mp1l=350e-9 gt_mp1w=800e-9 gt_mp3l=350e-9 gt_mp3w=800e-9 gt_mp2l=350e-9 gt_mp2w=800e-9
+.ends
+
+.subckt adc8b1_nand3_core a b c out inh_gnd inh_vdd
+mn1 out a net6 inh_gnd nmos1 L=gt_mn1l W=gt_mn1w AD='sx*gt_mn1w' AS='sx*gt_mn1w' PD='2*sx+gt_mn1w' PS='2*sx+gt_mn1w' NRD='lc/gt_mn1w' NRS='lc/gt_mn1w' M=1
+mn3 net10 c inh_gnd inh_gnd nmos1 L=gt_mn3l W=gt_mn3w AD='sx*gt_mn3w' AS='sx*gt_mn3w' PD='2*sx+gt_mn3w' PS='2*sx+gt_mn3w' NRD='lc/gt_mn3w' NRS='lc/gt_mn3w' M=1
+mn2 net6 b net10 inh_gnd nmos1 L=gt_mn2l W=gt_mn2w AD='sx*gt_mn2w' AS='sx*gt_mn2w' PD='2*sx+gt_mn2w' PS='2*sx+gt_mn2w' NRD='lc/gt_mn2w' NRS='lc/gt_mn2w' M=1
+mp1 out a inh_vdd inh_vdd pmos1 L=gt_mp1l W=gt_mp1w AD='sx*gt_mp1w' AS='sx*gt_mp1w' PD='2*sx+gt_mp1w' PS='2*sx+gt_mp1w' NRD='lc/gt_mp1w' NRS='lc/gt_mp1w' M=1
+mp3 out c inh_vdd inh_vdd pmos1 L=gt_mp3l W=gt_mp3w AD='sx*gt_mp3w' AS='sx*gt_mp3w' PD='2*sx+gt_mp3w' PS='2*sx+gt_mp3w' NRD='lc/gt_mp3w' NRS='lc/gt_mp3w' M=1
+mp2 out b inh_vdd inh_vdd pmos1 L=gt_mp2l W=gt_mp2w AD='sx*gt_mp2w' AS='sx*gt_mp2w' PD='2*sx+gt_mp2w' PS='2*sx+gt_mp2w' NRD='lc/gt_mp2w' NRS='lc/gt_mp2w' M=1
+.ends
+
+.subckt ADC8B1_NOR20 a b q inh_gnd inh_vdd
+xi1 b a q inh_gnd inh_vdd adc8b1_nor2_core gt_mn1l=350e-9 gt_mn1w=500e-9 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=500e-9 gt_mp1l=350e-9 gt_mp1w=1.6e-6 gt_mp2l=350e-9 gt_mp2w=1.6e-6
+.ends
+
+.subckt ADC8B1_NOR22 a b q inh_gnd inh_vdd
+xi1 b a q inh_gnd inh_vdd adc8b1_nor2_core gt_mn1l=350e-9 gt_mn1w=2e-6 sx=850e-9 lc=500e-9 gt_mn2l=350e-9 gt_mn2w=2e-6 gt_mp1l=350e-9 gt_mp1w=6.4e-6 gt_mp2l=350e-9 gt_mp2w=6.4e-6
+.ends
+
+.subckt adc8b1_nor2_core a b out inh_gnd inh_vdd
+mn1 out b inh_gnd inh_gnd nmos1 L=gt_mn1l W=gt_mn1w AD='sx*gt_mn1w' AS='sx*gt_mn1w' PD='2*sx+gt_mn1w' PS='2*sx+gt_mn1w' NRD='lc/gt_mn1w' NRS='lc/gt_mn1w' M=1
+mn2 out a inh_gnd inh_gnd nmos1 L=gt_mn2l W=gt_mn2w AD='sx*gt_mn2w' AS='sx*gt_mn2w' PD='2*sx+gt_mn2w' PS='2*sx+gt_mn2w' NRD='lc/gt_mn2w' NRS='lc/gt_mn2w' M=1
+mp1 out a net17 inh_vdd pmos1 L=gt_mp1l W=gt_mp1w AD='sx*gt_mp1w' AS='sx*gt_mp1w' PD='2*sx+gt_mp1w' PS='2*sx+gt_mp1w' NRD='lc/gt_mp1w' NRS='lc/gt_mp1w' M=1
+mp2 net17 b inh_vdd inh_vdd pmos1 L=gt_mp2l W=gt_mp2w AD='sx*gt_mp2w' AS='sx*gt_mp2w' PD='2*sx+gt_mp2w' PS='2*sx+gt_mp2w' NRD='lc/gt_mp2w' NRS='lc/gt_mp2w' M=1
+.ends
+
+.subckt ADC8B1_NOR30 a b c q inh_gnd inh_vdd
+xi1 a b c q inh_gnd inh_vdd adc8b1_nor3_core gt_mn1l=350e-9 gt_mn1w=500e-9 sx=850e-9 lc=500e-9 gt_mn3l=350e-9 gt_mn3w=500e-9 gt_mn2l=350e-9 gt_mn2w=500e-9
++ gt_mp3l=350e-9 gt_mp3w=2.4e-6 gt_mp1l=350e-9 gt_mp1w=2.4e-6 gt_mp2l=350e-9 gt_mp2w=2.4e-6
+.ends
+
+.subckt adc8b1_nor3_core a b c out inh_gnd inh_vdd
+mn1 out a inh_gnd inh_gnd nmos1 L=gt_mn1l W=gt_mn1w AD='sx*gt_mn1w' AS='sx*gt_mn1w' PD='2*sx+gt_mn1w' PS='2*sx+gt_mn1w' NRD='lc/gt_mn1w' NRS='lc/gt_mn1w' M=1
+mn3 out c inh_gnd inh_gnd nmos1 L=gt_mn3l W=gt_mn3w AD='sx*gt_mn3w' AS='sx*gt_mn3w' PD='2*sx+gt_mn3w' PS='2*sx+gt_mn3w' NRD='lc/gt_mn3w' NRS='lc/gt_mn3w' M=1
+mn2 out b inh_gnd inh_gnd nmos1 L=gt_mn2l W=gt_mn2w AD='sx*gt_mn2w' AS='sx*gt_mn2w' PD='2*sx+gt_mn2w' PS='2*sx+gt_mn2w' NRD='lc/gt_mn2w' NRS='lc/gt_mn2w' M=1
+mp3 net18 c inh_vdd inh_vdd pmos1 L=gt_mp3l W=gt_mp3w AD='sx*gt_mp3w' AS='sx*gt_mp3w' PD='2*sx+gt_mp3w' PS='2*sx+gt_mp3w' NRD='lc/gt_mp3w' NRS='lc/gt_mp3w' M=1
+mp1 out a net22 inh_vdd pmos1 L=gt_mp1l W=gt_mp1w AD='sx*gt_mp1w' AS='sx*gt_mp1w' PD='2*sx+gt_mp1w' PS='2*sx+gt_mp1w' NRD='lc/gt_mp1w' NRS='lc/gt_mp1w' M=1
+mp2 net22 b net18 inh_vdd pmos1 L=gt_mp2l W=gt_mp2w AD='sx*gt_mp2w' AS='sx*gt_mp2w' PD='2*sx+gt_mp2w' PS='2*sx+gt_mp2w' NRD='lc/gt_mp2w' NRS='lc/gt_mp2w' M=1
+.ends
+
+.subckt ADC8B1_OAI210 a b c q inh_gnd inh_vdd
+xi1 b a c q inh_gnd inh_vdd adc8b1_oai21_core gt_mn2l=350e-9 gt_mn2w=1e-6 sx=850e-9 lc=500e-9 gt_mn1l=350e-9 gt_mn1w=1e-6 gt_mn3l=350e-9 gt_mn3w=1e-6
++ gt_mp1l=350e-9 gt_mp1w=1.6e-6 gt_mp3l=350e-9 gt_mp3w=800e-9 gt_mp2l=350e-9 gt_mp2w=1.6e-6
+.ends
+
+.subckt adc8b1_oai21_core a b c out inh_gnd inh_vdd
+mn2 net10 b inh_gnd inh_gnd nmos1 L=gt_mn2l W=gt_mn2w AD='sx*gt_mn2w' AS='sx*gt_mn2w' PD='2*sx+gt_mn2w' PS='2*sx+gt_mn2w' NRD='lc/gt_mn2w' NRS='lc/gt_mn2w' M=1
+mn1 net10 a inh_gnd inh_gnd nmos1 L=gt_mn1l W=gt_mn1w AD='sx*gt_mn1w' AS='sx*gt_mn1w' PD='2*sx+gt_mn1w' PS='2*sx+gt_mn1w' NRD='lc/gt_mn1w' NRS='lc/gt_mn1w' M=1
+mn3 out c net10 inh_gnd nmos1 L=gt_mn3l W=gt_mn3w AD='sx*gt_mn3w' AS='sx*gt_mn3w' PD='2*sx+gt_mn3w' PS='2*sx+gt_mn3w' NRD='lc/gt_mn3w' NRS='lc/gt_mn3w' M=1
+mp1 out a net26 inh_vdd pmos1 L=gt_mp1l W=gt_mp1w AD='sx*gt_mp1w' AS='sx*gt_mp1w' PD='2*sx+gt_mp1w' PS='2*sx+gt_mp1w' NRD='lc/gt_mp1w' NRS='lc/gt_mp1w' M=1
+mp3 out c inh_vdd inh_vdd pmos1 L=gt_mp3l W=gt_mp3w AD='sx*gt_mp3w' AS='sx*gt_mp3w' PD='2*sx+gt_mp3w' PS='2*sx+gt_mp3w' NRD='lc/gt_mp3w' NRS='lc/gt_mp3w' M=1
+mp2 net26 b inh_vdd inh_vdd pmos1 L=gt_mp2l W=gt_mp2w AD='sx*gt_mp2w' AS='sx*gt_mp2w' PD='2*sx+gt_mp2w' PS='2*sx+gt_mp2w' NRD='lc/gt_mp2w' NRS='lc/gt_mp2w' M=1
+.ends
+
+.subckt ADC8B1_OAI310 a b c d q inh_gnd inh_vdd
+xi1 a b c d q inh_gnd inh_vdd adc8b1_oai31_core gt_mn1l=350e-9 gt_mn1w=1e-6 sx=850e-9 lc=500e-9 gt_mn4l=350e-9 gt_mn4w=1e-6 gt_mn7l=350e-9
++ gt_mn7w=1e-6 gt_mn2l=350e-9 gt_mn2w=1e-6 gt_mp4l=350e-9 gt_mp4w=800e-9 gt_mp1l=350e-9 gt_mp1w=2.4e-6 gt_mp3l=350e-9 gt_mp3w=2.4e-6 gt_mp2l=350e-9 gt_mp2w=2.4e-6
+.ends
+
+.subckt adc8b1_oai31_core a b c d out inh_gnd inh_vdd
+mn1 net35 a inh_gnd inh_gnd nmos1 L=gt_mn1l W=gt_mn1w AD='sx*gt_mn1w' AS='sx*gt_mn1w' PD='2*sx+gt_mn1w' PS='2*sx+gt_mn1w' NRD='lc/gt_mn1w' NRS='lc/gt_mn1w' M=1
+mn4 net35 b inh_gnd inh_gnd nmos1 L=gt_mn4l W=gt_mn4w AD='sx*gt_mn4w' AS='sx*gt_mn4w' PD='2*sx+gt_mn4w' PS='2*sx+gt_mn4w' NRD='lc/gt_mn4w' NRS='lc/gt_mn4w' M=1
+mn7 net35 c inh_gnd inh_gnd nmos1 L=gt_mn7l W=gt_mn7w AD='sx*gt_mn7w' AS='sx*gt_mn7w' PD='2*sx+gt_mn7w' PS='2*sx+gt_mn7w' NRD='lc/gt_mn7w' NRS='lc/gt_mn7w' M=1
+mn2 out d net35 inh_gnd nmos1 L=gt_mn2l W=gt_mn2w AD='sx*gt_mn2w' AS='sx*gt_mn2w' PD='2*sx+gt_mn2w' PS='2*sx+gt_mn2w' NRD='lc/gt_mn2w' NRS='lc/gt_mn2w' M=1
+mp4 out d inh_vdd inh_vdd pmos1 L=gt_mp4l W=gt_mp4w AD='sx*gt_mp4w' AS='sx*gt_mp4w' PD='2*sx+gt_mp4w' PS='2*sx+gt_mp4w' NRD='lc/gt_mp4w' NRS='lc/gt_mp4w' M=1
+mp1 net7 a inh_vdd inh_vdd pmos1 L=gt_mp1l W=gt_mp1w AD='sx*gt_mp1w' AS='sx*gt_mp1w' PD='2*sx+gt_mp1w' PS='2*sx+gt_mp1w' NRD='lc/gt_mp1w' NRS='lc/gt_mp1w' M=1
+mp3 out c net11 inh_vdd pmos1 L=gt_mp3l W=gt_mp3w AD='sx*gt_mp3w' AS='sx*gt_mp3w' PD='2*sx+gt_mp3w' PS='2*sx+gt_mp3w' NRD='lc/gt_mp3w' NRS='lc/gt_mp3w' M=1
+mp2 net11 b net7 inh_vdd pmos1 L=gt_mp2l W=gt_mp2w AD='sx*gt_mp2w' AS='sx*gt_mp2w' PD='2*sx+gt_mp2w' PS='2*sx+gt_mp2w' NRD='lc/gt_mp2w' NRS='lc/gt_mp2w' M=1
+.ends
+
+.subckt ADC8B1_SAR8 eocout qdacout0 qdacout1 qdacout2 qdacout3 qdacout4 qdacout5 qdacout6 qdacout7 qoutout0 qoutout1 qoutout2 qoutout3 qoutout4 qoutout5
++ qoutout6 qoutout7 sampleout clock comp start inh_gnd inh_vdd
+xu5 n62 inh_gnd inh_vdd adc8b1_TIE0
+xi0 n60 inh_gnd inh_vdd adc8b1_TIE1
+xu47 n57 n58 n368 n44 inh_gnd inh_vdd adc8b1_AOI210
+xu19 n49 n50 n46 n48 n270 inh_gnd inh_vdd adc8b1_OAI310
+xu17 n45 n46 n47 n48 n274 inh_gnd inh_vdd adc8b1_OAI310
+xu21 n51 n45 n52 n48 n266 inh_gnd inh_vdd adc8b1_OAI310
+xu10 n38 i<1> n27 n34 n269 inh_gnd inh_vdd adc8b1_OAI310
+xu7 n32 i<1> i<2> n368 n31 inh_gnd inh_vdd adc8b1_AOI310
+xu44 i<1> n27 n32 n368 n40 inh_gnd inh_vdd adc8b1_AOI310
+xu42 i<2> n26 n32 n368 n37 inh_gnd inh_vdd adc8b1_AOI310
+xu46 n27 n26 n32 n368 n42 inh_gnd inh_vdd adc8b1_AOI310
+xu9 n35 n36 n37 n271 inh_gnd inh_vdd adc8b1_OAI210
+xu11 n36 n39 n40 n267 inh_gnd inh_vdd adc8b1_OAI210
+xu24 n28 n53 n54 net0774 inh_gnd inh_vdd adc8b1_OAI210
+xu13 n36 n41 n42 n263 inh_gnd inh_vdd adc8b1_OAI210
+xu18 n45 n35 n48 n272 inh_gnd inh_vdd adc8b1_OAI210
+xu20 n45 n39 n48 n268 inh_gnd inh_vdd adc8b1_OAI210
+xu8 n27 n33 n34 n273 inh_gnd inh_vdd adc8b1_OAI210
+xu14 n36 n43 n44 n261 inh_gnd inh_vdd adc8b1_OAI210
+xu22 n45 n41 n48 n264 inh_gnd inh_vdd adc8b1_OAI210
+xu12 i<2> n33 n34 n265 inh_gnd inh_vdd adc8b1_OAI210
+xu23 n45 n43 n48 n262 inh_gnd inh_vdd adc8b1_OAI210
+xout_reg__1__ clock qdacout1 n368 qoutout1 net825 inh_gnd inh_vdd adc8b1_DFE1
+xout_reg__2__ clock qdacout2 n368 qoutout2 net820 inh_gnd inh_vdd adc8b1_DFE1
+xout_reg__4__ clock qdacout4 n368 qoutout4 net815 inh_gnd inh_vdd adc8b1_DFE1
+xout_reg__0__ clock qdacout0 n368 qoutout0 net810 inh_gnd inh_vdd adc8b1_DFE1
+xout_reg__7__ clock qdacout7 n368 qoutout7 net805 inh_gnd inh_vdd adc8b1_DFE1
+xout_reg__3__ clock qdacout3 n368 qoutout3 net800 inh_gnd inh_vdd adc8b1_DFE1
+xout_reg__5__ clock qdacout5 n368 qoutout5 net795 inh_gnd inh_vdd adc8b1_DFE1
+xout_reg__6__ clock qdacout6 n368 qoutout6 net790 inh_gnd inh_vdd adc8b1_DFE1
+xdac_reg__1__ clock n264 n263 qdacout1 net873 start inh_gnd inh_vdd adc8b1_DFEC1
+xdac_reg__5__ clock n272 n271 qdacout5 net867 start inh_gnd inh_vdd adc8b1_DFEC1
+xdac_reg__3__ clock n268 n267 qdacout3 net861 start inh_gnd inh_vdd adc8b1_DFEC1
+xstartphasesample_reg clock n60 n243 n61 n28 start inh_gnd inh_vdd adc8b1_DFEC1
+xdac_reg__2__ clock n266 n265 qdacout2 net849 start inh_gnd inh_vdd adc8b1_DFEC1
+xdac_reg__7__ clock n276 n275 qdacout7 net843 start inh_gnd inh_vdd adc8b1_DFEC1
+xdac_reg__4__ clock n270 n269 qdacout4 net837 start inh_gnd inh_vdd adc8b1_DFEC1
+xdac_reg__6__ clock n274 n273 qdacout6 net831 start inh_gnd inh_vdd adc8b1_DFEC1
+xu30 n27 i<2> n46 n55 inh_gnd inh_vdd adc8b1_IMUX20
+xi_reg__2__ clock n286 n285 i<2> n27 start inh_gnd inh_vdd adc8b1_DFEP1
+xdac_reg__0__ clock n262 n261 qdacout0 net907 start inh_gnd inh_vdd adc8b1_DFEP1
+xi_reg__0__ clock n282 n285 i<0> n25 start inh_gnd inh_vdd adc8b1_DFEP1
+xstartphaseeoc_reg clock n62 net0947 n63 net895 start inh_gnd inh_vdd adc8b1_DFEP1
+xeoc_reg clock n29 net0774 sampleout n29 start inh_gnd inh_vdd adc8b1_DFEP1
+xi_reg__1__ clock n284 n285 i<1> n26 start inh_gnd inh_vdd adc8b1_DFEP1
+xu3 n30 n54 n368 inh_gnd inh_vdd adc8b1_NOR22
+xu41 i<1> i<0> i<2> n57 inh_gnd inh_vdd adc8b1_NOR30
+xu33 n38 n25 n32 inh_gnd inh_vdd adc8b1_NOR20
+xu34 n57 sampleout n56 inh_gnd inh_vdd adc8b1_NOR20
+xu6 n61 n30 n243 inh_gnd inh_vdd adc8b1_NOR20
+xu28 n29 n63 eocout inh_gnd inh_vdd adc8b1_NOR20
+xu59 comp n59 inh_gnd inh_vdd adc8b1_CLKIN0
+xu48 n368 n34 inh_gnd inh_vdd adc8b1_CLKIN0
+xu57 n54 net0947 inh_gnd inh_vdd adc8b1_CLKIN0
+xu52 n50 n47 inh_gnd inh_vdd adc8b1_CLKIN0
+xu53 n46 n52 inh_gnd inh_vdd adc8b1_CLKIN0
+xu55 n57 n53 inh_gnd inh_vdd adc8b1_CLKIN0
+xu56 start n30 inh_gnd inh_vdd adc8b1_CLKIN0
+xu49 n38 n58 inh_gnd inh_vdd adc8b1_CLKIN0
+xu54 n56 n45 inh_gnd inh_vdd adc8b1_CLKIN0
+xu58 n31 n275 inh_gnd inh_vdd adc8b1_CLKIN0
+xu36 n52 n25 n35 inh_gnd inh_vdd adc8b1_NAND20
+xu26 n47 n29 n284 inh_gnd inh_vdd adc8b1_NAND20
+xu15 n34 n36 n285 inh_gnd inh_vdd adc8b1_NAND20
+xu27 i<0> n29 n282 inh_gnd inh_vdd adc8b1_NAND20
+xu50 n50 n26 n55 inh_gnd inh_vdd adc8b1_NAND20
+xu35 n58 i<1> n33 inh_gnd inh_vdd adc8b1_NAND20
+xu25 n46 n29 n286 inh_gnd inh_vdd adc8b1_NAND20
+xu31 n61 sampleout n54 inh_gnd inh_vdd adc8b1_NAND20
+xu38 n50 n25 n39 inh_gnd inh_vdd adc8b1_NAND20
+xu32 start n61 n38 inh_gnd inh_vdd adc8b1_NAND20
+xu45 n50 i<0> n51 inh_gnd inh_vdd adc8b1_NAND20
+xu43 n56 i<0> n49 inh_gnd inh_vdd adc8b1_NAND20
+xu37 n58 n53 n36 inh_gnd inh_vdd adc8b1_NAND20
+xu16 comp n29 n276 inh_gnd inh_vdd adc8b1_NAND20
+xu51 n59 n29 n48 inh_gnd inh_vdd adc8b1_NAND20
+xu40 i<0> n47 n46 n43 inh_gnd inh_vdd adc8b1_NAND30
+xu39 n47 n25 n46 n41 inh_gnd inh_vdd adc8b1_NAND30
+xu29 i<0> n26 n25 i<1> n50 inh_gnd inh_vdd adc8b1_AOI220
+.ends
+
+.subckt ADC8B1_TG1B en ep in out vdd vss
+mi67 out ep in vdd pmos1 L=350e-9 W=1.3e-6 AD=1.43e-12 AS=1.43e-12 PD=3.5e-6 PS=3.5e-6 NRD=461.538e-3 NRS=461.538e-3 M=1
+mi68 in en out vss nmos1 L=350e-9 W=1.3e-6 AD=1.43e-12 AS=1.43e-12 PD=3.5e-6 PS=3.5e-6 NRD=461.538e-3 NRS=461.538e-3 M=1
+.ends
+
+.subckt ADC8B1_TG2B en ep in out vdd vss
+mi67 out ep in vdd pmos1 L=350e-9 W=5e-6 AD=5.5e-12 AS=5.5e-12 PD=7.2e-6 PS=7.2e-6 NRD=120e-3 NRS=120e-3 M=1
+mi68 in en out vss nmos1 L=350e-9 W=5e-6 AD=5.5e-12 AS=5.5e-12 PD=7.2e-6 PS=7.2e-6 NRD=120e-3 NRS=120e-3 M=1
+.ends
+
+.subckt adc8b1_tgate_core en ep in out inh_gnd inh_vdd
+mp1 out ep in inh_vdd pmos1 L=gt_mp1l W=gt_mp1w AD='sx*gt_mp1w' AS='sx*gt_mp1w' PD='2*sx+gt_mp1w' PS='2*sx+gt_mp1w' NRD='lc/gt_mp1w' NRS='lc/gt_mp1w' M=1
+mn1 out en in inh_gnd nmos1 L=gt_mn1l W=gt_mn1w AD='sx*gt_mn1w' AS='sx*gt_mn1w' PD='2*sx+gt_mn1w' PS='2*sx+gt_mn1w' NRD='lc/gt_mn1w' NRS='lc/gt_mn1w' M=1
+.ends
+
+.subckt ADC8B1_TIE0 q inh_gnd inh_vdd
+mi3 q net6 inh_gnd inh_gnd nmos1 L=500e-9 W=2.95e-6 AD=2.5075e-12 AS=2.5075e-12 PD=4.65e-6 PS=4.65e-6 NRD=169.492e-3 NRS=169.492e-3 M=1
+mi2 net6 net6 inh_vdd inh_vdd pmos1 L=500e-9 W=4.75e-6 AD=4.0375e-12 AS=4.0375e-12 PD=6.45e-6 PS=6.45e-6 NRD=105.263e-3 NRS=105.263e-3 M=1
+.ends
+
+.subckt ADC8B1_TIE1 q inh_gnd inh_vdd
+mi3 net6 net6 inh_gnd inh_gnd nmos1 L=500e-9 W=2.95e-6 AD=2.5075e-12 AS=2.5075e-12 PD=4.65e-6 PS=4.65e-6 NRD=169.492e-3 NRS=169.492e-3 M=1
+mi5 q net6 inh_vdd inh_vdd pmos1 L=500e-9 W=4.75e-6 AD=4.0375e-12 AS=4.0375e-12 PD=6.45e-6 PS=6.45e-6 NRD=105.263e-3 NRS=105.263e-3 M=1
+.ends

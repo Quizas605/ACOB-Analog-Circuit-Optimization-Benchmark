@@ -1,0 +1,27 @@
+* "simulator" "HSPICE" 
+* "version" "D-2010.03 32-BIT"
+* "format" "HSP"
+* "rundate" "19:40:50 10/25/2023 "
+* "netlist" "OPAMP1.circuit "
+* "runtitle" "* disclaimer:"
+* time =    0.            
+* temperature =   27.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc=   1.0000p       
+.nodeset
++ inp =   1.6500        
++ out =   1.6500        
++ pd =   0.            
++ vdda =   3.3000        
++ xpd =   3.3000        
++ x1.net12 = 680.1936m       
++ x1.net13 = 680.1936m       
++ x1.net158 =   2.5335        
++ x1.net21 = 879.6983m       
++ x1.net27 =   1.9679        
++ x1.net31 =   2.4486        
++ x1.net51 =   3.8042n       
++ x1.net56 = 669.3051m       
++ x1.net69 =   3.3000        
+***   END: Saved Operating Point ***                     

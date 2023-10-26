@@ -1,0 +1,288 @@
+* Disclaimer:
+* No rights or licenses are granted by ams to Recipient, expressly or by implication, with respect to any proprietary information 
+* or patent, copyright mask, work, trademark, trade secret or other intellectual property right owned or controlled by ams, except
+* as expressly provided by ams. Recipient may not remove any copyright notices from the Simulation File. ams may make changes to 
+* the Simulation Files or to items referenced therein at any time without notice and is not obligated to support or update these Files.
+* This simulation File is provided by ams "AS IS" and any express or implied warranties, including, but not limited to the implied 
+* warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall ams or its suppliers be liable 
+* for any direct, indirect, incidental, special, exemplary or consequential damages (including, but not limited to procurement of 
+* substitute goods or services, loss of use, data or profits, or business interruption however caused and on any theory of liability, 
+* whether in contract, strict liability or tort (including negligence or otherwise) arising in any way out of the use of - or any 
+* inability to use - this Simulation File, even if advised of the possibility of such damage.  
+* © ams AG
+
+.subckt DAC8B1 dacout rn rp b0 b1 b2 b3 b4 b5 b6 b7 vdda gnda
+xd1 gnda vdda primitive_nwd AREA=5.61e-12 PJ=0 M=1
+xi3 gndaint vdda primitive_pd AREA=790e-15 PJ=3.3e-6 M=1
+xi0 gnda vddint primitive_nd AREA=1e-12 PJ=4e-6 M=1
+xr1 vdda vdda vddint primitive_rdiffp L=2.1e-6 W=700e-9 M=1
+xr0 gnda vdda gndaint primitive_rdiffp L=2.1e-6 W=700e-9 M=1
+xi717 net10876 net10868 net10880 vdda gnda net10741 dac8b1_anand3 gt_pdl=350e-9 gt_pdw=2e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=2.5e-6
+xi608 net9 net362 DAC8B1_RLSB
+xi609 net11389 net474 DAC8B1_RLSB
+xi610 net473 net11392 DAC8B1_RLSB
+xi619 net11494 net366 DAC8B1_RLSB
+xi620 net11410 net438 DAC8B1_RLSB
+xi621 net11407 net11369 DAC8B1_RLSB
+xi622 net445 net11387 DAC8B1_RLSB
+xi618 net429 net526 DAC8B1_RLSB
+xi617 net457 net11366 DAC8B1_RLSB
+xi616 net3142 net11348 DAC8B1_RLSB
+xi615 net11395 net634 DAC8B1_RLSB
+xi611 net3058 net442 DAC8B1_RLSB
+xi612 net11416 net454 DAC8B1_RLSB
+xi613 net11401 net470 DAC8B1_RLSB
+xi614 net11425 net450 DAC8B1_RLSB
+xi623 net11387 net4302 DAC8B1_RLSB
+xi741 net5954 net5952 net5948 net3954 vdda gnda net4367 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi739 net5954 net3956 net3955 net5950 vdda gnda net4289 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi742 net3958 net5952 net5948 net3954 vdda gnda net4328 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi732 net10874 net10876 net10868 net10880 vdda gnda net11013 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi726 net10874 net10870 net10868 net17156 vdda gnda net10696 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi746 net3958 net5952 net3955 net3954 vdda gnda net4346 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi727 net10882 net10870 net10868 net17156 vdda gnda net10691 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi719 net10882 net10870 net10868 net10880 vdda gnda net10736 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi721 net10882 net10876 net10872 net10880 vdda gnda net10726 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi722 net10874 net10870 net10872 net10880 vdda gnda net10716 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi723 net10882 net10870 net10872 net10880 vdda gnda net10711 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi720 net10874 net10876 net10872 net10880 vdda gnda net10721 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi725 net10882 net10876 net10868 net17156 vdda gnda net10701 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi724 net10874 net10876 net10868 net17156 vdda gnda net10706 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi731 net10882 net10870 net10872 net17156 vdda gnda net10671 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi730 net10874 net10870 net10872 net17156 vdda gnda net10676 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi733 net5954 net5952 net5948 net5950 vdda gnda net4301 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi736 net3958 net3956 net5948 net5950 vdda gnda net4370 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi735 net5954 net3956 net5948 net5950 vdda gnda net4379 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi744 net3958 net3956 net5948 net3954 vdda gnda net4319 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi738 net3958 net5952 net3955 net5950 vdda gnda net4307 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi737 net5954 net5952 net3955 net5950 vdda gnda net4310 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi743 net5954 net3956 net5948 net3954 vdda gnda net4304 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi740 net3958 net3956 net3955 net5950 vdda gnda net4364 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi734 net3958 net5952 net5948 net5950 vdda gnda net4325 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi718 net10874 net10870 net10868 net10880 vdda gnda net10731 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi747 net5954 net3956 net3955 net3954 vdda gnda net4298 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi748 net3958 net3956 net3955 net3954 vdda gnda net4292 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi729 net10882 net10876 net10872 net17156 vdda gnda net10681 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi745 net5954 net5952 net3955 net3954 vdda gnda net4373 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi728 net10874 net10876 net10872 net17156 vdda gnda net10686 dac8b1_anand4 gt_pdl=350e-9 gt_pdw=3e-6 sx=1.1e-6 lc=600e-9 gt_pul=350e-9 gt_puw=3e-6
+xi635 vdda gnda net4370 net4046 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi672 vdda gnda net10876 net10870 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi667 vdda gnda b0 net10874 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi671 vdda gnda net10874 net10882 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi632 vdda gnda net4301 net3995 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi674 vdda gnda net10880 net17156 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi673 vdda gnda net10868 net10872 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi637 vdda gnda net4307 net4007 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi682 vdda gnda net5948 net3955 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi681 vdda gnda net5952 net3956 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi683 vdda gnda net5950 net3954 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi680 vdda gnda net5954 net3958 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi676 vdda gnda b4 net5954 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi633 vdda gnda net4325 net4184 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi634 vdda gnda net4379 net4061 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi649 vdda gnda net10741 net10866 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi650 vdda gnda net10731 net10864 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi663 vdda gnda net10671 net10838 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi661 vdda gnda net10681 net10842 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi659 vdda gnda net10691 net10846 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi657 vdda gnda net10701 net10850 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi655 vdda gnda net10711 net10854 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi653 vdda gnda net10726 net10860 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi651 vdda gnda net10736 net10862 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi641 vdda gnda net4328 net4013 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi647 vdda gnda net4292 net3992 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi645 vdda gnda net4346 net4025 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi643 vdda gnda net4319 net4166 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi639 vdda gnda net4364 net4064 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi668 vdda gnda b1 net10876 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi669 vdda gnda b2 net10868 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi670 vdda gnda b3 net10880 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi677 vdda gnda b5 net5952 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi678 vdda gnda b6 net5948 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi679 vdda gnda b7 net5950 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=3e-6
+xi664 vdda gnda net11013 net11436 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi662 vdda gnda net10676 net10840 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi660 vdda gnda net10686 net10844 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi658 vdda gnda net10696 net10848 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi656 vdda gnda net10706 net10852 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi654 vdda gnda net10716 net10856 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi652 vdda gnda net10721 net10858 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi646 vdda gnda net4298 net4067 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi644 vdda gnda net4373 net4031 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi642 vdda gnda net4304 net4010 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi640 vdda gnda net4367 net4070 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi638 vdda gnda net4289 net4037 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi636 vdda gnda net4310 net4001 dac8b1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2.95e-6
+xi547 net211 net159 DAC8B1_RMSB8
+xi545 rn net3096 DAC8B1_RMSB8
+xi548 net3189 net126 DAC8B1_RMSB8
+xi551 net199 net3189 DAC8B1_RMSB8
+xi550 net3108 net199 DAC8B1_RMSB8
+xi544 net3096 net3123 DAC8B1_RMSB8
+xi546 net3123 net211 DAC8B1_RMSB8
+xi600 net196 net3144 DAC8B1_RMSB8
+xi549 net159 net3108 DAC8B1_RMSB8
+xi603 net3144 rp DAC8B1_RMSB8
+xi601 net190 net196 DAC8B1_RMSB8
+xi602 net187 net190 DAC8B1_RMSB8
+xi607 net126 net178 DAC8B1_RMSB8
+xi606 net178 net3183 DAC8B1_RMSB8
+xi605 net3183 net3150 DAC8B1_RMSB8
+xi604 net3150 net187 DAC8B1_RMSB8
+mi216 net9 net4184 net3096 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi237 net9 net4037 net199 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi258 net9 net4166 net3150 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi251 net4302 net4070 net178 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi245 net9 net4070 net126 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi275 net4302 net4067 net3144 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi242 net9 net4064 net3189 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi227 net4302 net4061 net211 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi244 net4302 net4064 net126 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi252 net4302 net4013 net3183 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi261 net9 net4031 net187 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi215 net9 net3995 rn gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi228 net4302 net4046 net159 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi268 net4302 net4025 net196 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi276 net4302 net3992 rp gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi243 net4302 net4037 net3189 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi236 net4302 net4007 net199 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi356 net3142 vddint net634 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi267 net4302 net4031 net190 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi358 net11494 vddint net526 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi259 net4302 net4010 net3150 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi266 net9 net4025 net190 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi260 net4302 net4166 net187 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi220 net4302 net4184 net3123 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi221 net9 net4061 net3123 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi250 net9 net4013 net178 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi253 net9 net4010 net3183 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi234 net9 net4007 net3108 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi269 net9 net4067 net196 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi235 net4302 net4001 net3108 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi229 net9 net4001 net159 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi219 net4302 net3995 net3096 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi333 net473 vddint net474 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi336 net11425 vddint net470 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi274 net9 net3992 net3144 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi226 net9 net4046 net211 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi357 net457 vddint net11348 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi338 net11401 vddint net454 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi337 net11395 vddint net450 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi360 net445 net11013 net11369 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi339 net11416 vddint net442 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi362 net11407 vddint net438 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi332 net3058 vddint net11392 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi359 net429 vddint net11366 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi431 dacout net10852 net634 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi430 dacout net10840 net11369 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi429 dacout net10864 net474 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi428 dacout net10854 net450 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi427 dacout net10850 net11348 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi426 dacout net10862 net11392 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi425 dacout net10842 net438 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi424 dacout net10838 net11387 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi423 dacout net10856 net470 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi422 dacout net10860 net454 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi421 dacout net10844 net366 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi420 dacout net10848 net11366 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi419 dacout net10846 net526 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi418 dacout net10866 net362 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi417 dacout net10858 net442 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi363 net11410 vddint net366 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi327 net11389 vddint net362 gnda nmos1 L=350e-9 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mi328 net11389 gndaint net362 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi241 net4302 net4289 net3189 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi225 net4302 net4379 net211 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi254 net4302 net4328 net3183 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi265 net4302 net4373 net190 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi230 net4302 net4370 net159 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi247 net9 net4367 net126 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi240 net9 net4364 net3189 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi246 net4302 net4364 net126 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi272 net9 net4292 net3144 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi238 net4302 net4307 net199 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi354 net11494 gndaint net526 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi249 net4302 net4367 net178 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi334 net473 gndaint net474 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi257 net4302 net4304 net3150 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi264 net9 net4346 net190 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi273 net4302 net4298 net3144 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi352 net3142 gndaint net634 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi270 net4302 net4346 net196 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi263 net9 net4373 net187 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi262 net4302 net4319 net187 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi223 net9 net4379 net3123 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi248 net9 net4328 net178 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi222 net4302 net4325 net3123 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi214 net9 net4301 rn vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi256 net9 net4319 net3150 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi217 net9 net4325 net3096 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi231 net9 net4310 net159 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi233 net4302 net4310 net3108 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi232 net9 net4307 net3108 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi364 net445 net11436 net11369 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi255 net9 net4304 net3183 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi218 net4302 net4301 net3096 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi271 net9 net4298 net196 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi340 net11425 gndaint net470 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi224 net9 net4370 net211 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi278 net4302 net4292 rp vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi343 net11416 gndaint net442 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi353 net457 gndaint net11348 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi367 net11410 gndaint net366 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi366 net11407 gndaint net438 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi239 net9 net4289 net199 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi342 net11401 gndaint net454 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi355 net429 gndaint net11366 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi341 net11395 gndaint net450 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi331 net3058 gndaint net11392 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi447 dacout net10716 net470 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi446 dacout net10731 net474 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi445 dacout net10701 net11348 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi444 dacout net10686 net366 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi443 dacout net10736 net11392 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi442 dacout net10711 net450 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi441 dacout net10726 net454 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi440 dacout net10706 net634 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi439 dacout net10696 net11366 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi438 dacout net10676 net11369 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi437 dacout net10681 net438 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi436 dacout net10691 net526 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi435 dacout net10741 net362 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi434 dacout net10721 net442 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi432 dacout net10671 net11387 vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+.ends
+
+.subckt dac8b1_ainvr vdda vssa in out
+mn1 out in vssa vssa nmos1 L=gt_pdl W=gt_pdw AD='sx*gt_pdw' AS='sx*gt_pdw' PD='2*sx+gt_pdw' PS='2*sx+gt_pdw' NRD='lc/gt_pdw' NRS='lc/gt_pdw' M=1
+mp1 out in vdda vdda pmos1 L=gt_pul W=gt_puw AD='sx*gt_puw' AS='sx*gt_puw' PD='2*sx+gt_puw' PS='2*sx+gt_puw' NRD='lc/gt_puw' NRS='lc/gt_puw' M=1
+.ends
+
+.subckt dac8b1_anand3 a b c vdda vssa y
+mi3 net23 c vssa vssa nmos1 L=gt_pdl W=gt_pdw AD='sx*gt_pdw' AS='sx*gt_pdw' PD='2*sx+gt_pdw' PS='2*sx+gt_pdw' NRD='lc/gt_pdw' NRS='lc/gt_pdw' M=1
+mn1 y a net13 vssa nmos1 L=gt_pdl W=gt_pdw AD='sx*gt_pdw' AS='sx*gt_pdw' PD='2*sx+gt_pdw' PS='2*sx+gt_pdw' NRD='lc/gt_pdw' NRS='lc/gt_pdw' M=1
+mn2 net13 b net23 vssa nmos1 L=gt_pdl W=gt_pdw AD='sx*gt_pdw' AS='sx*gt_pdw' PD='2*sx+gt_pdw' PS='2*sx+gt_pdw' NRD='lc/gt_pdw' NRS='lc/gt_pdw' M=1
+mp1 y a vdda vdda pmos1 L=gt_pul W=gt_puw AD='sx*gt_puw' AS='sx*gt_puw' PD='2*sx+gt_puw' PS='2*sx+gt_puw' NRD='lc/gt_puw' NRS='lc/gt_puw' M=1
+mp2 y b vdda vdda pmos1 L=gt_pul W=gt_puw AD='sx*gt_puw' AS='sx*gt_puw' PD='2*sx+gt_puw' PS='2*sx+gt_puw' NRD='lc/gt_puw' NRS='lc/gt_puw' M=1
+mi2 y c vdda vdda pmos1 L=gt_pul W=gt_puw AD='sx*gt_puw' AS='sx*gt_puw' PD='2*sx+gt_puw' PS='2*sx+gt_puw' NRD='lc/gt_puw' NRS='lc/gt_puw' M=1
+.ends
+
+.subckt dac8b1_anand4 a b c d vdda vssa y
+mi3 net23 c net61 vssa nmos1 L=gt_pdl W=gt_pdw AD='sx*gt_pdw' AS='sx*gt_pdw' PD='2*sx+gt_pdw' PS='2*sx+gt_pdw' NRD='lc/gt_pdw' NRS='lc/gt_pdw' M=1
+mn1 y a net13 vssa nmos1 L=gt_pdl W=gt_pdw AD='sx*gt_pdw' AS='sx*gt_pdw' PD='2*sx+gt_pdw' PS='2*sx+gt_pdw' NRD='lc/gt_pdw' NRS='lc/gt_pdw' M=1
+mn2 net13 b net23 vssa nmos1 L=gt_pdl W=gt_pdw AD='sx*gt_pdw' AS='sx*gt_pdw' PD='2*sx+gt_pdw' PS='2*sx+gt_pdw' NRD='lc/gt_pdw' NRS='lc/gt_pdw' M=1
+mi5 net61 d vssa vssa nmos1 L=gt_pdl W=gt_pdw AD='sx*gt_pdw' AS='sx*gt_pdw' PD='2*sx+gt_pdw' PS='2*sx+gt_pdw' NRD='lc/gt_pdw' NRS='lc/gt_pdw' M=1
+mi4 y d vdda vdda pmos1 L=gt_pul W=gt_puw AD='sx*gt_puw' AS='sx*gt_puw' PD='2*sx+gt_puw' PS='2*sx+gt_puw' NRD='lc/gt_puw' NRS='lc/gt_puw' M=1
+mp1 y a vdda vdda pmos1 L=gt_pul W=gt_puw AD='sx*gt_puw' AS='sx*gt_puw' PD='2*sx+gt_puw' PS='2*sx+gt_puw' NRD='lc/gt_puw' NRS='lc/gt_puw' M=1
+mp2 y b vdda vdda pmos1 L=gt_pul W=gt_puw AD='sx*gt_puw' AS='sx*gt_puw' PD='2*sx+gt_puw' PS='2*sx+gt_puw' NRD='lc/gt_puw' NRS='lc/gt_puw' M=1
+mi2 y c vdda vdda pmos1 L=gt_pul W=gt_puw AD='sx*gt_puw' AS='sx*gt_puw' PD='2*sx+gt_puw' PS='2*sx+gt_puw' NRD='lc/gt_puw' NRS='lc/gt_puw' M=1
+.ends
+
+.subckt DAC8B1_RLSB a b
+xrlsb0 a b primitive_rpoly2 L=82.85e-6 W=900e-9 M=1
+.ends
+
+.subckt DAC8B1_RMSB8 a b
+xrmsb1 net4 b primitive_rpoly2 L=23.7e-6 W=4e-6 M=1
+xrmsb0 net4 a primitive_rpoly2 L=23.7e-6 W=4e-6 M=1
+.ends

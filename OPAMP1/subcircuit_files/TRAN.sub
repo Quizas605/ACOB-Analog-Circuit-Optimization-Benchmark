@@ -1,0 +1,42 @@
+* Disclaimer:
+* This simulation File is provided by Mentor Graphics "AS IS" and any express or implied warranties, including, but not limited to the implied 
+* warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall Mentor Graphics or its suppliers be liable 
+* for any direct, indirect, incidental, special, exemplary or consequential damages (including, but not limited to procurement of 
+* substitute goods or services, loss of use, data or profits, or business interruption however caused and on any theory of liability, 
+* whether in contract, strict liability or tort (including negligence or otherwise) arising in any way out of the use of - or any 
+* inability to use - this Simulation File, even if advised of the possibility of such damage.  
+* © Mentor Graphics
+
+* simple CMOS transmission gate
+.subckt TRAN0 inout1 inout2 en vdd vss
+mp1 enb    en  vdd    vdd pmos1 L=gt_l W='gt_pw*0.5'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn1 enb    en  vss    vss nmos1 L=gt_l W='gt_nw*0.5'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp2 inout1 enb inout2 vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn2 inout1 en  inout2 vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
+
+
+* CMOS T-gate (two transmission gates in series, with grounding switch connected to middle node)
+.subckt TRAN1 inout1 inout2 en vdd vss
+mp1 enb    en  vdd    vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn1 enb    en  vss    vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp2 inout1 enb int    vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn2 inout1 en  int    vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp3 inout2 enb int    vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn3 inout2 en  int    vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mn4 vss    enb int    vss nmos1 L=gt_l W='gt_nw*0.5'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
+
+
+* CMOS T-gate (two transmission gates in series, with grounding switch connected to middle node), with 4X width
+.subckt TRAN4 inout1 inout2 en vdd vss
+mp1 enb    en  vdd    vdd pmos1 L=gt_l W='gt_pw*2.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn1 enb    en  vss    vss nmos1 L=gt_l W='gt_nw*2.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+mp2 inout1 enb int    vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' m=4
+mn2 inout1 en  int    vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' m=4
+mp3 inout2 enb int    vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' m=4
+mn3 inout2 en  int    vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' m=4
+mn4 vss    enb int    vss nmos1 L=gt_l W='gt_nw*0.5'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+.ends
+
+

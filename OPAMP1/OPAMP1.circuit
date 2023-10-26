@@ -1,0 +1,78 @@
+* Disclaimer:
+* THIS FILE IS PROVIDED “AS IS” AND WITH:
+* (A)  NO WARRANTY OF ANY KIND, express, implied or statutory, including any implied warranties of merchantability or 
+* fitness for a particular purpose, which Mentor Graphics disclaims to the maximum extent permitted by applicable law; and
+* (B)  NO INDEMNIFICATION FOR INFRINGEMENT OF INTELLECTUAL PROPERTY RIGHTS.
+* LIMITATION OF LIABILITY:  IN NO EVENT SHALL MENTOR GRAPHICS OR ITS LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, 
+* INCIDENTAL, OR CONSEQUENTIAL DAMAGES (INCLUDING LOST PROFITS OR SAVINGS) WHATSOEVER, WHETHER BASED ON CONTRACT, TORT OR 
+* ANY OTHER LEGAL THEORY, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+* © 2017 Mentor Graphics Corporation. All rights reserved.
+
+* Operational amplifier
+* Specifications, with Cload= 50fF 
+*            Min   Typ   Max                    
+* Voffset    -1    0.3   1    mV
+* Vpp_1MHz   700   900   1000 mV
+* delay_1MHz 0     50    120  ns
+* Iddq       0     0.1   0.3  uA  
+* CMR     0.9-2.3     0.4-2.6 V
+* 
+* in/out nodes
+* inn    : inverting input
+* inp    : non-inverting input
+* out    : analog output
+* pd     : power-down digital input, active high
+* xpd    : pd-inverted digital input
+* vdda   : 3.3 VDC, power in 
+* vssa   : ground
+*.subckt OPAMP1 inn inp out pd xpd vdda vssa 
+
+X1 out inp out pd xpd vdda 0  OPAMP1
+
+.TEMP 27
+.param vddmin=3.0 vddnom=3.3 vddmax=3.6
+
+VDD vdda 0 vddnom
+
+Cload  out   0  50e-15
+
+* Test description
+* Sine test: Non-inverting buffer configuration; measure output-input offset, then apply 1Vp-p @ 2 MHz, and measure output Vp-p and phase delay
+*               Voff Vampl freq
+* CMR test: apply slow linear ramp, and measure offset
+
+* For sine test, not for CMR test
+Vin  inp  0 sin(1.65 0.5 1meg) 
+* For Iddq test 
+Vpd  pd   0 pwl(0,        0,       2u,       0,        2.1u,    vddnom)
+Vxpd xpd  0 pwl(0,       vddnom, 2u,      vddnom,  2.1u,     0)
+.MEAS Voffset    FIND v(out,inp) at=0                                    * Lbound=-1m   Ubound=1m
+.MEAS Vpp@1MHz   PP   v(out) from=0.2u to=1.8u                           * Lbound=700m  Ubound=1000m
+*.MEAS delay      TRIG v(inp) val=1.65 td=10n TARG v(out) val=1.65 td=50n  * Lbound=0     Ubound=120n
+.MEAS delay      TRIG v(inp) val=1.65 fall=1 td=10n TARG v(out) val=1.65 rise=1 td=50n  * Lbound=0     Ubound=120n  
+.MEAS Iddq       FIND i(VDD) at=2.2u                                     * Lbound=-0.3u Ubound=0
+.MEAS fom param='1e7*abs(Iddq)+1e7*abs(delay)+1e5*abs(Voffset)+100*max(1-Vpp@1MHz,0)'
+.TRAN 0.1u 2.3u 0.0
+
+* For CMR test, not for sine test
+*Vin   inp  0 pwl(0 0 3.3m 3.3)  
+*Vpd   pd   0 0
+*Vxpd  xpd  0 vddnom
+*.MEAS Vcmr1    FIND v(out,inp) at=0.4m                                  *  Lbound=-1m   Ubound=1m
+*.MEAS Vcmr2    FIND v(out,inp) at=0.9m                                  *  Lbound=-1m   Ubound=1m
+*.MEAS Vcmr3    FIND v(out,inp) at=2.3m                                  *  Lbound=-1m   Ubound=1m
+*.MEAS Vcmr4    FIND v(out,inp) at=2.6m                                  *  Lbound=-1m   Ubound=1m
+*.TRAN 0.1u 3.3m 0.0
+
+
+.INCLUDE subcircuit_files/OPAMP1.sub
+.INCLUDE subcircuit_files/PRIMITIVE.sub
+.INCLUDE param
+
+*.INCLUDE process_models/fastN_fastP.process
+*.INCLUDE process_models/slowN_fastP.process
+.INCLUDE process_models/typical.process
+*.INCLUDE process_models/fastN_slowP.process
+*.INCLUDE process_models/slowN_slowP.process
+.END
+

@@ -1,0 +1,34 @@
+* Disclaimer:
+* No rights or licenses are granted by ams to Recipient, expressly or by implication, with respect to any proprietary information 
+* or patent, copyright mask, work, trademark, trade secret or other intellectual property right owned or controlled by ams, except
+* as expressly provided by ams. Recipient may not remove any copyright notices from the Simulation File. ams may make changes to 
+* the Simulation Files or to items referenced therein at any time without notice and is not obligated to support or update these Files.
+* This simulation File is provided by ams "AS IS" and any express or implied warranties, including, but not limited to the implied 
+* warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall ams or its suppliers be liable 
+* for any direct, indirect, incidental, special, exemplary or consequential damages (including, but not limited to procurement of 
+* substitute goods or services, loss of use, data or profits, or business interruption however caused and on any theory of liability, 
+* whether in contract, strict liability or tort (including negligence or otherwise) arising in any way out of the use of - or any 
+* inability to use - this Simulation File, even if advised of the possibility of such damage.  
+* © ams AG
+
+.subckt VREG1 vdda vref ib vout vssa
+m1a<1> v0 vfb vcom vcom pmos1 L=2.8e-6 W=2.8e-6 AD=2.38e-12 AS=2.38e-12 PD=4.5e-6 PS=4.5e-6 NRD=178.5714e-3 NRS=178.5714e-3 m=2
+m1b<1> v1 vref vcom vcom pmos1 L=2.8e-6 W=2.8e-6 AD=2.38e-12 AS=2.38e-12 PD=4.5e-6 PS=4.5e-6 NRD=178.5714e-3 NRS=178.5714e-3 m=2
+mgp3<1> vgn ib vdda vdda pmos1 L=1e-6 W=7e-6 AD=5.95e-12 AS=5.95e-12 PD=8.7e-6 PS=8.7e-6 NRD=71.42857e-3 NRS=71.42857e-3 m=8
+mgp0<1> ib ib vdda vdda pmos1 L=1e-6 W=7e-6 AD=5.95e-12 AS=5.95e-12 PD=8.7e-6 PS=8.7e-6 NRD=71.42857e-3 NRS=71.42857e-3 m=4
+mgp1<1> vcom ib vdda vdda pmos1 L=1e-6 W=7e-6 AD=5.95e-12 AS=5.95e-12 PD=8.7e-6 PS=8.7e-6 NRD=71.42857e-3 NRS=71.42857e-3 m=4
+mgp2<1> v2 ib vdda vdda pmos1 L=1e-6 W=7e-6 AD=5.95e-12 AS=5.95e-12 PD=8.7e-6 PS=8.7e-6 NRD=71.42857e-3 NRS=71.42857e-3 m=16
+m2b<1> v1 v0 vssa vssa nmos1 L=3.5e-6 W=3.5e-6 AD=2.975e-12 AS=2.975e-12 PD=5.2e-6 PS=5.2e-6 NRD=142.8571e-3 NRS=142.8571e-3 m=2
+m2a<1> v0 v0 vssa vssa nmos1 L=3.5e-6 W=3.5e-6 AD=2.975e-12 AS=2.975e-12 PD=5.2e-6 PS=5.2e-6 NRD=142.8571e-3 NRS=142.8571e-3 m=2
+mgn1<1> vvf vgn vssa vssa nmos1 L=3.5e-6 W=3.5e-6 AD=2.975e-12 AS=2.975e-12 PD=5.2e-6 PS=5.2e-6 NRD=142.8571e-3 NRS=142.8571e-3 m=2
+mgn0<1> vgn vgn vssa vssa nmos1 L=3.5e-6 W=3.5e-6 AD=2.975e-12 AS=2.975e-12 PD=5.2e-6 PS=5.2e-6 NRD=142.8571e-3 NRS=142.8571e-3 m=2
+mgn2<1> vout vgn vssa vssa nmos1 L=3.5e-6 W=3.5e-6 AD=2.975e-12 AS=2.975e-12 PD=5.2e-6 PS=5.2e-6 NRD=142.8571e-3 NRS=142.8571e-3 m=8
+mvf vdda vout vvf vssa nmos1 L=700e-9 W=7e-6 AD=5.95e-12 AS=5.95e-12 PD=8.7e-6 PS=8.7e-6 NRD=71.42857e-3 NRS=71.42857e-3
+m2 v2 v1 vssa vssa nmos1 L=3.5e-6 W=14e-6 AD=11.9e-12 AS=11.9e-12 PD=15.7e-6 PS=15.7e-6 NRD=35.71429e-3 NRS=35.71429e-3
+xcc1 v1 vvf primitive_cpoly AREA=4.8e-9 PERI=277.1e-6
+xcc2 v1 v2 primitive_cpoly AREA=249.48e-12 PERI=63.2e-6
+m3<1> vdda v2 vout vssa nmos1 L=350e-9 W=25e-6 NRD=20e-3 NRS=20e-3 m=8
+xr2 vfb0 vssa primitive_rpoly2 L=300e-6 W=2e-6
+xr1 vfb vfb0 primitive_rpoly2 L=300e-6 W=2e-6
+xr0 vout vfb primitive_rpoly2 L=300e-6 W=2e-6
+.ends

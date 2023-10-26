@@ -1,0 +1,6 @@
+$DATA1 SOURCE='HSPICE' VERSION='D-2010.03 32-BIT'
+.TITLE '* disclaimer:'
+ voffset          vpp@1mhz         delay            iddq              
+ fom              temper           alter#            
+  5.621e-06          1.0692         5.601e-07       -1.580e-07        
+    7.7427          27.0000           1.0000         

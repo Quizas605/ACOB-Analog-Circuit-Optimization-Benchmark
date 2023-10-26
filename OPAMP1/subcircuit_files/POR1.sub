@@ -1,0 +1,41 @@
+* Disclaimer:
+* No rights or licenses are granted by ams to Recipient, expressly or by implication, with respect to any proprietary information 
+* or patent, copyright mask, work, trademark, trade secret or other intellectual property right owned or controlled by ams, except
+* as expressly provided by ams. Recipient may not remove any copyright notices from the Simulation File. ams may make changes to 
+* the Simulation Files or to items referenced therein at any time without notice and is not obligated to support or update these Files.
+* This simulation File is provided by ams "AS IS" and any express or implied warranties, including, but not limited to the implied 
+* warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall ams or its suppliers be liable 
+* for any direct, indirect, incidental, special, exemplary or consequential damages (including, but not limited to procurement of 
+* substitute goods or services, loss of use, data or profits, or business interruption however caused and on any theory of liability, 
+* whether in contract, strict liability or tort (including negligence or otherwise) arising in any way out of the use of - or any 
+* inability to use - this Simulation File, even if advised of the possibility of such damage.  
+* © ams AG
+
+.subckt POR1 pd por xpor vdda vssa 
+mi2 vores net92 vdda vdda pmos1 L=50.05e-6 W=10e-6 AD=11e-12 AS=11e-12 PD=12.2e-6 PS=12.2e-6 NRD=60e-3 NRS=60e-3 M=1
+mi44 xpor vcap vdda vdda pmos1 L=650e-9 W=7e-6 AD=10.5e-12 AS=10.5e-12 PD=10e-6 PS=10e-6 NRD=114.286e-3 NRS=114.286e-3 M=1
+mi53 xpdi pd vdda vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mp1 net92 pdi vdda vdda pmos1 L=160.05e-6 W=2e-6 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mpcap vdda vcap vdda vdda pmos1 L=20.05e-6 W=15e-6 AD=22.5e-12 AS=22.5e-12 PD=18e-6 PS=18e-6 NRD=53.3333e-3 NRS=53.3333e-3 M=1
+mi57 vcap xpdi vdda vdda pmos1 L=350e-9 W=1.2e-6 AD=1.32e-12 AS=1.32e-12 PD=3.4e-6 PS=3.4e-6 NRD=500e-3 NRS=500e-3 M=1
+mi49 por xpor vdda vdda pmos1 L=650e-9 W=14e-6 AD=21e-12 AS=21e-12 PD=17e-6 PS=17e-6 NRD=57.1429e-3 NRS=57.1429e-3 M=1
+mi3 vcap vores vdda vdda pmos1 L=650e-9 W=7e-6 AD=10.5e-12 AS=10.5e-12 PD=10e-6 PS=10e-6 NRD=114.286e-3 NRS=114.286e-3 M=1
+mi16 net88 pdi vdda vdda pmos1 L=80.05e-6 W=1.5e-6 AD=2.25e-12 AS=2.25e-12 PD=4.5e-6 PS=4.5e-6 NRD=533.333e-3 NRS=533.333e-3 M=1
+mi55 pdi xpdi vdda vdda pmos1 L=350e-9 W=7e-6 AD=7.7e-12 AS=7.7e-12 PD=9.2e-6 PS=9.2e-6 NRD=85.7143e-3 NRS=85.7143e-3 M=1
+mi54 xpdi pd vssa vssa nmos1 L=350e-9 W=4e-6 AD=4.4e-12 AS=4.4e-12 PD=6.2e-6 PS=6.2e-6 NRD=150e-3 NRS=150e-3 M=1
+mi78 vores vcap hyst vssa nmos1 L=650e-9 W=6e-6 AD=9e-12 AS=9e-12 PD=9e-6 PS=9e-6 NRD=133.333e-3 NRS=133.333e-3 M=1
+mi0 vores net88 vssa vssa nmos1 L=15.05e-6 W=5e-6 AD=7.5e-12 AS=7.5e-12 PD=8e-6 PS=8e-6 NRD=160e-3 NRS=160e-3 M=1
+mi56 pdi xpdi vssa vssa nmos1 L=350e-9 W=4e-6 AD=4.4e-12 AS=4.4e-12 PD=6.2e-6 PS=6.2e-6 NRD=150e-3 NRS=150e-3 M=1
+mi45 xpor vcap vssa vssa nmos1 L=650e-9 W=4e-6 AD=6e-12 AS=6e-12 PD=7e-6 PS=7e-6 NRD=200e-3 NRS=200e-3 M=1
+mi72 net101 net88 vssa vssa nmos1 L=15.05e-6 W=5e-6 AD=7.5e-12 AS=7.5e-12 PD=8e-6 PS=8e-6 NRD=160e-3 NRS=160e-3 M=1
+mi50 por xpor vssa vssa nmos1 L=650e-9 W=8e-6 AD=12e-12 AS=12e-12 PD=11e-6 PS=11e-6 NRD=100e-3 NRS=100e-3 M=1
+mi79 net92 net92 vssa vssa nmos1 L=68e-6 W=1e-6 AD=1.1e-12 AS=1.1e-12 PD=3.2e-6 PS=3.2e-6 NRD=600e-3 NRS=600e-3 M=1
+mi13<3> net88 net88 vssa vssa nmos1 L=15.05e-6 W=5e-6 AD=5.5e-12 AS=5.5e-12 PD=7.2e-6 PS=7.2e-6 NRD=120e-3 NRS=120e-3 M=1
+mi13<2> net88 net88 vssa vssa nmos1 L=15.05e-6 W=5e-6 AD=5.5e-12 AS=5.5e-12 PD=7.2e-6 PS=7.2e-6 NRD=120e-3 NRS=120e-3 M=1
+mi13<1> net88 net88 vssa vssa nmos1 L=15.05e-6 W=5e-6 AD=5.5e-12 AS=5.5e-12 PD=7.2e-6 PS=7.2e-6 NRD=120e-3 NRS=120e-3 M=1
+mi13<0> net88 net88 vssa vssa nmos1 L=15.05e-6 W=5e-6 AD=5.5e-12 AS=5.5e-12 PD=7.2e-6 PS=7.2e-6 NRD=120e-3 NRS=120e-3 M=1
+mi77 hyst net88 vssa vssa nmos1 L=15.05e-6 W=2.5e-6 AD=3.75e-12 AS=3.75e-12 PD=5.5e-6 PS=5.5e-6 NRD=320e-3 NRS=320e-3 M=1
+mi4 vcap vores net101 vssa nmos1 L=650e-9 W=4e-6 AD=6e-12 AS=6e-12 PD=7e-6 PS=7e-6 NRD=200e-3 NRS=200e-3 M=1
+mi59 net88 pdi vssa vssa nmos1 L=350e-9 W=1.2e-6 AD=1.32e-12 AS=1.32e-12 PD=3.4e-6 PS=3.4e-6 NRD=500e-3 NRS=500e-3 M=1
+.ends
+

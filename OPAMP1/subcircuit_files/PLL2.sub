@@ -1,0 +1,116 @@
+* Disclaimer:
+* THIS FILE IS PROVIDED “AS IS” AND WITH:
+* (A)  NO WARRANTY OF ANY KIND, express, implied or statutory, including any implied warranties of merchantability or 
+* fitness for a particular purpose, which Mentor Graphics disclaims to the maximum extent permitted by applicable law; and
+* (B)  NO INDEMNIFICATION FOR INFRINGEMENT OF INTELLECTUAL PROPERTY RIGHTS.
+* LIMITATION OF LIABILITY:  IN NO EVENT SHALL MENTOR GRAPHICS OR ITS LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, 
+* INCIDENTAL, OR CONSEQUENTIAL DAMAGES (INCLUDING LOST PROFITS OR SAVINGS) WHATSOEVER, WHETHER BASED ON CONTRACT, TORT OR 
+* ANY OTHER LEGAL THEORY, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+* © 2017 Mentor Graphics Corporation. All rights reserved.
+
+.subckt PLL1 clkin d0in d1in d2in d3in vcoout vdd vss
+
+* .subckt LOGIC_DFFR clk d r q qb vdd vss
+* .subckt LOGIC_DFF  clk d q qb  vdd vss
+* .subckt LOGIC_NAN2 a b out vdd vss
+* .subckt LOGIC_INV  in out vdd vss 
+* .subckt LOGIC_MUX2 i0 i1 sel out outb vdd vss
+* .subckt LOGIC_XOR2 a b out vdd vss
+
+* clock for testing PFD 
+* Vin fbclk 0 pulse(0v {vddnom} 0n     TRISENOM 	TRISENOM {0.5*TREF-TRISENOM} 	{TREF}) 		* 50% duty cycle
+
+* Phase detector
+X1  fbclk  VDD  RS2 Qdn  Qdnb  VDD VSS LOGIC_DFFR
+X2  clkin  VDD  RS2 Qup  Qupb  VDD VSS LOGIC_DFFR
+X3  Qup    Qdn  RSb            VDD VSS LOGIC_NAN2
+X4  RSb    RS1                 VDD VSS LOGIC_INV
+X5  RS1    RS1b                VDD VSS LOGIC_INV
+X6  RS1b   RS2                 VDD VSS LOGIC_INV
+* reset override
+* Vrs RS2 0 0
+
+* Charge pump
+X7  Qup  Qdn  VCOin VDD VSS PLL1_chargepump       *                           3 uA SS;           6uA TT;             9uA FF
+
+* Loop filter
+X8  VCOin cap1 PRIMITIVE_RPOLY2 W=0.5u L=130u     * L=130u           54kohm @1.25V SS;  25kohm @1.9V TT,    16kohm @2.2V FF
+X9  cap1  VSS  PRIMITIVE_CPOLY  AREA=1300e-12     * for 100 MHz out:  1.4pF @1.25V SS;   1.1pF @1.9V TT;     1.0pF @2.2V FF
+X10 VCOin VSS  PRIMITIVE_CPOLY  AREA=260e-12      *                   0.28pF             0.22pF              0.2pF
+
+* ramp for testing VCO
+* vramp VCOin 0 pwl(0,0, 3.3u 3.3)
+
+* Voltage Controlled Oscillator
+X11 VCOin VCOout VDD VSS PLL1_vco
+
+* feedback divide-by-N, where N = {d3in d2in d1in d0in} + 1
+X12 D0in   Q0B   loadb D0  D0B VDD VSS LOGIC_MUX2
+X13 VCOout D0    Q0    Q0B     VDD VSS LOGIC_DFF
+
+X14 Q0     Q1B   D1x           VDD VSS LOGIC_XOR2
+X15 D1in   D1x   loadb D1  D1B VDD VSS LOGIC_MUX2
+X16 VCOout D1    Q1    Q1B     VDD VSS LOGIC_DFF
+
+X17 Q0     Q1    D2o           VDD VSS LOGIC_OR2
+X18 D2o    Q2B   D2x           VDD VSS LOGIC_XOR2
+X19 D2in   D2x   loadb D2  D2B VDD VSS LOGIC_MUX2
+X20 VCOout D2    Q2    Q2B     VDD VSS LOGIC_DFF
+
+X21 D2o    Q2    D3o           VDD VSS LOGIC_OR2
+X22 D3o    Q3B   D3x           VDD VSS LOGIC_XOR2
+X23 D3in   D3x   loadb D3  D3B VDD VSS LOGIC_MUX2
+X24 VCOout D3    Q3    Q3B     VDD VSS LOGIC_DFF
+
+X25 D3o    Q3    loadb         VDD VSS LOGIC_OR2
+X26 VCOout loadb fbclk         VDD VSS LOGIC_OR2
+
+.ends
+
+.subckt PLL1_chargepump Qup Qdn cpout VDD VSS
+* N bias chain
+Mna  vdd   vdd   vda   VSS nmos1 L='6*gt_l' W='0.5*gt_nw'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+X1   vda   v9bn  PRIMITIVE_RPOLY2 W=0.5u L=200u    * ~75k ohms
+Mn1  v9bn  v9bn  VSS   VSS nmos1 L='2*gt_l' W='1.0*gt_nw'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+* P bias chain
+Mp1  v9bp  v9bp  VDD   VDD pmos1 L='1*gt_l' W='0.5*gt_pw'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+4*gt_pw'
+Mn2  v9bp  v9bn  VSS   VSS nmos1 L='3*gt_l' W='0.5*gt_nw'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2*gt_nw'
+* gate constant currents
+Mp2  net98 v9bp  VDD   VDD pmos1 L='2*gt_l' W='1*gt_pw'  AD='sx*gt_pw' AS='sx*2.0*gt_pw' PD='2*sx+gt_pw' PS='2*sx+3*gt_pw'
+Mn5  cpout Qdn   net98 VSS nmos1 L='1*gt_l' W='0.5*gt_nw'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mn4  cpout Qup   net95 VSS nmos1 L='1*gt_l' W='0.5*gt_nw'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mn3  net95 v9bn  VSS   VSS nmos1 L='8*gt_l' W='1*gt_nw'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+.ends
+
+.subckt PLL1_VCO vcoin clkout vdd vss
+Mp1 vcn   VCOin VDD   VDD  pmos1 L='gt_l*3.0' W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'
+X1  vbn   vcn  PRIMITIVE_RPOLY2 W=0.5u L=25u    * ~10k ohms
+Mn1  vbn   vbn   VSS   VSS nmos1 L=gt_l W='gt_nw*2.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+Mn2  net01 vbn   VSS   VSS nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mn3  out0  out0  net01 VSS nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mp2  out0  out0  vbp   VDD pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+Mp3  vbp   vbp   VDD   VDD pmos1 L=gt_l W='gt_pw*0.5'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+
+Mn4  net11 vbn   VSS   VSS nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mn5  out1  out5  net11 VSS nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mp4  out1  out5  net14 VDD pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+Mp5  net14 vbp   VDD   VDD pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+Mn6  net21 vbn   VSS   VSS nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mn7  out2  out1  net21 VSS nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mp6  out2  out1  net24 VDD pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+Mp7  net24 vbp   VDD   VDD pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+Mn8  net31 vbn   VSS   VSS nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mn9  out3  out2  net31 VSS nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mp8  out3  out2  net34 VDD pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+Mp9  net34 vbp   VDD   VDD pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+Mn10 net41 vbn   VSS   VSS nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mn11 out4  out3  net41 VSS nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mp10 out4  out3  net44 VDD pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+Mp11 net44 vbp   VDD   VDD pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+Mn12 net51 vbn   VSS   VSS nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mn13 out5  out4  net51 VSS nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+Mp12 out5  out4  net54 VDD pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+Mp13 net54 vbp   VDD   VDD pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mp14 clkout out5 vdd   vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn14 clkout out5 vss   vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
