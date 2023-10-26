@@ -1,0 +1,4 @@
+$DATA1 SOURCE='HSPICERF' VERSION='D-2010.03'
+.TITLE '* Disclaimer:'
+ fom idd iddq temper alter#
+  7.1849	  -3.2818e-04	  -3.9030e-11	     27.000000 1

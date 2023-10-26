@@ -1,0 +1,55 @@
+* Disclaimer:
+* No rights or licenses are granted by ams to Recipient, expressly or by implication, with respect to any proprietary information 
+* or patent, copyright mask, work, trademark, trade secret or other intellectual property right owned or controlled by ams, except
+* as expressly provided by ams. Recipient may not remove any copyright notices from the Simulation File. ams may make changes to 
+* the Simulation Files or to items referenced therein at any time without notice and is not obligated to support or update these Files.
+* This simulation File is provided by ams "AS IS" and any express or implied warranties, including, but not limited to the implied 
+* warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall ams or its suppliers be liable 
+* for any direct, indirect, incidental, special, exemplary or consequential damages (including, but not limited to procurement of 
+* substitute goods or services, loss of use, data or profits, or business interruption however caused and on any theory of liability, 
+* whether in contract, strict liability or tort (including negligence or otherwise) arising in any way out of the use of - or any 
+* inability to use - this Simulation File, even if advised of the possibility of such damage.  
+* © ams AG
+
+.subckt OSC1 q xena xin xout inh_gnd inh_vdd3o inh_vdd3r
+xi155 inh_vdd3r inh_gnd xena ena osc1_ainvr gt_pdl=350e-9 gt_pdw=1e-6 sx=2e-6 lc=1.25e-6 gt_pul=350e-9 gt_puw=2e-6
+mi156 net53 ena inh_vdd3r inh_vdd3r pmos1 L=Lp156 W=Wp156 AD=2.2e-12 AS=2.2e-12 PD=4.2e-6 PS=4.2e-6 NRD=300e-3 NRS=300e-3 M=1
+mp02 net53 net50 inh_vdd3r inh_vdd3r pmos1 L=Lp02 W=Wp02 AD=13.2e-12 AS=13.2e-12 PD=14.2e-6 PS=14.2e-6 NRD=50e-3 NRS=50e-3 M=1
+mi153 q net53 inh_vdd3r inh_vdd3r pmos1 L=Lp153 W=Wp153 AD=22e-12 AS=22e-12 PD=22.2e-6 PS=22.2e-6 NRD=30e-3 NRS=30e-3 M=1
+mp01 net53 xena net50 inh_vdd3r pmos1 L=Lp01 W=Wp01 AD=1.1e-12 AS=1.1e-12 PD=3.2e-6 PS=3.2e-6 NRD=600e-3 NRS=600e-3 M=1
+mn01 net53 net50 net26 inh_gnd nmos1 L=Ln01 W=Wn01 AD=5.5e-12 AS=5.5e-12 PD=7.2e-6 PS=7.2e-6 NRD=120e-3 NRS=120e-3 M=1
+mi154 q net53 inh_gnd inh_gnd nmos1 L=Ln154 W=Wn154 AD=11e-12 AS=11e-12 PD=12.2e-6 PS=12.2e-6 NRD=60e-3 NRS=60e-3 M=1
+mi163 net26 ena inh_gnd inh_gnd nmos1 L=Ln163 W=Wn163 AD=5.5e-12 AS=5.5e-12 PD=7.2e-6 PS=7.2e-6 NRD=120e-3 NRS=120e-3 M=1
+xc0<0> net50 inh_gnd primitive_cpoly AREA=1.571e-9 PERI=178.9e-6 M=1
+xc0<1> net50 inh_gnd primitive_cpoly AREA=1.571e-9 PERI=178.9e-6 M=1
+xc1<0> net53 inh_gnd primitive_cpoly AREA=1.571e-9 PERI=178.9e-6 M=1
+xc1<1> net53 inh_gnd primitive_cpoly AREA=1.571e-9 PERI=178.9e-6 M=1
+xc2<0> net50 inh_gnd primitive_cpoly AREA=1.122e-9 PERI=141.5e-6 M=1
+xc2<1> net50 inh_gnd primitive_cpoly AREA=1.122e-9 PERI=141.5e-6 M=1
+xc3<0> net53 inh_gnd primitive_cpoly AREA=1.122e-9 PERI=141.5e-6 M=1
+xc3<1> net53 inh_gnd primitive_cpoly AREA=1.122e-9 PERI=141.5e-6 M=1
+xi168 inh_gnd xin primitive_nwd AREA=365e-12 PJ=104e-6 M=1
+xi45 inh_gnd xout primitive_nwd AREA=365e-12 PJ=104e-6 M=1
+xd2 inh_gnd inh_vdd3o primitive_nwd AREA=614.5e-12 PJ=144.64e-6 M=1
+xd4 inh_gnd inh_vdd3o primitive_nwd AREA=614.5e-12 PJ=144.64e-6 M=1
+xd0 inh_gnd inh_vdd3r primitive_nwd AREA=10.54e-12 PJ=13e-6 M=1
+xd3 inh_gnd inh_vdd3r primitive_nwd AREA=10.54e-12 PJ=13e-6 M=1
+xr1 xin inh_vdd3o net50 primitive_rdiffp L=15.4e-6 W=12.2e-6 M=1
+xr0 xout inh_vdd3o net53 primitive_rdiffp L=15.4e-6 W=12.2e-6 M=1
+xi166 inh_gnd net50 primitive_nd AREA=15.74e-12 PJ=16.0284e-6 M=1
+xi24 inh_gnd net53 primitive_nd AREA=15.74e-12 PJ=16.0284e-6 M=1
+xi167 inh_gnd xin primitive_nd AREA=222e-12 PJ=222e-6 M=1
+xi44 inh_gnd xout primitive_nd AREA=222e-12 PJ=222e-6 M=1
+xi182 net53 inh_vdd3r primitive_pd AREA=6.5e-12 PJ=9.42843e-6 M=1
+xi40 xout inh_vdd3o primitive_pd AREA=486.44e-12 PJ=102.457e-6 M=1
+xi48 net50 inh_vdd3r primitive_pd AREA=6.5e-12 PJ=9.42843e-6 M=1
+xi164 xin inh_vdd3o primitive_pd AREA=486.44e-12 PJ=102.457e-6 M=1
+xi23 net53 inh_vdd3o primitive_pd AREA=106.608e-12 PJ=40.21e-6 M=1
+xi165 net50 inh_vdd3o primitive_pd AREA=106.608e-12 PJ=40.21e-6 M=1
+.ends
+
+.subckt osc1_ainvr vdda vssa in out
+mn1 out in vssa vssa nmos1 L=gt_pdl W=gt_pdw AD='sx*gt_pdw' AS='sx*gt_pdw' PD='2*sx+gt_pdw' PS='2*sx+gt_pdw' NRD='lc/gt_pdw' NRS='lc/gt_pdw' M=1
+mp1 out in vdda vdda pmos1 L=gt_pul W=gt_puw AD='sx*gt_puw' AS='sx*gt_puw' PD='2*sx+gt_puw' PS='2*sx+gt_puw' NRD='lc/gt_puw' NRS='lc/gt_puw' M=1
+.ends
+ 

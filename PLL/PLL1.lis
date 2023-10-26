@@ -1,0 +1,266 @@
+************************************************************************
+HSPICE RF -- D-2010.03 (Feb 23 2010) 
+Copyright (C) 2010 Synopsys,Inc. All rights reserved.
+This software and the associated documentation are confidential and
+proprietary to Synopsys, Inc. Your use or disclosure of this software
+is subject to the terms and conditions of a written license agreement
+between you, or your company, and Synopsys, Inc.
+************************************************************************
+
+hspicerf 64-bit version D-2010.03 (Feb 23 2010 11:43:57) 
+
+machine info: Linux hnode21.hpc.sme 3.10.0-1160.el7.x86_64 #1 SMP Mon Oct 19 16:18:59 UTC 2020 x86_64
+
+current time: 23:22:36  04/29/2023
+
+command line: hspicerf64 PLL1.circuit
+
+Warning: (PLL1.circuit:38) .connect statement is not supported. This command will be ignored.
+
+Warning: (PLL1.circuit:39) .connect statement is not supported. This command will be ignored.
+
+Warning: (PLL1.circuit:40) .connect statement is not supported. This command will be ignored.
+
+Warning: (PLL1.circuit:41) .connect statement is not supported. This command will be ignored.
+
+Warning: 34 subcircuits are ignored because not called by any instance.
+
+Subcircuits not called by any instance:
+-------------------------------------------------------
+| Location                           | Subckt         |
+|------------------------------------+----------------|
+| (./subcircuit_files/LOGIC.sub:24)  | "LOGIC_INVX2"  |
+| (./subcircuit_files/LOGIC.sub:30)  | "LOGIC_INVX4"  |
+| (./subcircuit_files/LOGIC.sub:44)  | "LOGIC_BUFX2"  |
+| (./subcircuit_files/LOGIC.sub:52)  | "LOGIC_BUFX4"  |
+| (./subcircuit_files/LOGIC.sub:60)  | "LOGIC_BUFZ"   |
+| (./subcircuit_files/LOGIC.sub:72)  | "LOGIC_BUFZX2" |
+| (./subcircuit_files/LOGIC.sub:84)  | "LOGIC_BUFZX4" |
+| (./subcircuit_files/LOGIC.sub:96)  | "LOGIC_PUPD"   |
+| (./subcircuit_files/LOGIC.sub:112) | "LOGIC_NAN3"   |
+| (./subcircuit_files/LOGIC.sub:122) | "LOGIC_NAN4"   |
+| (./subcircuit_files/LOGIC.sub:134) | "LOGIC_NOR2"   |
+| (./subcircuit_files/LOGIC.sub:142) | "LOGIC_NOR3"   |
+| (./subcircuit_files/LOGIC.sub:152) | "LOGIC_NOR4"   |
+| (./subcircuit_files/LOGIC.sub:198) | "LOGIC_AND2"   |
+| (./subcircuit_files/LOGIC.sub:208) | "LOGIC_AND2X2" |
+| (./subcircuit_files/LOGIC.sub:218) | "LOGIC_AND2X4" |
+| (./subcircuit_files/LOGIC.sub:238) | "LOGIC_OR2X2"  |
+| (./subcircuit_files/LOGIC.sub:248) | "LOGIC_OR2X4"  |
+| (./subcircuit_files/LOGIC.sub:258) | "LOGIC_AOI21"  |
+| (./subcircuit_files/LOGIC.sub:268) | "LOGIC_AOI22"  |
+| (./subcircuit_files/LOGIC.sub:280) | "LOGIC_AOI222" |
+| (./subcircuit_files/LOGIC.sub:296) | "LOGIC_AOI32"  |
+| (./subcircuit_files/LOGIC.sub:310) | "LOGIC_AOI33"  |
+| (./subcircuit_files/LOGIC.sub:326) | "LOGIC_OAI21"  |
+| (./subcircuit_files/LOGIC.sub:336) | "LOGIC_OAI22"  |
+| (./subcircuit_files/LOGIC.sub:348) | "LOGIC_OAI222" |
+| (./subcircuit_files/LOGIC.sub:364) | "LOGIC_OAI32"  |
+| (./subcircuit_files/LOGIC.sub:378) | "LOGIC_OAI33"  |
+| (./subcircuit_files/LOGIC.sub:394) | "LOGIC_LAT"    |
+| (./subcircuit_files/LOGIC.sub:412) | "LOGIC_LATN"   |
+| (./subcircuit_files/LOGIC.sub:460) | "LOGIC_DFFN"   |
+| (./subcircuit_files/LOGIC.sub:524) | "LOGIC_DFFRN"  |
+| (./subcircuit_files/LOGIC.sub:558) | "LOGIC_DFFS"   |
+| (./subcircuit_files/LOGIC.sub:592) | "LOGIC_DFFSN"  |
+|-----------------------------------------------------|
+
+Total number of lines parsed: 1062
+
+Resource Usage for Parsing
+--------------------------
+| CPU Time    | 0.01 sec |
+| Peak Memory | 0.36 Mb  |
+|------------------------|
+
+Warning:  option "COMPAT" ignored
+
+
+Warning:  option "ABSV" ignored
+
+
+Source Files
+------------------------------------
+| "PLL1.circuit"                   |
+| "param"                          |
+| "process_models/typical.process" |
+| "subcircuit_files/LOGIC.sub"     |
+| "subcircuit_files/PLL1.sub"      |
+|----------------------------------|
+
+Options
+---------------------
+| Option | Value    |
+|--------+----------|
+| DEFAD  | 5.29e-12 |
+| DEFAS  | 5.29e-12 |
+| DEFNRD | 0.1      |
+| DEFNRS | 0.1      |
+| DEFPD  | 9.2e-06  |
+| DEFPS  | 9.2e-06  |
+| TEMPC  | 27       |
+| TEMPK  | 300.15   |
+|-------------------|
+
+74 unique instance models are loaded.
+
+Resource Usage for Load Netlist Data
+--------------------------
+| CPU Time    | 0.01 sec |
+| Peak Memory | 3.13 Mb  |
+|------------------------|
+
+License user information
+------------------------------------------------------
+| FLEXLM   | v8.5b                                   |
+| USER     | zhaoxuyang                              |
+| HOSTNAME | hnode21.hpc.sme                         |
+| HOSTID   | 23154                                   |
+| PID      | /export/home/zhaoxuyang/License-int.dat |
+|----------------------------------------------------|
+
+License file: hspice
+----------------------------------------------------------------------------
+| license | checkout number | expiration date |  # in use / total | server |
+|---------+-----------------+-----------------+-------------------+--------|
+| 1       | 31-dec-2040     | 2019.12/0       | 0/                |        |
+|--------------------------------------------------------------------------|
+
+License user information
+------------------------------------------------------
+| FLEXLM   | v8.5b                                   |
+| USER     | zhaoxuyang                              |
+| HOSTNAME | hnode21.hpc.sme                         |
+| HOSTID   | 23154                                   |
+| PID      | /export/home/zhaoxuyang/License-int.dat |
+|----------------------------------------------------|
+
+License file: hspicerf
+----------------------------------------------------------------------------
+| license | checkout number | expiration date |  # in use / total | server |
+|---------+-----------------+-----------------+-------------------+--------|
+| 1       | 31-dec-2040     | 2019.12/0       | 0/                |        |
+|--------------------------------------------------------------------------|
+
+Netlist Statistics
+---------------------
+| Type      | Count |
+|-----------+-------|
+| nmos      | 151   |
+| pmos      | 147   |
+| resistor  | 3     |
+| capacitor | 3     |
+| vsrc      | 2     |
+|-------------------|
+
+Summary of Possible Problems in Netlist
+-------------------------------------
+| Negative resistor             | 0 |
+| Negative capacitor            | 0 |
+| Negative inductor             | 0 |
+| Unconnected node              | 0 |
+| Dangling terminal             | 0 |
+| Non-rail bulk terminal        | 0 |
+| Floating MOS gate             | 4 |
+| Floating MOS bulk             | 0 |
+| Floating BJT substrate        | 0 |
+| Floating controlled input     | 0 |
+| Floating current source nodes | 0 |
+| Source loop                   | 0 |
+|-----------------------------------|
+
+Warning: 4 MOS with floating (no DC path to gnd) gate.
+Floating gates are usually a netlist error. If they occur in a subcircuit, then the gate does not connect up through a port. If a subckt port is identified as floating then a port that touches the gate is floating. This message can be suppressed by attaching a ".nodeset" to the node.
+
+The following elements have a floating gate.
+-----------------------------------------------------------------------------------
+| Location                         | Subckt    | Instance | Net/node | Definition |
+|----------------------------------+-----------+----------+----------+------------|
+| (subcircuit_files/LOGIC.sub:174) | top level | "X1"     | "D3"     | LOGIC_MUX2 |
+| (subcircuit_files/LOGIC.sub:174) | top level | "X1"     | "D2"     | LOGIC_MUX2 |
+| (subcircuit_files/LOGIC.sub:174) | top level | "X1"     | "D1"     | LOGIC_MUX2 |
+| (subcircuit_files/LOGIC.sub:174) | top level | "X1"     | "D0"     | LOGIC_MUX2 |
+|---------------------------------------------------------------------------------|
+
+Resource Usage for Netlist Check
+--------------------------
+| CPU Time    | 0.00 sec |
+| Peak Memory | 3.18 Mb  |
+|------------------------|
+
+Number of nodes: 184
+
+Total number of nodes (including internal nodes): 780
+
+Resource Usage for Netlist Data Compression
+--------------------------
+| CPU Time    | 0.00 sec |
+| Peak Memory | 3.29 Mb  |
+|------------------------|
+
+Simulation
+
+Warning: Node D0 has no DC path to ground.
+
+Warning: Node D1 has no DC path to ground.
+
+Warning: Node D2 has no DC path to ground.
+
+Warning: Node D3 has no DC path to ground.
+
+OP: finished using direct method
+
+Number of iterations for OP analysis: 62
+
+Resource Usage for Operating Point
+--------------------------
+| CPU Time    | 0.02 sec |
+| Peak Memory | 4.38 Mb  |
+|------------------------|
+
+Transient Analysis
+10.0% time = 500.0 ns ( etc = 1.0 sec, ett = 2.0 sec )
+  ( slv=644  evl=187  rej=29  mem=4792K cpu=0   wall=0 )
+20.0% time = 1000.0 ns ( etc = 1.0 sec, ett = 1.0 sec )
+  ( slv=656  evl=192  rej=29  mem=4792K cpu=0   wall=0 )
+30.0% time = 1500.0 ns ( etc = 0.0 sec, ett = 1.0 sec )
+  ( slv=667  evl=196  rej=29  mem=4792K cpu=0   wall=0 )
+40.0% time = 2000.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=679  evl=199  rej=29  mem=4792K cpu=0   wall=0 )
+50.0% time = 2500.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=931  evl=259  rej=47  mem=4792K cpu=0   wall=0 )
+60.0% time = 3000.0 ns ( etc = 0.0 sec, ett = 1.0 sec )
+  ( slv=1431  evl=391  rej=65  mem=4792K cpu=0   wall=0 )
+70.0% time = 3500.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=1443  evl=398  rej=65  mem=4792K cpu=0   wall=0 )
+80.0% time = 4000.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=1475  evl=403  rej=68  mem=4792K cpu=0   wall=0 )
+90.0% time = 4500.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=1483  evl=406  rej=68  mem=4792K cpu=0   wall=0 )
+100.0% time = 5000.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=1659  evl=449  rej=81  mem=4792K cpu=0   wall=0 )
+
+solve = 1659 eval = 449 reject = 81
+******
+***
+ ******  transient analysis       temp=  27
+ ******
+clkout_pk2pk=  3.2097      from=   4.000e-06  to=   5.000e-06
+fom=  21.3883    param =  2.139e+01
+iddavg=  -2.1388e-05      from=   1.000e-06  to=   2.000e-06
+
+
+
+Transient time = 0.36 cpu sec, 0.37 wall sec
+
+Resource Usage for Transient Analysis
+--------------------------
+| CPU Time    | 0.36 sec |
+| Peak Memory | 4.68 Mb  |
+|------------------------|
+
+    --- hspicerf done [PLL1.circuit] ---
+
+Total time   = 0.40 cpu sec
+
+Total memory = 4.68 Mbytes

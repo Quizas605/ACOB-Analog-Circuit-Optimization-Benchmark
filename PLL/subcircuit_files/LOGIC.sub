@@ -1,0 +1,624 @@
+* Disclaimer:
+* THIS FILE IS PROVIDED “AS IS” AND WITH:
+* (A)  NO WARRANTY OF ANY KIND, express, implied or statutory, including any implied warranties of merchantability or 
+* fitness for a particular purpose, which Mentor Graphics disclaims to the maximum extent permitted by applicable law; and
+* (B)  NO INDEMNIFICATION FOR INFRINGEMENT OF INTELLECTUAL PROPERTY RIGHTS.
+* LIMITATION OF LIABILITY:  IN NO EVENT SHALL MENTOR GRAPHICS OR ITS LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, 
+* INCIDENTAL, OR CONSEQUENTIAL DAMAGES (INCLUDING LOST PROFITS OR SAVINGS) WHATSOEVER, WHETHER BASED ON CONTRACT, TORT OR 
+* ANY OTHER LEGAL THEORY, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+* © 2017 Mentor Graphics Corporation. All rights reserved.
+
+* Default values for the following are provided for all logic gates
+* gt_l  - gate length (all logic gates assigned minimum length, 350 nm, by default)
+* gt_nw - n-channel gate width for 1X inverter
+* gt_pw - p-channel gate width (= 3 * gt_nw) for 1X inverter with VDD/2 switching point
+* sx    - 1um when gates share diffusions (default); should use 2um for gates with single transistors (eg inverter) 
+
+* inverter
+.subckt LOGIC_INV in out vdd vss sx=2e-6 
+mp1 out in vdd vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn1 out in vss vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
+
+* inverter, with 2X drive
+.subckt LOGIC_INVX2 in out vdd vss sx=2e-6 
+mp1 out in vdd vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' m=2
+mn1 out in vss vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' m=2
+.ends
+
+* inverter, with 4X drive
+.subckt LOGIC_INVX4 in out vdd vss sx=2e-6 
+mp1 out in vdd vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' m=4
+mn1 out in vss vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' m=4
+.ends
+
+* non-inverting buffer
+.subckt LOGIC_BUF in out vdd vss sx=2e-6
+mp1 outb in   vdd vdd pmos1 L=gt_l W='gt_pw*0.25' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' 
+mn1 outb in   vss vss nmos1 L=gt_l W='gt_nw*0.25' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp2 out  outb vdd vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' 
+mn2 out  outb vss vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
+
+* non-inverting buffer, with 2X drive
+.subckt LOGIC_BUFX2 in out vdd vss 
+mp1 outb in   vdd vdd pmos1 L=gt_l W='gt_pw*0.5'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' 
+mn1 outb in   vss vss nmos1 L=gt_l W='gt_nw*0.5'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp2 out  outb vdd vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' m=2
+mn2 out  outb vss vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' m=2
+.ends
+
+* non-inverting buffer, with 4X drive
+.subckt LOGIC_BUFX4 in out vdd vss 
+mp1 outb in   vdd vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' 
+mn1 outb in   vss vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp2 out  outb vdd vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' m=4
+mn2 out  outb vss vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' m=4
+.ends
+
+* non-inverting tri-state buffer, positive active enable
+.subckt LOGIC_BUFZ in en out vdd vss sx=2e-6
+mp0 inb  in   vdd vdd pmos1 L=gt_l W='gt_pw*0.25' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' 
+mn0 inb  in   vss vss nmos1 L=gt_l W='gt_nw*0.25' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp1 enb  en   vdd vdd pmos1 L=gt_l W='gt_pw*0.25' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' 
+mn1 enb  en   vss vss nmos1 L=gt_l W='gt_nw*0.25' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp2 n1   inb  vdd vdd pmos1 L=gt_l W='gt_pw*2.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw' 
+mp3 out  enb  n1  vdd pmos1 L=gt_l W='gt_pw*2.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw' 
+mn2 out  en   n2  vss nmos1 L=gt_l W='gt_nw*2.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn3 n2   inb  vss vss nmos1 L=gt_l W='gt_nw*2.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+.ends
+
+* non-inverting tri-state buffer, with 2X drive, positive active enable
+.subckt LOGIC_BUFZX2 in en out vdd vss sx=2e-6
+mp0 inb  in   vdd vdd pmos1 L=gt_l W='gt_pw*0.5'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' 
+mn0 inb  in   vss vss nmos1 L=gt_l W='gt_nw*0.5'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp1 enb  en   vdd vdd pmos1 L=gt_l W='gt_pw*0.5'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' 
+mn1 enb  en   vss vss nmos1 L=gt_l W='gt_nw*0.5'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp2 n1   inb  vdd vdd pmos1 L=gt_l W='gt_pw*2.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw' m=2
+mp3 out  enb  n1  vdd pmos1 L=gt_l W='gt_pw*2.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw' m=2
+mn2 out  en   n2  vss nmos1 L=gt_l W='gt_nw*2.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' m=2
+mn3 n2   inb  vss vss nmos1 L=gt_l W='gt_nw*2.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' m=2
+.ends
+
+* non-inverting tri-state buffer, with 4X drive, positive active enable
+.subckt LOGIC_BUFZX4 in en out vdd vss sx=2e-6
+mp0 inb  in   vdd vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' 
+mn0 inb  in   vss vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp1 enb  en   vdd vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' 
+mn1 enb  en   vss vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp2 n1   inb  vdd vdd pmos1 L=gt_l W='gt_pw*2.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw' m=4
+mp3 out  enb  n1  vdd pmos1 L=gt_l W='gt_pw*2.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw' m=4
+mn2 out  en   n2  vss nmos1 L=gt_l W='gt_nw*2.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' m=4
+mn3 n2   inb  vss vss nmos1 L=gt_l W='gt_nw*2.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' m=4
+.ends
+
+* pull-up / pull-down, with <0.1X drive of basic inverter
+.subckt LOGIC_PUPD in out vdd vss sx=2e-6
+mp1 outb in   vdd vdd pmos1 L='6.0*gt_l'  W='2.0*gt_l' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw' 
+mn1 outb in   vss vss nmos1 L='6.0*gt_l'  W='2.0*gt_l' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mp2 out  outb vdd vdd pmos1 L='20.0*gt_l' W='2.0*gt_l' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw' 
+mn2 out  outb vss vss nmos1 L='60.0*gt_l' W='2.0*gt_l' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+.ends
+
+* 2-input NAND 
+.subckt LOGIC_NAN2 a b out vdd vss
+mp1 out a vdd vdd pmos1 L=gt_l W='gt_pw*1.0'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp2 out b vdd vdd pmos1 L=gt_l W='gt_pw*1.0'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mn1 out a n1  vss nmos1 L=gt_l W='gt_nw*2.0'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn2 n1  b vss vss nmos1 L=gt_l W='gt_nw*2.0'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
+
+* 3-input NAND 
+.subckt LOGIC_NAN3 a b c out vdd vss
+mp1 out a vdd vdd pmos1 L=gt_l W='gt_pw*0.8'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp2 out b vdd vdd pmos1 L=gt_l W='gt_pw*0.8'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp3 out c vdd vdd pmos1 L=gt_l W='gt_pw*0.8'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mn1 out a n2  vss nmos1 L=gt_l W='gt_nw*2.4'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.4*gt_nw' PS='2*sx+2.4*gt_nw'  
+mn2 n2  b n1  vss nmos1 L=gt_l W='gt_nw*2.4'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.4*gt_nw' PS='2*sx+2.4*gt_nw' 
+mn3 n1  c vss vss nmos1 L=gt_l W='gt_nw*2.4'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.4*gt_nw' PS='2*sx+2.4*gt_nw' 
+.ends
+
+* 4-input NAND 
+.subckt LOGIC_NAN4 a b c d out vdd vss
+mp1 out a vdd vdd pmos1 L=gt_l W='gt_pw*0.7'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp2 out b vdd vdd pmos1 L=gt_l W='gt_pw*0.7'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp3 out c vdd vdd pmos1 L=gt_l W='gt_pw*0.7'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp4 out d vdd vdd pmos1 L=gt_l W='gt_pw*0.7'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mn1 out a n3  vss nmos1 L=gt_l W='gt_nw*2.8'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.8*gt_nw' PS='2*sx+2.8*gt_nw'  
+mn2 n3  b n2  vss nmos1 L=gt_l W='gt_nw*2.8'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.8*gt_nw' PS='2*sx+2.8*gt_nw' 
+mn3 n2  c n1  vss nmos1 L=gt_l W='gt_nw*2.8'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.8*gt_nw' PS='2*sx+2.8*gt_nw' 
+mn4 n1  d vss vss nmos1 L=gt_l W='gt_nw*2.8'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.8*gt_nw' PS='2*sx+2.8*gt_nw' 
+.ends
+
+* 2-input NOR 
+.subckt LOGIC_NOR2 a b out vdd vss
+mp1 n1  a vdd vdd pmos1 L=gt_l W='gt_pw*1.5'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp2 out b n1  vdd pmos1 L=gt_l W='gt_pw*1.5'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mn1 out a vss vss nmos1 L=gt_l W='gt_nw*1.0'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn2 out b vss vss nmos1 L=gt_l W='gt_nw*1.0'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
+
+* 3-input NOR 
+.subckt LOGIC_NOR3 a b c out vdd vss
+mp1 n1  a vdd vdd pmos1 L=gt_l W='gt_pw*1.5'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp2 n2  b n1  vdd pmos1 L=gt_l W='gt_pw*1.5'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp3 out c n2  vdd pmos1 L=gt_l W='gt_pw*1.5'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mn1 out a vss vss nmos1 L=gt_l W='gt_nw*0.8'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn2 out b vss vss nmos1 L=gt_l W='gt_nw*0.8'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mn3 out c vss vss nmos1 L=gt_l W='gt_nw*0.8'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
+
+* 4-input NOR 
+.subckt LOGIC_NOR4 a b c d out vdd vss
+mp1 n1  a vdd vdd pmos1 L=gt_l W='gt_pw*2.0'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 n2  b n1  vdd pmos1 L=gt_l W='gt_pw*2.0'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 n3  c n2  vdd pmos1 L=gt_l W='gt_pw*2.0'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 out d n3  vdd pmos1 L=gt_l W='gt_pw*2.0'   AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 out a vss vss nmos1 L=gt_l W='gt_nw*0.7'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn2 out b vss vss nmos1 L=gt_l W='gt_nw*0.7'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mn3 out c vss vss nmos1 L=gt_l W='gt_nw*0.7'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mn4 out d vss vss nmos1 L=gt_l W='gt_nw*0.7'   AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+.ends
+
+* 2-to-1 multiplexer
+.subckt LOGIC_MUX2 i0 i1 sel out outb vdd vss
+mp0 selb sel  vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn0 selb sel  vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+*
+mp1 n1   i0   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp2 outb sel  n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp3 n2   i1   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp4 outb selb n2  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mn1 outb i1   n3  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw'  
+mn2 n3   sel  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw'
+mn3 outb i0   n4  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+mn4 n4   selb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+*
+mp5 out  outb vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn5 out  outb vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+.ends
+
+* 2-input exclusive OR
+.subckt LOGIC_XOR2 a b out vdd vss
+mp0 ab  a    vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn0 ab  a    vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+mp1 bb  b    vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn1 bb  b    vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+mp2 n1  a    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp3 n1  b    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp4 out ab   n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp5 out bb   n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mn2 out a    n2  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw'  
+mn3 n2  b    vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+mn4 out ab   n3  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+mn5 n3  bb   vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+.ends
+
+* 2-input AND
+.subckt LOGIC_AND2 a b out vdd vss
+mp1 outb a    vdd vdd pmos1 L=gt_l W='gt_pw*0.25' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp2 outb b    vdd vdd pmos1 L=gt_l W='gt_pw*0.25' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mn1 outb a    n1  vss nmos1 L=gt_l W='gt_nw*0.5'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn2 n1   b    vss vss nmos1 L=gt_l W='gt_nw*0.5'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+mp3 out  outb vdd vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn3 out  outb vss vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
+
+* 2-input AND, with 2X drive
+.subckt LOGIC_AND2X2 a b out vdd vss
+mp1 outb a    vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp2 outb b    vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mn1 outb a    n1  vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn2 n1   b    vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+mp3 out  outb vdd vdd pmos1 L=gt_l W='gt_pw*1.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' m=2
+mn3 out  outb vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' m=2
+.ends
+
+* 2-input AND, with 4X drive
+.subckt LOGIC_AND2X4 a b out vdd vss
+mp1 outb a    vdd vdd pmos1 L=gt_l W='gt_pw*1.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp2 outb b    vdd vdd pmos1 L=gt_l W='gt_pw*1.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mn1 outb a    n1  vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' m=2
+mn2 n1   b    vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' m=2
+mp3 out  outb vdd vdd pmos1 L=gt_l W='gt_pw*1.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' m=4
+mn3 out  outb vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' m=4
+.ends
+
+* 2-input OR 
+.subckt LOGIC_OR2 a b out vdd vss
+mp1 n1   a    vdd vdd pmos1 L=gt_l W='gt_pw*0.5'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp2 outb b    n1  vdd pmos1 L=gt_l W='gt_pw*0.5'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mn1 outb a    vss vss nmos1 L=gt_l W='gt_nw*0.25' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn2 outb b    vss vss nmos1 L=gt_l W='gt_nw*0.25' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp3 out  outb vdd vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn3 out  outb vss vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
+
+* 2-input OR , with 2X drive
+.subckt LOGIC_OR2X2 a b out vdd vss
+mp1 n1   a    vdd vdd pmos1 L=gt_l W='gt_pw*0.5'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp2 outb b    n1  vdd pmos1 L=gt_l W='gt_pw*0.5'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mn1 outb a    vss vss nmos1 L=gt_l W='gt_nw*0.25' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn2 outb b    vss vss nmos1 L=gt_l W='gt_nw*0.25' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp3 out  outb vdd vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' m=2
+mn3 out  outb vss vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' m=2
+.ends
+
+* 2-input OR , with 4X drive
+.subckt LOGIC_OR2X4 a b out vdd vss
+mp1 n1   a    vdd vdd pmos1 L=gt_l W='gt_pw*0.5'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp2 outb b    n1  vdd pmos1 L=gt_l W='gt_pw*0.5'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mn1 outb a    vss vss nmos1 L=gt_l W='gt_nw*0.25' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn2 outb b    vss vss nmos1 L=gt_l W='gt_nw*0.25' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+mp3 out  outb vdd vdd pmos1 L=gt_l W='gt_pw*1.0'  AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw' m=4
+mn3 out  outb vss vss nmos1 L=gt_l W='gt_nw*1.0'  AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' m=4
+.ends
+
+* 2-1 AND-OR-invert  out = ~((a&b)|c)
+.subckt LOGIC_AOI21 a b c out vdd vss
+mp1 n1  a    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp2 n1  b    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp3 out c    n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mn1 out a    n2  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw'  
+mn2 n2  b    vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+mn3 out c    vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
+
+* 2-2 AND-OR-invert  out = ~((a&b)|(c&d))
+.subckt LOGIC_AOI22 a b c d out vdd vss
+mp1 n1  a    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp2 n1  b    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp3 out c    n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp4 out d    n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mn1 out a    n2  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw'  
+mn2 n2  b    vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+mn3 out c    n3  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+mn4 n3  d    vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+.ends
+
+* 2-2-2 AND-OR-invert  out = ~((a&b)|(c&d)|(e&f))
+.subckt LOGIC_AOI222 a b c d e f out vdd vss
+mp1 n1  a    vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 n1  b    vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 n2  c    n1  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 n2  d    n1  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp5 out e    n2  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp6 out f    n2  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 out a    n3  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 n3  b    vss vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn3 out c    n4  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 n4  d    vss vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn5 out e    n5  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn6 n5  f    vss vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+.ends
+
+* 3-2 AND-OR-invert  out = ~((a&b&c)|(d&e))
+.subckt LOGIC_AOI32 a b c d e out vdd vss
+mp1 n1  a    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp2 n1  b    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp3 n1  c    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp4 out d    n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp5 out e    n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mn1 out a    n2  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 n2  b    n3  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn3 n3  c    vss vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 out d    n4  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+mn5 n4  e    vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+.ends
+
+* 3-3 AND-OR-invert  out = ~((a&b&c)|(d&e&f))
+.subckt LOGIC_AOI33 a b c d e f out vdd vss
+mp1 n1  a    vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 n1  b    vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 n1  c    vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 out d    n1  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp5 out e    n1  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp6 out f    n1  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 out a    n2  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 n2  b    n3  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn3 n3  c    vss vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 out d    n4  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn5 n4  e    n5  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn6 n5  f    vss vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+.ends
+
+* 2-1 OR-AND-invert  out = ~((a|b)&c)
+.subckt LOGIC_OAI21 a b c out vdd vss
+mp1 n1  a    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp2 out b    n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp3 out c    vdd vdd pmos1 L=gt_l W='gt_pw*1.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.0*gt_pw' PS='2*sx+1.0*gt_pw'  
+mn1 out a    n2  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw'  
+mn2 out b    n2  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+mn3 n2  c    vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+.ends
+
+* 2-2 OR-AND-invert  out = ~((a|b)&(c|d))
+.subckt LOGIC_OAI22 a b c d out vdd vss
+mp1 n1  a    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp2 out b    n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp3 n2  c    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mp4 out d    n2  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+1.5*gt_pw' PS='2*sx+1.5*gt_pw'  
+mn1 out a    n3  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw'  
+mn2 out b    n3  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+mn3 n3  c    vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+mn4 n3  d    vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+1.5*gt_nw' PS='2*sx+1.5*gt_nw' 
+.ends
+
+* 2-2-2 OR-AND-invert  out = ~((a|b)&(c|d)&(e|f))
+.subckt LOGIC_OAI222 a b c d e f out vdd vss
+mp1 n1  a    vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 out b    n1  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 n2  c    vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 out d    n2  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp5 n3  e    vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp6 out f    n3  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 out a    n4  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 out b    n4  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn3 n4  c    n5  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 n4  d    n5  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn5 n5  e    vss vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn6 n5  f    vss vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+.ends
+
+* 3-2 OR-AND-invert  out = ~((a|b|c)&(d|e))
+.subckt LOGIC_OAI32 a b c d e out vdd vss
+mp1 n1  a    vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 n2  b    n1  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 out c    n2  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 n3  d    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp5 out e    n3  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 out a    n4  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 out b    n4  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn3 out c    n4  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 n4  d    vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn5 n4  e    vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+.ends
+
+* 3-3 OR-AND-invert  out = ~((a|b|c)&(d|e|f))
+.subckt LOGIC_OAI33 a b c d e f out vdd vss
+mp1 n1  a    vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 n2  b    n1  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 out c    n2  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 n3  d    vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp5 n4  e    n3  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp6 out f    n4  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 out a    n5  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 out b    n5  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn3 out c    n5  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 n5  d    vss vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn5 n5  e    vss vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn6 n5  f    vss vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+.ends
+
+* Latch - transparent when EN high
+.subckt LOGIC_LAT en d q qb vdd vss
+mp0 enb en  vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn0 enb en  vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+*
+mp1 n1  q   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 qb  en  n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 n2  d   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 qb  enb n2  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 qb  d   n3  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 n3  en  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn3 qb  q   n4  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 n4  enb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp5 q   qb  vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn5 q   qb  vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+.ends
+
+* Latch - transparent when EN low
+.subckt LOGIC_LATN enb d q qb vdd vss
+mp0 en enb  vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn0 en enb  vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+*
+mp1 n1  q   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 qb  en  n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 n2  d   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 qb  enb n2  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 qb  d   n3  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 n3  en  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn3 qb  q   n4  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 n4  enb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp5 q   qb  vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn5 q   qb  vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+.ends
+
+* D-type flip-flop - rising edge clock
+.subckt LOGIC_DFF clk d q qb vdd vss
+mp0 clkb clk  vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn0 clkb clk  vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+*
+mp1 n1   d    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 qbi  clk  n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 n2   qi   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 qbi  clkb n2  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 qbi  qi   n3  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 n3   clk  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn3 qbi  d    n4  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 n4   clkb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp5 qi   qbi  vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn5 qi   qbi  vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+*
+mp6 n5   qi   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp7 qb   clkb n5  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp8 n6   q    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp9 qb   clk  n6  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn6 qb   q    n7  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn7 n7   clkb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn8 qb   qi   n8  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn9 n8   clk  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp10 q   qb   vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn10 q   qb   vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+.ends
+
+* D-type flip-flop - falling edge clock
+.subckt LOGIC_DFFN clkb d q qb vdd vss
+mp0 clk clkb  vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn0 clk clkb  vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+*
+mp1 n1   d    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 qbi  clk  n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 n2   qi   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 qbi  clkb n2  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 qbi  qi   n3  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 n3   clk  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn3 qbi  d    n4  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 n4   clkb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp5 qi   qbi  vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn5 qi   qbi  vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+*
+mp6 n5   qi   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp7 qb   clkb n5  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp8 n6   q    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp9 qb   clk  n6  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn6 qb   q    n7  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn7 n7   clkb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn8 qb   qi   n8  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn9 n8   clk  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp10 q   qb   vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn10 q   qb   vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+.ends
+
+* D-type flip-flop - rising edge clock, with async positive-active reset
+.subckt LOGIC_DFFR clk d r q qb vdd vss
+mp0 clkb clk  vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn0 clkb clk  vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+*
+mp1 n1   d    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 qbi  clk  n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 n2   qi   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 qbi  clkb n2  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 qbi  qi   n3  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 n3   clk  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn3 qbi  d    n4  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 n4   clkb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp5  n5  qbi  vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp6  qi  r    n5  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn5  qi  qbi  vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn6  qi  r    vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+*
+mp7  n6  qi   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp8  qb  clkb n6  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp9  n7  q    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp10 qb  clk  n7  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn7  qb  q    n8  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn8  n8  clkb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn9  qb  qi   n9  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn10 n9  clk  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp11 n10 qb   vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp12 q   r    n10 vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn11 q   qb   vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn12 q   r    vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
+
+* D-type flip-flop - falling edge clock, with async positive-active reset
+.subckt LOGIC_DFFRN clkb d r q qb vdd vss
+mp0 clk clkb  vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn0 clk clkb  vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+*
+mp1 n1   d    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 qbi  clk  n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 n2   qi   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 qbi  clkb n2  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 qbi  qi   n3  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 n3   clk  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn3 qbi  d    n4  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 n4   clkb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp5  n5  qbi  vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp6  qi  r    n5  vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn5  qi  qbi  vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn6  qi  r    vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+*
+mp7  n6  qi   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp8  qb  clkb n6  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp9  n7  q    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp10 qb  clk  n7  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn7  qb  q    n8  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn8  n8  clkb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn9  qb  qi   n9  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn10 n9  clk  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp11 n10 qb   vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp12 q   r    n10 vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn11 q   qb   vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn12 q   r    vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
+
+* D-type flip-flop - rising edge clock, with async negative-active set
+.subckt LOGIC_DFFS clk d sb q qb vdd vss
+mp0 clkb clk  vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn0 clkb clk  vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+*
+mp1 n1   d    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 qbi  clk  n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 n2   qi   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 qbi  clkb n2  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 qbi  qi   n3  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 n3   clk  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn3 qbi  d    n4  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 n4   clkb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp5  qi  qbi  vdd vdd pmos1 L=gt_l W='gt_pw*1.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp6  qi  sb   vdd vdd pmos1 L=gt_l W='gt_pw*1.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mn5  qi  qbi  n5  vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn6  n5  sb   vss vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp7  n6  qi   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp8  qb  clkb n6  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp9  n7  q    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp10 qb  clk  n7  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn7  qb  q    n8  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn8  n8  clkb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn9  qb  qi   n9  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn10 n9  clk  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp11 q   qb   vdd vdd pmos1 L=gt_l W='gt_pw*1.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mp12 q   sb   vdd vdd pmos1 L=gt_l W='gt_pw*1.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'  
+mn11 q   qb   n10 vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn12 n10 sb   vss vss nmos1 L=gt_l W='gt_nw*2.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+.ends
+
+* D-type flip-flop - falling edge clock, with async negative-active set
+.subckt LOGIC_DFFSN clkb d sb q qb vdd vss
+mp0 clk clkb  vdd vdd pmos1 L=gt_l W='gt_pw*0.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+gt_pw' PS='2*sx+gt_pw'
+mn0 clk clkb  vss vss nmos1 L=gt_l W='gt_nw*0.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'
+*
+mp1 n1   d    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp2 qbi  clk  n1  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp3 n2   qi   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp4 qbi  clkb n2  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn1 qbi  qi   n3  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn2 n3   clk  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn3 qbi  d    n4  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn4 n4   clkb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp5  qi  qbi  vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp6  qi  sb   vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn5  qi  qbi  n5  vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn6  n5  sb   vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+*
+mp7  n6  qi   vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp8  qb  clkb n6  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp9  n7  q    vdd vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp10 qb  clk  n7  vdd pmos1 L=gt_l W='gt_pw*1.5' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn7  qb  q    n8  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'  
+mn8  n8  clkb vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw'
+mn9  qb  qi   n9  vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+mn10 n9  clk  vss vss nmos1 L=gt_l W='gt_nw*1.5' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+2.0*gt_nw' PS='2*sx+2.0*gt_nw' 
+*
+mp11 q   qb   vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mp12 q   sb   vdd vdd pmos1 L=gt_l W='gt_pw*2.0' AD='sx*gt_pw' AS='sx*gt_pw' PD='2*sx+2.0*gt_pw' PS='2*sx+2.0*gt_pw'  
+mn11 q   qb   n10 vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw'  
+mn12 n10 sb   vss vss nmos1 L=gt_l W='gt_nw*1.0' AD='sx*gt_nw' AS='sx*gt_nw' PD='2*sx+gt_nw' PS='2*sx+gt_nw' 
+.ends
+ 

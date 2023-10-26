@@ -1,0 +1,16 @@
+***** HSPICE -- D-2010.03 32-BIT (Feb 23 2010) linux ******
+ Input File: OSC1.circuit
+ lic:
+ lic: FLEXlm: v8.5b
+ lic: USER:   lvruiyu              HOSTNAME: console5
+ lic: HOSTID:                      PID:      252364
+ lic: Using FLEXlm license file:
+ lic: /export/home/lvruiyu/License-int.dat
+ lic: Checkout 1 hspice
+ lic: License/Maintenance for hspice will expire on 31-dec-2040/2019.12
+ lic: NODE LOCKED license on hostid
+ lic:
+ init: begin read circuit files,  cpu clock=  1.00E-02
+ **error** invalid memory reference
+
+ lic: Release hspice token(s)

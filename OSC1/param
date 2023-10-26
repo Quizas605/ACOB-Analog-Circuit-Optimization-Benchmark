@@ -1,0 +1,15 @@
+.param Lp156 = 350e-9
+.param Wp156 = 2e-6
+.param Lp02 = 450e-9
+.param Wp02 = 12e-06
+.param Lp153 = 450e-9
+.param Wp153 = 20e-6
+.param Lp01 = 400.05e-6
+.param Wp01 = 1e-6
+.param Ln01 = 450e-9
+.param Wn01 = 5e-6
+.param Ln154 = 450e-9
+.param Wn154 = 10e-6
+.param Ln163 = 450e-9
+.param Wn163 = 5e-6
+

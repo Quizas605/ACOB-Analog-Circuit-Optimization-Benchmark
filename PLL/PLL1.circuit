@@ -1,0 +1,72 @@
+* Disclaimer:
+* THIS FILE IS PROVIDED “AS IS” AND WITH:
+* (A)  NO WARRANTY OF ANY KIND, express, implied or statutory, including any implied warranties of merchantability or 
+* fitness for a particular purpose, which Mentor Graphics disclaims to the maximum extent permitted by applicable law; and
+* (B)  NO INDEMNIFICATION FOR INFRINGEMENT OF INTELLECTUAL PROPERTY RIGHTS.
+* LIMITATION OF LIABILITY:  IN NO EVENT SHALL MENTOR GRAPHICS OR ITS LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, 
+* INCIDENTAL, OR CONSEQUENTIAL DAMAGES (INCLUDING LOST PROFITS OR SAVINGS) WHATSOEVER, WHETHER BASED ON CONTRACT, TORT OR 
+* ANY OTHER LEGAL THEORY, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+* © 2017 Mentor Graphics Corporation. All rights reserved.
+
+* Based on ITC'97 benchmark PLL;  added divide-by-N in feedback, and optimized loop filter and VCO for this process
+* Specifications, with Cload= 50fF 
+*            Min   Typ   Max                    
+* VCO freq.  60    100   120   MHz
+* Lock time  -      -    5     us   (when pk-pk v(x1.cap1) < 10 mV)
+* Jitter     -     200   -     ps pk-pk
+* Delay      -     1     -     ns
+* DutyCyle   -     47%   -     %
+* Idd        -     -     1     mA
+* Multiplier 1     -     9
+* 
+* in/out nodes
+* clkin  : digital input, 7~160 MHz, 40-60% duty cycle
+* d0~3   : digital input, feedback divider max count;  Fvco = Fclkin * ({d3, d2, d1, d0} + 1)
+* vcoout : digital output <1 MHz, 40-60% duty cycle
+* vdd    : 3.3 VDC, power in 
+* vss    : ground
+*.subckt PLL1 clkin d0in d1in d2in d3in vcoout vdd vss
+
+X1 refclk d0 d1 d2 d3 clkout vdd 0 PLL1
+
+.TEMP 27
+.param vddnom=3.3
+
+VDD   vdd      0 vddnom
+Cload clkout   0  50e-15
+
+.connect d0 vdd
+.connect d1 vdd
+.connect d2 0
+.connect d3 0
+
+.ic v(X1.X11.out5)=0   * so that ring oscillator VCO starts oscillating quickly
+.ic v(X1.Rsb)=0        * initial PFD  reset for faster convergence
+
+.param TREF=40ns
+.param TRISENOM=15ps	* clock rise and fall time
+*             pulse(v0  v1      delay  rise         fall            high            period)
+Vin RefClk1 0 pulse(0v vddnom 0n     TRISENOM 	TRISENOM 0.5*TREF-TRISENOM 	TREF) 		* 50% duty cycle
+X0  RefClk1 refclk vdd 0 LOGIC_BUF
+
+.MEAS Iddavg         AVG i(VDD) from=1u to=2u                                       * lbound=-1m   ubound=-0.3m
+*.MEAS VCO_in_pk2pk   PP v(x1.cap1) from=4u to=5u                                  *   lbound=0     ubound=10m
+.MEAS clkout_pk2pk   PP v(clkout) from=4u to=5u
+.MEAS fom param='1e6*abs(Iddavg)+20*max(0,2.8-clkout_pk2pk)'
+
+.probe v
+
+*.INCLUDE subcircuit_files/PLL1_bk.sub
+.INCLUDE subcircuit_files/PLL1.sub
+.INCLUDE subcircuit_files/LOGIC.sub
+.INCLUDE param
+
+*.INCLUDE process_models/fastN_fastP.process
+*.INCLUDE process_models/slowN_fastP.process
+.INCLUDE process_models/typical.process
+*.INCLUDE process_models/fastN_slowP.process
+*.INCLUDE process_models/slowN_slowP.process
+.TRAN 20n 5u 0
+.END
+
+ 

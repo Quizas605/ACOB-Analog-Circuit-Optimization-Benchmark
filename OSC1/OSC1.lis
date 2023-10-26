@@ -1,0 +1,199 @@
+************************************************************************
+HSPICE RF -- D-2010.03 (Feb 23 2010) 
+Copyright (C) 2010 Synopsys,Inc. All rights reserved.
+This software and the associated documentation are confidential and
+proprietary to Synopsys, Inc. Your use or disclosure of this software
+is subject to the terms and conditions of a written license agreement
+between you, or your company, and Synopsys, Inc.
+************************************************************************
+
+hspicerf 32-bit version D-2010.03 (Feb 23 2010 11:43:32) 
+
+machine info: Linux console5 3.10.0-1160.el7.x86_64 #1 SMP Mon Oct 19 16:18:59 UTC 2020 x86_64
+
+current time: 20:42:31  10/25/2023
+
+command line: hspicerf OSC1.circuit
+
+Warning: (./process_models/typical.process:115) Subcircuit "PRIMITIVE_RPOLY2" is ignored because not called by any instance.
+
+Total number of lines parsed: 359
+
+Resource Usage for Parsing
+--------------------------
+| CPU Time    | 0.00 sec |
+| Peak Memory | 0.11 Mb  |
+|------------------------|
+
+Warning:  option "COMPAT" ignored
+
+
+Warning:  option "ABSV" ignored
+
+
+Source Files
+------------------------------------
+| "OSC1.circuit"                   |
+| "process_models/typical.process" |
+| "subcircuit_files/OSC1.sub"      |
+| "subcircuit_files/PRIMITIVE.sub" |
+|----------------------------------|
+
+Options
+---------------------
+| Option | Value    |
+|--------+----------|
+| DEFAD  | 5.29e-12 |
+| DEFAS  | 5.29e-12 |
+| DEFNRD | 0.1      |
+| DEFNRS | 0.1      |
+| DEFPD  | 9.2e-06  |
+| DEFPS  | 9.2e-06  |
+| TEMPC  | 27       |
+| TEMPK  | 300.15   |
+|-------------------|
+
+27 unique instance models are loaded.
+
+Resource Usage for Load Netlist Data
+--------------------------
+| CPU Time    | 0.00 sec |
+| Peak Memory | 1.47 Mb  |
+|------------------------|
+
+License user information
+-----------------------
+| FLEXLM   | v8.5b    |
+| USER     | lvruiyu  |
+| HOSTNAME | console5 |
+| HOSTID   | `S       |
+| PID      | 325336   |
+|---------------------|
+
+License file: /export/home/lvruiyu/License-int.dat
+--------------------------------------------------------------------------------
+| license | checkout number | expiration date     |  # in use / total | server |
+|---------+-----------------+---------------------+-------------------+--------|
+| hspice  | 1               | 31-dec-2040/2019.12 | 201587192/0       |        |
+|------------------------------------------------------------------------------|
+
+License user information
+---------------------------------------------------
+| FLEXLM   | v8.5b                                |
+| USER     | lvruiyu                              |
+| HOSTNAME | console5                             |
+| HOSTID   | 325336                               |
+| PID      | /export/home/lvruiyu/License-int.dat |
+|-------------------------------------------------|
+
+License file: hspicerf
+--------------------------------------------------------------------------------
+| license | checkout number | expiration date     |  # in use / total | server |
+|---------+-----------------+---------------------+-------------------+--------|
+| 1       | 31-dec-2040     | 2019.12/-1202590843 | 0/                |        |
+|------------------------------------------------------------------------------|
+
+Netlist Statistics
+---------------------
+| Type      | Count |
+|-----------+-------|
+| nmos      | 4     |
+| pmos      | 5     |
+| resistor  | 1     |
+| capacitor | 13    |
+| vsrc      | 2     |
+| diode     | 16    |
+| inductor  | 1     |
+| pjf       | 2     |
+|-------------------|
+
+Summary of Possible Problems in Netlist
+-------------------------------------
+| Negative resistor             | 0 |
+| Negative capacitor            | 0 |
+| Negative inductor             | 0 |
+| Unconnected node              | 0 |
+| Dangling terminal             | 0 |
+| Non-rail bulk terminal        | 0 |
+| Floating MOS gate             | 0 |
+| Floating MOS bulk             | 0 |
+| Floating BJT substrate        | 0 |
+| Floating controlled input     | 0 |
+| Floating current source nodes | 0 |
+| Source loop                   | 0 |
+|-----------------------------------|
+
+Resource Usage for Netlist Check
+--------------------------
+| CPU Time    | 0.00 sec |
+| Peak Memory | 1.57 Mb  |
+|------------------------|
+
+Number of nodes: 15
+
+Total number of nodes (including internal nodes): 39
+
+Resource Usage for Netlist Data Compression
+--------------------------
+| CPU Time    | 0.00 sec |
+| Peak Memory | 1.60 Mb  |
+|------------------------|
+
+Simulation
+
+OP: finished using direct method
+
+Number of iterations for OP analysis: 55
+
+Resource Usage for Operating Point
+--------------------------
+| CPU Time    | 0.00 sec |
+| Peak Memory | 1.66 Mb  |
+|------------------------|
+
+Transient Analysis
+10.0% time = 200.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=191  evl=94  rej=12  mem=1818K cpu=0   wall=0 )
+20.0% time = 400.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=504  evl=226  rej=19  mem=1818K cpu=0   wall=0 )
+30.0% time = 600.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=974  evl=429  rej=32  mem=1818K cpu=0   wall=0 )
+40.0% time = 800.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=1474  evl=627  rej=46  mem=1818K cpu=0   wall=0 )
+50.0% time = 1000.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=2044  evl=872  rej=61  mem=1818K cpu=0   wall=0 )
+60.0% time = 1200.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=2628  evl=1111  rej=81  mem=1818K cpu=0   wall=0 )
+70.0% time = 1400.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=3185  evl=1341  rej=100  mem=1818K cpu=0   wall=0 )
+80.0% time = 1600.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=3763  evl=1586  rej=122  mem=1818K cpu=0   wall=0 )
+90.0% time = 1800.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=4400  evl=1846  rej=144  mem=1818K cpu=0   wall=0 )
+100.0% time = 2000.0 ns ( etc = 0.0 sec, ett = 0.0 sec )
+  ( slv=5034  evl=2097  rej=169  mem=1818K cpu=0   wall=0 )
+
+solve = 5034 eval = 2097 reject = 169
+******
+***
+ ******  transient analysis       temp=  27
+ ******
+fom=  7.1849    param =  7.185e+00
+idd=  -3.2818e-04      from=   1.400e-06  to=   2.000e-06
+iddq=  -3.9030e-11    when/at= 0.000e+00
+
+
+
+Transient time = 0.16 cpu sec, 0.32 wall sec
+
+Resource Usage for Transient Analysis
+--------------------------
+| CPU Time    | 0.16 sec |
+| Peak Memory | 1.78 Mb  |
+|------------------------|
+
+    --- hspicerf done [OSC1.circuit] ---
+
+Total time   = 0.16 cpu sec
+
+Total memory = 1.78 Mbytes

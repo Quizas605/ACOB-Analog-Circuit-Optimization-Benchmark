@@ -1,0 +1,71 @@
+* Disclaimer:
+* THIS FILE IS PROVIDED “AS IS” AND WITH:
+* (A)  NO WARRANTY OF ANY KIND, express, implied or statutory, including any implied warranties of merchantability or 
+* fitness for a particular purpose, which Mentor Graphics disclaims to the maximum extent permitted by applicable law; and
+* (B)  NO INDEMNIFICATION FOR INFRINGEMENT OF INTELLECTUAL PROPERTY RIGHTS.
+* LIMITATION OF LIABILITY:  IN NO EVENT SHALL MENTOR GRAPHICS OR ITS LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, 
+* INCIDENTAL, OR CONSEQUENTIAL DAMAGES (INCLUDING LOST PROFITS OR SAVINGS) WHATSOEVER, WHETHER BASED ON CONTRACT, TORT OR 
+* ANY OTHER LEGAL THEORY, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+* © 2017 Mentor Graphics Corporation. All rights reserved.
+
+* Circuits to measure characteristics of PRIMITIVE circuit elements
+
+* DIODES
+
+V1 Vapplied 0 pwl(0, -10,  20m, 10)
+
+R1 Vapplied n1 100000
+* .subckt primitive_nd a c area=1e-12 pj=4e-6
+X1 n1 0 primitive_nd
+
+R2 Vapplied n2 100000
+* subckt primitive_nwd a c area=1e-12 pj=4e-6
+X2 n2 0 primitive_nwd
+
+R3 Vapplied n3 100000
+* .subckt primitive_pd a c area=1e-12 pj=4e-6
+X3 n3 0 primitive_pd
+
+R4 Vapplied n4 100000
+* forward biased zener
+D4 n4 0 DZF1
+
+R5 Vapplied n5 100000
+* reverse biased zener
+D5 n5 0 DZR1
+
+R6 Vapplied n6 100000
+* substrate diode with varacter model
+D6 n6 0 DWELL1
+
+R7 Vapplied n7 100000
+* substrate diode with varacter model
+D7 n7 0 DWELL2
+
+
+* RESISTORS
+
+R8 Vapplied n8 100000
+V8 vdd 0 3.3
+* .subckt primitive_rdiffp d b s w=1e-6 l=1e-6 dtemp=0
+X8 n8 vdd 0 primitive_rdiffp w=1e-6 l=10e-6
+
+R9 Vapplied n9 100000
+* SUBCKT PRIMITIVE_RPOLY2 N1 N2 W=1e-6 L=1e-6
+X9 n9 0 primitive_rpoly2 w=1e-6 l=10e-6
+
+
+* CAPACITOR
+
+R10 Vapplied n10 100000
+* .SUBCKT PRIMITIVE_CPOLY N1 N2 AREA=0 PERI='4*AREA**0.5'
+X10 n10 0 primitive_cpoly
+
+.probe v
+.probe i
+
+.INCLUDE subcircuit_files/PRIMITIVE.sub
+.INCLUDE process_models/typical.process
+
+.TRAN 1m 200m
+.END

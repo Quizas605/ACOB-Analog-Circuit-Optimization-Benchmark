@@ -1,0 +1,93 @@
+* Disclaimer:
+* THIS FILE IS PROVIDED “AS IS” AND WITH:
+* (A)  NO WARRANTY OF ANY KIND, express, implied or statutory, including any implied warranties of merchantability or 
+* fitness for a particular purpose, which Mentor Graphics disclaims to the maximum extent permitted by applicable law; and
+* (B)  NO INDEMNIFICATION FOR INFRINGEMENT OF INTELLECTUAL PROPERTY RIGHTS.
+* LIMITATION OF LIABILITY:  IN NO EVENT SHALL MENTOR GRAPHICS OR ITS LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, 
+* INCIDENTAL, OR CONSEQUENTIAL DAMAGES (INCLUDING LOST PROFITS OR SAVINGS) WHATSOEVER, WHETHER BASED ON CONTRACT, TORT OR 
+* ANY OTHER LEGAL THEORY, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+* © 2017 Mentor Graphics Corporation. All rights reserved.
+
+* Inverter for connecting across external quartz 1~20 MHz crystal to form an oscillator
+* Specifications, with Cload= 50fF      
+*          Min   Typ   Max                    
+* Gain     1.8   2.4   3.0    V/V     (for v(xin)=1 volt swing around 1.9V bias)
+* Rosc     3     8     30     Mohm    (internal biasing resistance across xin and xout)
+* Idd      50    200   600    uA  
+* Iddq(pd) 0     <0.01 0.01   uA
+ 
+* in/out nodes
+* q         : digital output
+* xena      : enable, digital input, active low
+* xin       : crystal input, self-biasing
+* xout      : crystal output, self-biasing
+* inh_gnd   : digital ground
+* inh_vdd3o : digital 3.3 VDC, power in 
+* inh_vdd3r : digital 3.3 VDC, power in 
+*.subckt OSC1 q xena xin xout inh_gnd inh_vdd3o inh_vdd3r
+
+X1 q xena xin xout 0 vdda vdda OSC1
+
+.TEMP 27
+.param vddnom=3.3
+
+Cload   q  0  50e-15
+
+* Test description
+* measure DC gain of inverter, via 100ohm input - apply 1.5V, then 2.5V at xin, and measure delta xout
+* measure feedback resistance - measure current through 100ohm input
+* could also apply crystal across xin and xout, to see that oscillation starts
+* may also apply clock via capacitor to xin, and no load on xout
+
+VDD vdda  0 vddnom
+
+.PARAM vin0=1.2  vin1=2.4  rin=1meg
+* Inputs to measure gain
+*Vdcin xinr 0 pwl(0,vin0, 50us,vin0, 51us,vin1)
+*Rin   xinr xin {rin}
+
+Vena  xena  0 pwl(0, vddnom, 100n, vddnom,  200n, 0)
+
+* 15 MHz Crystal equivalent
+C0 xin xout 7p
+C1 xin n1   28p
+L1 n1  n2   14.556u
+R1 n2  xout 1
+
+* alternative AC-coupled input clock
+* Vin  inp  0 sin(0 1.5 15meg)  
+* Cin inp xin 100p
+
+* pads
+Cxin  xin  0  1p
+Cxout xout 0  1p
+
+* Measures for gain
+*.MEAS  v1      FIND   v(xout) at=50u                                        
+*.MEAS  v0      FIND   v(xout) at=100u                                     
+*.MEAS  i_in    FIND   i(Rin)  at=50u
+*.MEAS  gain    PARAM '(v1-v0)/(vin1-vin0)'                               *Lbound=1.8    Ubound=3
+*.MEAS  Rosc    PARAM  '(v1 - (vin0 + rin * -1.0 * i_in))/(-1.0 * i_in)'  *Lbound=3meg   Ubound=30meg
+.MEAS  Idd     AVG  i(VDD) from=1.4u to=100u                             *Lbound=-600u  Ubound=-50u
+.MEAS  Iddq    FIND i(VDD) at=0                                          *Lbound=-0.01u Ubound=0
+.MEAS fom param='1e4*abs(Idd)+1e11*abs(Iddq)'
+* can only measure period when connecting crystal or clock
+*.MEAS  period   TRIG v(q) val=1.65 rise=20  TARG v(q) val=1.65 rise=21  Lbound=50n    Ubound=50.2n
+
+.probe v
+
+.INCLUDE subcircuit_files/OSC1.sub
+.INCLUDE subcircuit_files/PRIMITIVE.sub
+.INCLUDE param
+
+*.INCLUDE process_models/fastN_fastP.process
+*.INCLUDE process_models/slowN_fastP.process
+.INCLUDE process_models/typical.process
+*.INCLUDE process_models/fastN_slowP.process
+*.INCLUDE process_models/slowN_slowP.process
+*.TRAN 10n 100u
+
+.TRAN 10n 2u
+
+.END
+

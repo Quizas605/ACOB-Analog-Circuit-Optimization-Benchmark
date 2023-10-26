@@ -1,0 +1,16 @@
+***** HSPICE -- D-2010.03 64-BIT (Feb 23 2010) linux ******
+ Input File: PLL1.circuit
+ lic:
+ lic: FLEXlm: v8.5b
+ lic: USER:   zad                  HOSTNAME: centos7eda
+ lic: HOSTID: 000c29eda837         PID:      5391
+ lic: Using FLEXlm license file:
+ lic: /opt/hspice/License-int.dat
+ lic: Checkout 1 hspice
+ lic: License/Maintenance for hspice will expire on 31-dec-2040/2019.12
+ lic: NODE LOCKED license on hostid 000c29eda837
+ lic:
+ init: begin read circuit files,  cpu clock=  1.00E-02
+ **error** invalid memory reference
+
+ lic: Release hspice token(s)

@@ -1,0 +1,4 @@
+$DATA1 SOURCE='HSPICERF' VERSION='D-2010.03'
+.TITLE '* Disclaimer:'
+ clkout_pk2pk fom iddavg temper alter#
+  3.2097	  21.3883	  -2.1388e-05	     27.000000 1
